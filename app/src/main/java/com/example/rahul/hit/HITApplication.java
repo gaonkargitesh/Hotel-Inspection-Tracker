@@ -3,16 +3,16 @@ package com.example.rahul.hit;
 import android.app.Application;
 import android.util.Log;
 
-public class HIT extends Application {
+public class HITApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("HIT","Create successful");
+        Log.d("HITApplication","Create successful");
     }
 
     @Override
     public void onTerminate() {
         super.onTerminate();
-        Log.d("HIT","Terminate successful");
+        Log.d("HITApplication","Terminate successful");
     }
 }
