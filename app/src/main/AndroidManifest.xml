@@ -19,7 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".launcher.view.LauncherActivity"></activity>
+        <activity android:name=".launcher.view.LauncherActivity" />
+
+        <activity
+            android:name=".login.view.LoginActivity"
+            android:label="@string/title_activity_login"/>
     </application>
 
 </manifest>
