@@ -6,4 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".launcher.view.LauncherActivity">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LauncherPage_TextView_Message"
+        android:text="Welcome"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:padding="70dp"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LauncherPage_ImageView"
+        app:layout_constraintTop_toBottomOf="@id/LauncherPage_TextView_Message"
+        android:src="@drawable/launcherscreen"
+        android:maxHeight="200dp"
+        android:maxWidth="200dp"
+        />
+
 </android.support.constraint.ConstraintLayout>
