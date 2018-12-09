@@ -17,14 +17,13 @@ public class LauncherActivity extends BaseActivity {
     public static boolean isLogin;
     public static boolean value;
 
-    /*Timer timer;
+    Timer timer;
 
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-        /*timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -32,7 +31,7 @@ public class LauncherActivity extends BaseActivity {
                 startActivity(intent);
                 finish();
             }
-        },800);*/
+        },800);
     }
 
 

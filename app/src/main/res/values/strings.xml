@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">HIT</string>
 
+    //Login page
+    <string name="loginpage_user_name">Username</string>
+    <string name="loginpage_password">Password</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">LoginActivity</string>
+
 </resources>
