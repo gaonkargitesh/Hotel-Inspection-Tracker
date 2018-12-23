@@ -12,7 +12,7 @@
 
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/email_loginPage"
+        android:id="@+id/textlayout_email_loginPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -22,49 +22,50 @@
         app:layout_constraintTop_toBottomOf="@id/login_id">
 
         <EditText
-            android:id="@+id/loginPage_Email_EditText"
+            android:id="@+id/editText_LoginPage_UserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="Email" />
+            android:hint="@string/loginpage_user_name" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/password_loginPage"
+        android:id="@+id/textlayout_password_loginPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintTop_toBottomOf="@id/email_loginPage">
+        app:layout_constraintTop_toBottomOf="@id/textlayout_email_loginPage">
 
         <EditText
-            android:id="@+id/loginpage_Password_EditText"
+            android:id="@+id/editText_Loginpage_Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="Password" />
+            android:hint="@string/loginpage_password" />
 
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/loginPage_Login_Butoon"
+        android:id="@+id/butoon_Login_LoginPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Login"
+        android:text="@string/loginpage_loginbutton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_loginPage" />
+        app:layout_constraintTop_toBottomOf="@id/textlayout_password_loginPage" />
 
     <TextView
-        android:id="@+id/loginPage_SignUp_TextView"
+        android:id="@+id/textView_SignUp_LoginPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:hint="Dont have an account?? SIGN UP"
+        android:focusable="true"
+        android:hint="@string/loginpage_signuptextview"
         android:textAlignment="center"
         android:textColor="#00F"
-        app:layout_constraintTop_toBottomOf="@id/loginPage_Login_Butoon" />
+        app:layout_constraintTop_toBottomOf="@id/butoon_Login_LoginPage" />
 
 </android.support.constraint.ConstraintLayout>
