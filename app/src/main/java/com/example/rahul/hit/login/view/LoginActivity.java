@@ -173,7 +173,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     baseActivityPreferenceHelper.putBoolean(IS_LOGIN,true);
                     loginPageToHomeScreenIntent= new Intent(LoginActivity.this,HomescreenActivity.class);
                     startActivity(loginPageToHomeScreenIntent);
-
+                    finish();
                     /*SharedPreferences.Editor editor=loginActivitySharedPreferences.edit();
                     editor.putBoolean("isLogin",true);
                     editor.apply();*/

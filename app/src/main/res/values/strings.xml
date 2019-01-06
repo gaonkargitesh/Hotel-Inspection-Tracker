@@ -18,6 +18,10 @@
     <string name="signuppage_logintextview">Already have an account??.. Login Now</string>
 
 
+    //HomeScreen Page
+    <string name="homescreenpage_logout_button">LOGOUT</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">LoginActivity</string>

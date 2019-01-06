@@ -2,6 +2,7 @@ package com.example.rahul.hit.signup.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,8 +21,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -56,6 +60,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     Button signupButton;
 
     Intent signupToLoginTextviewIntent;
+    Intent signupToHomeScreenIntent;
     FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
 
@@ -142,10 +147,54 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });*/
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+       /* mDatabase = FirebaseDatabase.getInstance().getReference();
         String randomid=mDatabase.push().getKey();
-        Users users= new Users(fullname,roomno,email,username,password,confirmPassword);
-        mDatabase.child("Users").child(randomid).setValue(users);
+        final Users users= new Users(fullname,roomno,email,username,password,confirmPassword);
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue()!=null){
+                    Toast.makeText(SignUpActivity.this,"User already exists..",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).setValue(users);
+                    signupToHomeScreenIntent = new Intent(SignUpActivity.this, HomescreenActivity.class);
+                    startActivity(signupToHomeScreenIntent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference usersRef = mDatabase.child("Users").child(email.substring(0, email.indexOf("@")));
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) { // User is already registered user
+                    //Show Error Message
+                    Toast.makeText(SignUpActivity.this,"User already exists..",Toast.LENGTH_SHORT).show();
+                } else {
+                    //Perform Next Step as Validation is successful
+                    final Users users= new Users(fullname,roomno,email,username,password,confirmPassword);
+
+                    //usersRef.child("Users").child(email.substring(0,email.indexOf("@"))).setValue(users);
+                    mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).setValue(users);
+                    //signupToHomeScreenIntent = new Intent(SignUpActivity.this, HomescreenActivity.class);
+                    //startActivity(signupToHomeScreenIntent);
+                    //finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
 
     }
 
@@ -163,10 +212,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         if (v== signupButton){
             userSignUp();
+            finish();
         }
         if (v==loginTextView){
             signupToLoginTextviewIntent =new Intent(SignUpActivity.this,LoginActivity.class);
             startActivity(signupToLoginTextviewIntent);
+            finish();
         }
     }
 }

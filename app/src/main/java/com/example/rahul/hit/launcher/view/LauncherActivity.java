@@ -39,8 +39,8 @@ public class LauncherActivity extends BaseActivity {
                 else {
                     Intent intent = new Intent(LauncherActivity.this, LoginActivity.class);
                     startActivity(intent);
-                    finish();
                 }
+                finish();
             }
         },800);
     }
