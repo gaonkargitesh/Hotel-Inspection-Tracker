@@ -31,7 +31,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".homescreen.view.HomescreenActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".workorder.view.AddWorkOrder" />
+        <activity android:name=".createcomplaint.view.AddCreateComplaint"></activity>
     </application>
 
 </manifest>

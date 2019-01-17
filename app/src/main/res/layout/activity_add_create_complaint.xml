@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context=".createcomplaint.view.AddCreateComplaint">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/create_compaint_toolbar_layout">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/create_complaint_toolbar"
+            app:titleTextColor="#FFF"
+            android:backgroundTint="#00F"
+            android:background="#586" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Complaint Details"
+        android:gravity="center"
+        android:id="@+id/textView_Details_AddComplaintPage"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/create_compaint_toolbar_layout"
+        android:textColor="#FFEB00"
+        />
+    
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textLayout_Title_AddComplaintPage"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textView_Details_AddComplaintPage"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_AddComplaintPage"
+            android:hint="Title"
+            android:inputType="textMultiLine"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textLayout_Description_AddComplaintPage"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textLayout_Title_AddComplaintPage"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_Description_AddComplaintPage"
+            android:hint="Description"
+            android:inputType="textMultiLine"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout_priority_AddComplaintPage"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textLayout_Description_AddComplaintPage"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_Priority_AddComplaintPage"
+            android:hint="Priority"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

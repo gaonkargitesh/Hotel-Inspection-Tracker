@@ -35,17 +35,17 @@ import butterknife.OnFocusChange;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //@BindView(R.id.editText_SignupPage_FullName)
-    EditText fullNameEditText;
+    //@BindView(R.id.editText_SignupPage_FirstName)
+    EditText firstNameEditText;
+
+    //@BindView(R.id.editText_SignupPage_LastName)
+    EditText lastNameEditText;
 
     //@BindView(R.id.editText_SignupPage_RoomNo)
     EditText roomNoEditText;
 
     //@BindView(R.id.editText_SignupPage_Email)
     EditText emailEditText;
-
-    //@BindView(R.id.editText_SignupPage_UserName)
-    EditText usernameEditText;
 
     //@BindView(R.id.editText_Loginpage_Password)
     EditText passwordEditText;
@@ -69,10 +69,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        fullNameEditText=findViewById(R.id.editText_SignupPage_FullName);
+        firstNameEditText=findViewById(R.id.editText_SignupPage_FirstName);
+        lastNameEditText=findViewById(R.id.editText_SignupPage_LastName);
         roomNoEditText=findViewById(R.id.editText_SignupPage_RoomNo);
         emailEditText=findViewById(R.id.editText_SignupPage_Email);
-        usernameEditText=findViewById(R.id.editText_SignupPage_UserName);
         passwordEditText=findViewById(R.id.editText_SignupPage_Password);
         confirmPasswordEditText=findViewById(R.id.editText_SignupPage_ConfirmPassword);
         ButterKnife.bind(this);
@@ -86,18 +86,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
     private void userSignUp(){
 
-        final String fullname=fullNameEditText.getText().toString();
-        final String roomno=roomNoEditText.getText().toString();
+        final String firstName=firstNameEditText.getText().toString();
+        final String roomNo=roomNoEditText.getText().toString();
         final String email=emailEditText.getText().toString();
-        final String username=usernameEditText.getText().toString();
+        final String lastName=lastNameEditText.getText().toString();
         final String password=passwordEditText.getText().toString();
         final String confirmPassword=confirmPasswordEditText.getText().toString();
 
-        if(TextUtils.isEmpty(fullname)){
+        if(TextUtils.isEmpty(firstName)){
             Toast.makeText(SignUpActivity.this,"Fullname is empty",Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(roomno)){
+        if(TextUtils.isEmpty(roomNo)){
             Toast.makeText(SignUpActivity.this,"roomno is empty",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -105,7 +105,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(SignUpActivity.this,"email is empty",Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(username)){
+        if(TextUtils.isEmpty(lastName)){
             Toast.makeText(SignUpActivity.this,"username is empty",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -180,7 +180,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SignUpActivity.this,"User already exists..",Toast.LENGTH_SHORT).show();
                 } else {
                     //Perform Next Step as Validation is successful
-                    final Users users= new Users(fullname,roomno,email,username,password,confirmPassword);
+                    final Users users= new Users(firstName,roomNo,email,lastName,password,confirmPassword);
 
                     //usersRef.child("Users").child(email.substring(0,email.indexOf("@"))).setValue(users);
                     mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).setValue(users);
