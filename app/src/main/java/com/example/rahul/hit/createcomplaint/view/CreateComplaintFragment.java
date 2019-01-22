@@ -57,6 +57,7 @@ public class CreateComplaintFragment extends Fragment {
     {
         createCompButtonToAddComplaint=new Intent(context, AddCreateComplaint.class);
         startActivity(createCompButtonToAddComplaint);
+
     }
 
 }

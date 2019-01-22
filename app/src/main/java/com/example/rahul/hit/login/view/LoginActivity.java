@@ -34,14 +34,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     PreferenceHelper helper;
 
-    TextView signupTextView;
+    TextView signUpTextView;
     EditText loginEmail;
     EditText loginPassword;
     Button loginButton;
 
-    Intent loginToSignupTextviewIntent;
-    Intent loginPageToHomeScreenIntent;
 
+    Intent loginToSignUpTextViewIntent;
+    Intent loginPageToHomeScreenIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +49,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        signupTextView = findViewById(R.id.textView_SignUp_LoginPage);
+        signUpTextView = findViewById(R.id.textView_SignUp_LoginPage);
 
         loginEmail = findViewById(R.id.editText_LoginPage_Email);
         loginPassword = findViewById(R.id.editText_Loginpage_Password);
@@ -57,7 +57,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
         loginButton.setOnClickListener(this);
-        signupTextView.setOnClickListener(this);
+        signUpTextView.setOnClickListener(this);
 
 
         /*loginActivitySharedPreferences=getSharedPreferences("HIT_PREFERENCE",MODE_PRIVATE);
@@ -90,8 +90,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    loginToSignupTextviewIntent=new Intent(LoginActivity.this,HomescreenActivity.class);
-                    startActivity(loginToSignupTextviewIntent);
+                    loginToSignUpTextViewIntent=new Intent(LoginActivity.this,HomescreenActivity.class);
+                    startActivity(loginToSignUpTextViewIntent);
                 }
             }
         });
@@ -151,6 +151,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                     if(dataSnapshot1.child("email").getValue().toString().equals(email) && dataSnapshot1.child("password").getValue().toString().equals(password)){
+
                         checkAuthentication=true;
                         break;
                     }
@@ -186,9 +187,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (v == loginButton) {
             userLogin();
         }
-        if (v == signupTextView) {
-            loginToSignupTextviewIntent = new Intent(LoginActivity.this, SignUpActivity.class);
-            startActivity(loginToSignupTextviewIntent);
+        if (v == signUpTextView) {
+            loginToSignUpTextViewIntent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(loginToSignUpTextViewIntent);
         }
     }
 

@@ -2,12 +2,12 @@ package com.example.rahul.hit.util;
 
 public class Users {
 
-    public String fullname;
-    public String roomno;
-    public String email;
-    public String username;
-    public String password;
-    public String confirmpassword;
+    private String fullname;
+    private String roomno;
+    private String email;
+    private String username;
+    private String password;
+    private String confirmpassword;
 
 
     public Users(String username, String password) {

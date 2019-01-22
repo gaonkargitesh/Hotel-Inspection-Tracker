@@ -4,6 +4,20 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".HITApplication"
         android:allowBackup="true"
@@ -12,6 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".dashboard.view.AddTechnician"></activity>
         <activity android:name=".MainActivity" />
         <activity
             android:name=".launcher.view.LauncherActivity"
@@ -33,7 +48,7 @@
             android:name=".homescreen.view.HomescreenActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".workorder.view.AddWorkOrder" />
-        <activity android:name=".createcomplaint.view.AddCreateComplaint"></activity>
+        <activity android:name=".createcomplaint.view.AddCreateComplaint" />
     </application>
 
 </manifest>

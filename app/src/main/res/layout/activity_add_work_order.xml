@@ -4,49 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".workorder.view.AddWorkOrder"
-    android:padding="8dp">
+    tools:context=".workorder.view.AddWorkOrder">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Work Order Details"
-        android:gravity="center"
-        android:id="@+id/textView_Details_WorkOrderPage"
-        android:padding="8dp"
-        android:textColor="#FFEB00"
-        />
-
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/work_order_toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textLayout_Title_WorkOrderPage"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/textView_Details_WorkOrderPage"
-        >
-        <EditText
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/work_order_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#586"
+            android:backgroundTint="#00F"
+            app:titleTextColor="#FFF" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textView_Details_WorkOrderPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Work Order Details"
+        android:textColor="#FFEB00"
+        app:layout_constraintTop_toBottomOf="@id/work_order_toolbar_layout" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textLayout_Title_WorkOrderPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/textView_Details_WorkOrderPage">
+
+        <EditText
             android:id="@+id/editText_WorkOrderPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Title"
-            android:inputType="textMultiLine"
-            />
+            android:inputType="textMultiLine" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/textLayout_Description_WorkOrderPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textLayout_Description_WorkOrderPage"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/textLayout_Title_WorkOrderPage"
-        >
+        app:layout_constraintTop_toBottomOf="@id/textLayout_Title_WorkOrderPage">
+
         <EditText
+            android:id="@+id/editText_Description_WorkOrderPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText_Description_WorkOrderPage"
             android:hint="Description"
-            android:inputType="textMultiLine"
-            />
+            android:inputType="textMultiLine" />
     </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -4,99 +4,231 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
     tools:context=".createcomplaint.view.AddCreateComplaint">
 
 
     <LinearLayout
+        android:id="@+id/create_compaint_toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/create_compaint_toolbar_layout">
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/create_complaint_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/create_complaint_toolbar"
-            app:titleTextColor="#FFF"
+            android:background="#586"
             android:backgroundTint="#00F"
-            android:background="#586" />
+            app:titleTextColor="#FFF" />
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Complaint Details"
-        android:gravity="center"
-        android:id="@+id/textView_Details_AddComplaintPage"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/create_compaint_toolbar_layout"
-        android:textColor="#FFEB00"
-        />
-    
+
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/textLayout_Title_AddComplaintPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textLayout_Title_AddComplaintPage"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/textView_Details_AddComplaintPage"
-        >
+        app:layout_constraintTop_toBottomOf="@id/create_compaint_toolbar_layout">
+
         <EditText
+            android:id="@+id/editText_AddComplaintPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText_AddComplaintPage"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:hint="Title"
-            android:inputType="textMultiLine"
-            />
+            android:inputType="textMultiLine" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/textLayout_Description_AddComplaintPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textLayout_Description_AddComplaintPage"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/textLayout_Title_AddComplaintPage"
-        >
+        app:layout_constraintTop_toBottomOf="@id/textLayout_Title_AddComplaintPage">
+
         <EditText
+            android:id="@+id/editText_Description_AddComplaintPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText_Description_AddComplaintPage"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:hint="Description"
-            android:inputType="textMultiLine"
-            />
+            android:inputType="textMultiLine" />
     </android.support.design.widget.TextInputLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout_priority_AddComplaintPage"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/textLayout_Description_AddComplaintPage"
-        >
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:weightSum="1"
+
+        app:layout_constraintTop_toBottomOf="@id/textLayout_Description_AddComplaintPage">
+
+        <RadioButton
+            android:id="@+id/radioButton_AddCreateComplaintPage_LowPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="radioButtonClicked"
+            android:text="Low" />
+
+        <RadioButton
+            android:id="@+id/radioButton_AddCreateComplaintPage_MediumPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="radioButtonClicked"
+            android:text="Medium" />
+
+        <RadioButton
+            android:id="@+id/radioButton_AddCreateComplaintPage_HighPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="radioButtonClicked"
+            android:text="High" />
+
+
+
+    </LinearLayout>
+    <!--<RadioGroup
+        android:id="@+id/radioGroup_AddComplaint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:tooltipText="Priority Level"
+        android:weightSum="1"
+        app:layout_constraintTop_toBottomOf="@id/textLayout_Description_AddComplaintPage">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Priority level" />
+
+        <RadioButton
+            android:id="@+id/radioButton_AddCreateComplaintPage_LowPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="radioButtonClicked"
+            android:text="Low" />
+
+        <RadioButton
+            android:id="@+id/radioButton_AddCreateComplaintPage_MediumPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="radioButtonClicked"
+            android:text="Medium" />
+
+        <RadioButton
+            android:id="@+id/radioButton_AddCreateComplaintPage_HighPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="radioButtonClicked"
+            android:text="High" />
+
+
+    </RadioGroup>-->
+
+    <TextView
+        android:id="@+id/textView_AddComplaint_UploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Upload Image"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup_AddComplaint" />
+
+    <Button
+        android:id="@+id/button_AddComplaint_Upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toTopOf="@id/button_AddComplaint_Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/textView_AddComplaint_UploadImage"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup_AddComplaint" />
+
+    <Button
+        android:id="@+id/button_AddComplaint_Add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Save"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_AddComplaint_UploadImage" />
+
+
+    <!--<android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout_priority_AddComplaintPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf=""
+        app:layout_constraintTop_toBottomOf="@id/textLayout_Description_AddComplaintPage">
+
+        <TextView
             android:id="@+id/textView_Priority_AddComplaintPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:hint="Priority"
             />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:id="@+id/low_priority_icon"
+            app:layout_constraintEnd_toStartOf="@id/medium_priority_icon"
+            app:layout_constraintStart_toEndOf="@id/textView_Priority_AddComplaintPage"
             />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:id="@+id/medium_priority_icon"
+            app:layout_constraintEnd_toStartOf="@id/high_priority_icon"
+            app:layout_constraintStart_toEndOf="@id/low_priority_icon"/>
 
         <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/high_priority_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/medium_priority_icon"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView_Upload_Image_Add_Complaint_Page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:hint="Upload Image :"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_priority_AddComplaintPage" />-->
+
+    <!--<ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/upload_image_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_priority_AddComplaintPage" />
+
+-->
 
 
 </android.support.constraint.ConstraintLayout>

@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"
             app:titleTextColor="#FFF"
-            android:backgroundTint="#00F"
-            android:background="#586" />
+            android:background="@color/colorPrimary"
+            android:theme="@style/AppTheme.AppBarOverlay"/>
 
         <FrameLayout
             android:id="@+id/frame_layout"

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layoutConstraint_AddTechnicianPage"
+    tools:context=".dashboard.view.AddTechnician">
+
+    <LinearLayout
+        android:id="@+id/add_Technician_Toolbar_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/add_Technician_Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00F">
+
+        </android.support.v7.widget.Toolbar>
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textLayout_AddTechnicianPage_TechName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/add_Technician_Toolbar_Layout">
+
+        <EditText
+            android:id="@+id/editText_AddTechnicianPage_TechName"
+            android:layout_width="match_parent"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/technician_name" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textLayout_AddTechnicianPage_TechEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textLayout_AddTechnicianPage_TechName">
+
+        <EditText
+            android:id="@+id/editText_AddTechnicianPage_TechEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/email" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textLayout_AddTechnicianPage_TechPhoneNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textLayout_AddTechnicianPage_TechEmail">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:id="@+id/editText_AddTechnicianPage_TechPhoneNo"
+            android:hint="@string/phone_number"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textLayout_AddTechnicianPage_TechJobProfile"
+        app:layout_constraintTop_toBottomOf="@id/textLayout_AddTechnicianPage_TechPhoneNo"
+        android:padding="8dp"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/job_profile"
+            android:layout_margin="8dp"
+            android:id="@+id/editText_AddTechnicianPage_TechJobProfile"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/textLayout_AddTechnicianPage_TechJobProfile"
+        android:layout_height="wrap_content"
+        android:hint="ADD"
+        android:layout_marginTop="16dp"
+        android:id="@+id/buttton_AddTechnicianPage_AddTech"
+        app:layout_constraintTop_toBottomOf="@id/textLayout_AddTechnicianPage_TechJobProfile"
+        />
+
+</android.support.constraint.ConstraintLayout>

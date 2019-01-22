@@ -74,6 +74,7 @@ public class HomescreenActivity extends BaseActivity {
         //Add First fragment by default (WorkOrderFragment)
         WorkorderFragment workorderFragment=new WorkorderFragment();
         Log.d("WorkOrderClass","Before Add method");
+        setTitle("Work Order");
         addFragment(workorderFragment);
         Log.d("WorkOrderClass","After Add method");
 
@@ -110,32 +111,34 @@ public class HomescreenActivity extends BaseActivity {
                 int id = menuItem.getItemId();
                 Log.d("Itemid","ID:"+id);
                 if (id == R.id.item_workorder_navigation_drawer) {
-                    Log.d("WorkOrderNav","Inside work irder case");
                     setTitle("Work Order");
                     WorkorderFragment workorderFragment= new WorkorderFragment();
-                    FragmentManager fragmentManager=getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.frame_layout,workorderFragment).commit();
+                    replaceFragment(workorderFragment);
+                    /*FragmentManager fragmentManager=getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.frame_layout,workorderFragment).commit();*/
                 }
                 else if (id == R.id.item_create_complaint_navigation_drawer) {
-                    Log.d("Complaintnav","Inside COmplainr case");
                     setTitle("Create Complaint");
                     CreateComplaintFragment createComplaintFragment= new CreateComplaintFragment();
-                    FragmentManager fragmentManager=getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.frame_layout,createComplaintFragment).commit();
+                    replaceFragment(createComplaintFragment);
+                    /*FragmentManager fragmentManager=getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.frame_layout,createComplaintFragment).commit();*/
 
                 }
                 else if (id == R.id.item_dashboard_navigation_drawer) {
                     Log.d("Dashboardnav","Inside Dashboard case");
                     setTitle("Dashboard");
                     DashboardFragment dashboardFragment = new DashboardFragment();
-                    FragmentManager fragmentManager=getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.frame_layout,dashboardFragment).commit();
+                    replaceFragment(dashboardFragment);
+                    /*FragmentManager fragmentManager=getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.frame_layout,dashboardFragment).commit();*/
                 }
                 else if (id == R.id.item_settings_navigation_drawer) {
                     setTitle("Settings");
                     SettingsFragment settingsFragment= new SettingsFragment();
-                    FragmentManager fragmentManager=getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.frame_layout,settingsFragment).commit();
+                    replaceFragment(settingsFragment);
+                    /*FragmentManager fragmentManager=getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.frame_layout,settingsFragment).commit();*/
                 }
                 else if(id==R.id.item_logout_navigation_drawer){
                     sharedPreferences=getSharedPreferences("HIT_PREFERENCE",MODE_PRIVATE);
@@ -166,6 +169,16 @@ public class HomescreenActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 
         public void addFragment(Fragment fragment){
             getSupportFragmentManager().beginTransaction()
@@ -173,11 +186,11 @@ public class HomescreenActivity extends BaseActivity {
                     .commit();
         }
 
-        /*private void replaceFragment(Fragment fragment){
+        private void replaceFragment(Fragment fragment){
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_layout, fragment)
                     .commit();
-        }*/
+        }
 
 
         //Action to be performed whwn it clicks on the navigation drawer button

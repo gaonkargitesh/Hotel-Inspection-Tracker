@@ -1,15 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".dashboard.view.DashboardFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Insdie dashboard"
-        android:gravity="center"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/tabLayout_DashboardPage"
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <!--<android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabItem_DashboardPage_Users"
+            android:text="Users"
+            />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="technician"
+            android:id="@+id/tabItem_DashboardPage_Technician"
+            />-->
+
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout_DashboardPage"
+        android:id="@+id/viewPager_DashboardPage"
+        >
+
+    </android.support.v4.view.ViewPager>
+    <!-- TODO: Update blank fragment layout -->
+    <!--<TextView
+        android:id="@+id/textView_DashboardPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:text="Technician"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout_DashboardPage" />
+
+    <Button
+        android:id="@+id/button_Add_Technician_DashBoard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="ADD Technician"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout_DashboardPage" />-->
+
+
+</android.support.constraint.ConstraintLayout>

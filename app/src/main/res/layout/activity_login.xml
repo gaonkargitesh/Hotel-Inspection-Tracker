@@ -5,10 +5,15 @@
     android:layout_height="match_parent">
 
     <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textlayout_email_loginPage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:id="@+id/login_id"
         android:layout_width="360dp"
         android:layout_height="225dp"
         android:src="@drawable/logo" />
+
 
 
     <android.support.design.widget.TextInputLayout
