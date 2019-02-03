@@ -2,25 +2,25 @@ package com.example.rahul.hit.util;
 
 public class Users {
 
-    private String fullname;
+    private String firstname;
     private String roomno;
     private String email;
-    private String username;
+    private String lastname;
     private String password;
     private String confirmpassword;
 
 
-    public Users(String username, String password) {
-        this.username = username;
+    public Users(String lastname, String password) {
+        this.lastname = lastname;
         this.password = password;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getRoomno() {
@@ -39,12 +39,12 @@ public class Users {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getPassword() {
@@ -67,11 +67,11 @@ public class Users {
     public Users(){
 
     }
-    public Users(String fullname, String roomno, String email, String username, String password, String confirmpassword){
-        this.fullname=fullname;
+    public Users(String firstname, String roomno, String email, String lastname, String password, String confirmpassword){
+        this.firstname = firstname;
         this.roomno=roomno;
         this.email=email;
-        this.username=username;
+        this.lastname = lastname;
         this.password=password;
         this.confirmpassword=confirmpassword;
 

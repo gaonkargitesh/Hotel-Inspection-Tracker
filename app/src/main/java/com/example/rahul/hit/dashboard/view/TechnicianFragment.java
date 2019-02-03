@@ -4,6 +4,7 @@ package com.example.rahul.hit.dashboard.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +22,9 @@ import butterknife.OnClick;
  */
 public class TechnicianFragment extends Fragment {
 
-    @BindView(R.id.textView_AddTechnicianPage_AddTechnician)
-    TextView addTechnician;
+
+    @BindView(R.id.floating_Button_AddTechnicianPage_AddTechnician)
+    FloatingActionButton addTechnician;
 
     Intent addTechnicianIntent;
     Context context;
@@ -44,7 +46,7 @@ public class TechnicianFragment extends Fragment {
         return view;
     }
 
-    @OnClick(R.id.textView_AddTechnicianPage_AddTechnician)
+    @OnClick(R.id.floating_Button_AddTechnicianPage_AddTechnician)
     public void onTextViewClick(View view){
         addTechnicianIntent=new Intent(context,AddTechnician.class);
         startActivity(addTechnicianIntent);

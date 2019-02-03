@@ -51,6 +51,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.google.firebase:firebase-database:16.0.5'
+    implementation 'com.google.firebase:firebase-storage:16.0.5'
 
     //Circular Image
     implementation 'de.hdodenhof:circleimageview:3.0.0'
@@ -58,7 +59,12 @@ dependencies {
     //RoundLetter View
     //implementation 'com.github.pavlospt:roundedletterview:1.2'
 
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
 
     testImplementation 'junit:junit:4.12'
@@ -67,3 +73,4 @@ dependencies {
 
 }
 apply plugin: 'com.google.gms.google-services'
+

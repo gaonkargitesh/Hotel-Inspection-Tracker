@@ -5,18 +5,22 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+
     <uses-feature
         android:name="android.hardware.camera.autofocus"
-        android:required="false" />
+        android:required="true" />
     <uses-feature
         android:name="android.hardware.camera.flash"
-        android:required="false" />
+        android:required="true" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+
 
     <application
         android:name=".HITApplication"
@@ -49,6 +53,16 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".workorder.view.AddWorkOrder" />
         <activity android:name=".createcomplaint.view.AddCreateComplaint" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.rahul.hit.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
     </application>
 
 </manifest>

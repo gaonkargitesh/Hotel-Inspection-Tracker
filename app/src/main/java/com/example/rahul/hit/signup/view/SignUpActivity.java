@@ -7,13 +7,16 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rahul.hit.BaseActivity;
 import com.example.rahul.hit.R;
+import com.example.rahul.hit.constants.AppConstant;
 import com.example.rahul.hit.homescreen.view.HomescreenActivity;
 import com.example.rahul.hit.login.view.LoginActivity;
 import com.example.rahul.hit.util.Users;
@@ -32,8 +35,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
-
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignUpActivity extends BaseActivity implements View.OnClickListener {
 
     //@BindView(R.id.editText_SignupPage_FirstName)
     EditText firstNameEditText;
@@ -84,6 +86,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         loginTextView.setOnClickListener(this);
 
     }
+
+    @Override
+    protected void init() {
+
+    }
+
     private void userSignUp(){
 
         final String firstName=firstNameEditText.getText().toString();
@@ -92,6 +100,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         final String lastName=lastNameEditText.getText().toString();
         final String password=passwordEditText.getText().toString();
         final String confirmPassword=confirmPasswordEditText.getText().toString();
+        final String fullname = firstName+ " "+lastName;
 
         if(TextUtils.isEmpty(firstName)){
             Toast.makeText(SignUpActivity.this,"Fullname is empty",Toast.LENGTH_SHORT).show();
@@ -184,6 +193,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                     //usersRef.child("Users").child(email.substring(0,email.indexOf("@"))).setValue(users);
                     mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).setValue(users);
+                    baseActivityPreferenceHelper.putString("full_name",firstName);
+                    baseActivityPreferenceHelper.putString("mail",email);
+                    Log.d("Signup Activity","Values are: "+AppConstant.BundleKey.fullName);
+                    Log.d("Signup Activity","Values are: "+AppConstant.BundleKey.email);
                     //signupToHomeScreenIntent = new Intent(SignUpActivity.this, HomescreenActivity.class);
                     //startActivity(signupToHomeScreenIntent);
                     //finish();

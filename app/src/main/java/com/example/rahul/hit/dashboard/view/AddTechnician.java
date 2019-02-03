@@ -7,6 +7,8 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import butterknife.BindInt;
 import butterknife.BindView;
@@ -46,6 +50,11 @@ public class AddTechnician extends AppCompatActivity {
     Button addTewchnician;
 
     CoordinatorLayout coordinatorLayout;
+
+
+    private RecyclerView technicianRecyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    //FirebaseRecyclerAdapter firebaseRecyclerAdapter;
 
 
     DatabaseReference mTechnicianDbReference;
@@ -90,7 +99,10 @@ public class AddTechnician extends AppCompatActivity {
             snackbar.show();
         }
 
-        mTechnicianDbReference= FirebaseDatabase.getInstance().getReference();
+        /*mTechnicianDbReference= FirebaseDatabase.getInstance().getReference().child("Technician").push();
+        ArrayList<TechnicianModel> techList= new ArrayList<>();
+        TechnicianModel technicianModel=new TechnicianModel();
+        //technicianModel.put();*/
         final DatabaseReference mDatabase= mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@")));
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
