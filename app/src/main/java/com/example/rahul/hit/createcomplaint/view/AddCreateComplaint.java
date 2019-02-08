@@ -1,7 +1,6 @@
 package com.example.rahul.hit.createcomplaint.view;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,17 +8,13 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -33,34 +28,26 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.rahul.hit.BaseActivity;
-import com.example.rahul.hit.MainActivity;
 import com.example.rahul.hit.R;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemSelected;
-
 
 
 public class AddCreateComplaint extends BaseActivity {
@@ -208,8 +195,8 @@ public class AddCreateComplaint extends BaseActivity {
         ComplaintDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final CreateComplaintAdapter  createComplaintAdapter= new CreateComplaintAdapter(Title,Description,priority,imageURL);
-                mStorageDatabase.child("Create Complaint").child(String.valueOf(System.currentTimeMillis())+email.substring(0,email.indexOf("@"))).setValue(createComplaintAdapter);
+                final CreateComplaintModel createComplaintModel = new CreateComplaintModel(Title,Description,priority,imageURL);
+                mStorageDatabase.child("Create Complaint").child(String.valueOf(System.currentTimeMillis())+email.substring(0,email.indexOf("@"))).setValue(createComplaintModel);
                 Toast.makeText(context, "Complaint added..", Toast.LENGTH_SHORT).show();
             }
 

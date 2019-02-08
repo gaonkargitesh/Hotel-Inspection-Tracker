@@ -63,6 +63,7 @@ public class AddTechnician extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_technician);
+        mTechnicianDbReference=FirebaseDatabase.getInstance().getReference();
         ButterKnife.bind(this);
 
     }
@@ -83,33 +84,30 @@ public class AddTechnician extends AppCompatActivity {
         final String jobProfile=TechJobProfile.getText().toString();
 
         if(TextUtils.isEmpty(name)){
-            Snackbar snackbar=Snackbar.make(coordinatorLayout,"9",Snackbar.LENGTH_SHORT);
-            snackbar.show();
+            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
         }
         if(TextUtils.isEmpty(email)){
-            Snackbar snackbar=Snackbar.make(coordinatorLayout,"hello",Snackbar.LENGTH_SHORT);
-            snackbar.show();
+            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
         }
         if(TextUtils.isEmpty(phoneNumber)){
-            Snackbar snackbar=Snackbar.make(coordinatorLayout,"hello",Snackbar.LENGTH_SHORT);
-            snackbar.show();
+            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
         }
         if(TextUtils.isEmpty(jobProfile)){
-            Snackbar snackbar=Snackbar.make(coordinatorLayout,"hello",Snackbar.LENGTH_SHORT);
-            snackbar.show();
+            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
         }
 
         /*mTechnicianDbReference= FirebaseDatabase.getInstance().getReference().child("Technician").push();
         ArrayList<TechnicianModel> techList= new ArrayList<>();
         TechnicianModel technicianModel=new TechnicianModel();
         //technicianModel.put();*/
-        final DatabaseReference mDatabase= mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@")));
+        DatabaseReference mDatabase= mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@")));
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getValue()!=null){
-                    Snackbar snackbar=Snackbar.make(coordinatorLayout,"Technician already exists...!!",Snackbar.LENGTH_SHORT);
-                    snackbar.show();
+                    /*Snackbar snackbar=Snackbar.make(coordinatorLayout,"Technician already exists...!!",Snackbar.LENGTH_SHORT);
+                    snackbar.show();*/
+                    Toast.makeText(AddTechnician.this, "exists", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     final TechnicianModel technicianModel=new TechnicianModel(name,email,phoneNumber,jobProfile);
