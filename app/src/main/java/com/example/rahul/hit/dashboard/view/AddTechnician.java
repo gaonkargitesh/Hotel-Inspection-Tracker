@@ -5,10 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +36,22 @@ import butterknife.OnClick;
 
 public class AddTechnician extends AppCompatActivity {
 
+
+    @BindView(R.id.textLayout_AddTechnicianPage_TechEmail)
+    TextInputLayout emailTextInputLayout;
+
+    @BindView(R.id.textLayout_AddTechnicianPage_TechName)
+    TextInputLayout nameTextInputLayout;
+
+    @BindView(R.id.textLayout_AddTechnicianPage_TechPhoneNo)
+    TextInputLayout phoneNoTextInputLayout;
+
+    @BindView(R.id.textLayout_AddTechnicianPage_TechPasswrod)
+    TextInputLayout passwordTextInputLayout;
+
+    @BindView(R.id.textLayout_AddTechnicianPage_TechJobProfile)
+    TextInputLayout jobProfileTextInputLayout;
+
     @BindView(R.id.editText_AddTechnicianPage_TechEmail)
     EditText TechEmail;
 
@@ -46,23 +64,41 @@ public class AddTechnician extends AppCompatActivity {
     @BindView(R.id.editText_AddTechnicianPage_TechJobProfile)
     EditText TechJobProfile;
 
+    @BindView(R.id.edittext_AddTechnicianPage_TechPassword)
+    EditText TechPassword;
+
     @BindView(R.id.buttton_AddTechnicianPage_AddTech)
-    Button addTewchnician;
+    Button addTechnician;
+
+
 
     CoordinatorLayout coordinatorLayout;
-
 
     private RecyclerView technicianRecyclerView;
     private LinearLayoutManager linearLayoutManager;
     //FirebaseRecyclerAdapter firebaseRecyclerAdapter;
 
 
+    Toolbar toolbar;
     DatabaseReference mTechnicianDbReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_technician);
+
+
+        toolbar=findViewById(R.id.add_Technician_Toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.back_arrow);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         mTechnicianDbReference=FirebaseDatabase.getInstance().getReference();
         ButterKnife.bind(this);
 
@@ -82,18 +118,30 @@ public class AddTechnician extends AppCompatActivity {
         final String email=TechEmail.getText().toString();
         final String phoneNumber=TechPhoneNo.getText().toString();
         final String jobProfile=TechJobProfile.getText().toString();
+        final String password=TechPassword.getText().toString();
 
         if(TextUtils.isEmpty(name)){
-            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+            nameTextInputLayout.setErrorEnabled(false);
+            nameTextInputLayout.setError("Name is empty");
         }
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+
+            nameTextInputLayout.setErrorEnabled(false);
+            nameTextInputLayout.setError("Email is empty");
         }
         if(TextUtils.isEmpty(phoneNumber)){
-            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+
+            nameTextInputLayout.setErrorEnabled(false);
+            nameTextInputLayout.setError("Phone number is empty");
         }
         if(TextUtils.isEmpty(jobProfile)){
-            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+
+            nameTextInputLayout.setErrorEnabled(false);
+            nameTextInputLayout.setError("Job Profile is empty");
+        }
+        if(TextUtils.isEmpty((password))){
+            nameTextInputLayout.setErrorEnabled(false);
+            nameTextInputLayout.setError("Password is empty");
         }
 
         /*mTechnicianDbReference= FirebaseDatabase.getInstance().getReference().child("Technician").push();
@@ -110,9 +158,8 @@ public class AddTechnician extends AppCompatActivity {
                     Toast.makeText(AddTechnician.this, "exists", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    final TechnicianModel technicianModel=new TechnicianModel(name,email,phoneNumber,jobProfile);
+                    final TechnicianModel technicianModel=new TechnicianModel(name,email,phoneNumber,jobProfile,password);
                     mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@"))).setValue(technicianModel);
-
                 }
             }
 

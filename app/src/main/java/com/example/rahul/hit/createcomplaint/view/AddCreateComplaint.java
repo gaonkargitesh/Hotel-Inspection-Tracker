@@ -114,15 +114,14 @@ public class AddCreateComplaint extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_create_complaint);
 
-        FirebaseApp.initializeApp(this);
+        //FirebaseApp.initializeApp(this);
         mStorageDatabase=FirebaseDatabase.getInstance().getReference();
         storageReference = FirebaseStorage.getInstance().getReference();
         ButterKnife.bind(this);
 
-        context = getApplicationContext();
+        context = this;
         toolbar = findViewById(R.id.create_complaint_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Add Create Complaint");
 
         toolbar.setNavigationIcon(R.drawable.back_arrow);
         toolbar.setTitle(R.string.add_create_complaint);

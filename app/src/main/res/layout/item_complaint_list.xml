@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/createComplaint_CardView_Container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="#C0C0C0"
+    android:paddingBottom="8dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp"
+    app:cardPreventCornerOverlap="false"
+    app:layout_constraintTop_toTopOf="parent">
+
+
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/imageView_complaint_list_compImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/textView_complaint_list_compTitle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_complaint_list_compTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textColor="#262626"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/imageView_complaint_list_compImage" />
+
+        <TextView
+            android:id="@+id/textView_complaint_list_compDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compTitle" />
+
+        <TextView
+            android:id="@+id/textView_complaint_list_compPriority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compDescription"
+
+            />
+
+        <Button
+            android:id="@+id/button_complaint_list_assignComplaint"
+            android:layout_width="wrap_content"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="16dp"
+            android:text="ASSIGN"
+            android:textColor="#00F"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/textView_complaint_list_compPriority"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compDescription"
+            app:layout_constraintTop_toTopOf="@id/textView_complaint_list_compPriority" />
+
+        <!--<TextView
+            android:id="@+id/textView_complaint_list_assignComplaint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:hint="ASSIGN"
+            android:drawablePadding="8dp"
+            android:drawableLeft="@drawable/add_technician"
+            android:textColor="#262626"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/textView_complaint_list_compPriority"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compDescription"
+            app:layout_constraintTop_toTopOf="@id/textView_complaint_list_compPriority"
+
+            />-->
+
+        <!--<Button
+            android:id="@+id/button_CreateComplaintPage_AssignWorker"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Assign Technician"
+            app:layout_constraintTop_toBottomOf="@id/complaint_Priority" />-->
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v7.widget.CardView>

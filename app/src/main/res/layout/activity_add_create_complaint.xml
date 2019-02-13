@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#586"
+            app:title="@string/add_create_complaint"
             android:backgroundTint="#00F"
             app:titleTextColor="#FFF" />
 

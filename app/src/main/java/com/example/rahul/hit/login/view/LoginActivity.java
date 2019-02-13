@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     PreferenceHelper helper;
 
+    TextInputLayout emailTextInputLayout;
+    TextInputLayout passwordTextInputLayout;
+
     TextView signUpTextView;
     EditText loginEmail;
     EditText loginPassword;
@@ -57,6 +61,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         signUpTextView = findViewById(R.id.textView_SignUp_LoginPage);
+
+        emailTextInputLayout=findViewById(R.id.textlayout_email_loginPage);
+        passwordTextInputLayout=findViewById(R.id.textlayout_password_loginPage);
+
 
         loginEmail = findViewById(R.id.editText_LoginPage_Email);
         loginPassword = findViewById(R.id.editText_Loginpage_Password);
@@ -90,12 +98,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         final String password = loginPassword.getText().toString();
         Log.d(TAG,"Email is "+email);
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(LoginActivity.this, "email is empty", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(LoginActivity.this, "email is empty", Toast.LENGTH_SHORT).show();
+            //loginEmail.setError("Email is empty");
+            emailTextInputLayout.setError("Email is empty");
+            emailTextInputLayout.setErrorEnabled(false         );
+            return;
+
+        }
+        else if (TextUtils.isEmpty(password)) {
+            //Toast.makeText(LoginActivity.this, "Password is empty", Toast.LENGTH_SHORT).show();
+            //loginPassword.setError("Password is empty");
+            passwordTextInputLayout.setError("Password is empty");
+            passwordTextInputLayout.setErrorEnabled(false);
             return;
         }
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(LoginActivity.this, "Password is empty", Toast.LENGTH_SHORT).show();
-            return;
+        else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+            loginEmail.setError("Invalid Email Address");
+        }
+        else{
+            Toast.makeText(this, "Login Succeessful..", Toast.LENGTH_SHORT).show();
         }
 
 

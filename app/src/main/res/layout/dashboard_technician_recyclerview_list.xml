@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="4dp"
         android:padding="4dp"
         android:id="@+id/textView_TechnicianList_TechName"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="4dp"
         android:padding="4dp"
         app:layout_constraintTop_toBottomOf="@id/textView_TechnicianList_TechName"
         android:id="@+id/textView_TechnicianList_TechEmail"/>
@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="4dp"
         android:padding="4dp"
         app:layout_constraintTop_toBottomOf="@id/textView_TechnicianList_TechEmail"
         android:id="@+id/textView_TechnicianList_TechPhoneNo"/>
@@ -31,7 +31,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="4dp"
         android:padding="4dp"
         app:layout_constraintTop_toBottomOf="@id/textView_TechnicianList_TechPhoneNo"
         android:id="@+id/textView_TechnicianList_TechJobProfile"

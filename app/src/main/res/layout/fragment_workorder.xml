@@ -3,21 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/work_order_fragment_container"
     tools:context=".workorder.view.WorkorderFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Inside Wokr order"
-        android:gravity="center"
-        />
+        android:id="@+id/insideContainer_Workorder">
+
+
+    </FrameLayout>
+    
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/floating_Button_Workorder_Fragement"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
+        android:visibility="gone"
         android:backgroundTint="#000080"
         android:src="@drawable/add_workorder_24dp"
         />

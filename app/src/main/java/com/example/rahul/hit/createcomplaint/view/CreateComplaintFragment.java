@@ -1,6 +1,7 @@
 package com.example.rahul.hit.createcomplaint.view;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,14 +9,19 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rahul.hit.R;
+import com.example.rahul.hit.technician.view.TechnicianAssignList;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +34,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.rahul.hit.createcomplaint.view.CreateComplaintAdapter.REQUEST_FOR_ACTIVITY_CODE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -38,9 +46,7 @@ public class CreateComplaintFragment extends Fragment {
 
     Intent createCompButtonToAddComplaint;
 
-
     RecyclerView createComplaintRecyclerView;
-
     DatabaseReference databaseReference;
     ArrayList<CreateComplaintModel> complaintList;
     CreateComplaintAdapter createComplaintAdapter;
@@ -57,8 +63,6 @@ public class CreateComplaintFragment extends Fragment {
 
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Create Complaint");
 
-
-
         complaintList=new ArrayList<CreateComplaintModel>();
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -69,7 +73,12 @@ public class CreateComplaintFragment extends Fragment {
                     CreateComplaintModel createComplaintModel=dataSnapshot1.getValue(CreateComplaintModel.class);
                     complaintList.add(createComplaintModel);
                 }
+
                 createComplaintAdapter=new CreateComplaintAdapter(context,complaintList);
+
+                //Adding lbelow line to separate the data in the recycelrview
+                //createComplaintRecyclerView.addItemDecoration(new DividerItemDecoration(createComplaintRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
                 createComplaintRecyclerView.setAdapter(createComplaintAdapter);
             }
 
@@ -93,14 +102,16 @@ public class CreateComplaintFragment extends Fragment {
         return view;
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @OnClick(R.id.floating_Button_CreateComplaint_Fragement)
     public void onButtonClick(View view)
     {
         createCompButtonToAddComplaint=new Intent(context, AddCreateComplaint.class);
         startActivity(createCompButtonToAddComplaint);
-
     }
 
 }

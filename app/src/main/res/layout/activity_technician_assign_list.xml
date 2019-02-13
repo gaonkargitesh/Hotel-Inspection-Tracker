@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".technician.view.TechnicianAssignList">
+
+
+    <LinearLayout
+        android:id="@+id/assign_technician_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/assign_technician_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#586"
+            android:backgroundTint="#00F"
+            app:title="Assign Technician"
+            app:titleTextColor="#FFF" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/assign_technician_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+
+    <!--<android.support.design.button.MaterialButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="ASSIGN"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="#00F"-->
+        <!--app:icon="@drawable/add_technician"-->
+        <!--android:textSize="16sp"-->
+        <!--style="@style/Widget.MaterialComponents.Button.TextButton"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/dd"-->
+        <!--/>-->
+</android.support.constraint.ConstraintLayout>

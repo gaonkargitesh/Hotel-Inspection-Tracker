@@ -6,6 +6,7 @@ public class TechnicianModel {
 
     private String name;
     private String email;
+    private String password;
 
     public String getName() {
         return name;
@@ -47,12 +48,21 @@ public class TechnicianModel {
 
     }
 
-    public TechnicianModel(String name,String email,String phoneNo,String jobPro){
+
+    public TechnicianModel(String name,String email,String phoneNo,String jobPro,String password){
         this.name=name;
         this.email=email;
         this.phoneNo=phoneNo;
         this.jobPro=jobPro;
+        this.password=password;
     }
 
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

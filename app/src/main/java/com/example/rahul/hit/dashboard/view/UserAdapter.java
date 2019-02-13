@@ -1,21 +1,30 @@
 package com.example.rahul.hit.dashboard.view;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.rahul.hit.R;
 import com.example.rahul.hit.util.Users;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
+    ColorGenerator generator = ColorGenerator.MATERIAL;
 
+    String firstLetter1;
     Context context;
     ArrayList<Users> userList;
 
@@ -24,10 +33,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         this.userList=userList;
     }
 
+
+
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new UserViewHolder((LayoutInflater.from(context).inflate(R.layout.dashboard_user_recyclerview_list,parent,false)));
+
+        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.dashboard_user_recyclerview_list,parent,false);
+        return new UserViewHolder(view);
     }
 
     @Override
@@ -35,10 +48,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         Users users=userList.get(position);
 
+        String firstLetter=String.valueOf(userList.get(position)).substring(0,1);
+        Log.d("Firstletter",""+firstLetter);
+
+        String letter="f";
+
+        firstLetter1= String.valueOf(String.valueOf(userList.get(position)).charAt(0));
+        Log.d("Firstletter1",""+firstLetter1);
+
         userViewHolder.mFirstName.setText(userList.get(position).getFirstname());
         userViewHolder.mLastName.setText(userList.get(position).getLastname());
         userViewHolder.mEmail.setText(userList.get(position).getEmail());
         userViewHolder.mRoomNo.setText(userList.get(position).getRoomno());
+
+        TextDrawable drawable=TextDrawable.builder().buildRound(firstLetter1, generator.getRandomColor());
+
+        Log.d("imageview","sdsffgjdfj");
+        userViewHolder.userImageView.setImageDrawable(drawable);
     }
 
     @Override
@@ -52,6 +78,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         TextView mLastName;
         TextView mEmail;
         TextView mRoomNo;
+        CircleImageView userImageView;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +87,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             this.mLastName=itemView.findViewById(R.id.textView_userList_lastName);
             this.mEmail=itemView.findViewById(R.id.textView_userList_email);
             this.mRoomNo=itemView.findViewById(R.id.textView_userList_roomNo);
+            this.userImageView=itemView.findViewById(R.id.imageView_userList_firstLetter);
         }
     }
 }

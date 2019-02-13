@@ -73,7 +73,7 @@ public class HomescreenActivity extends BaseActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        reference= FirebaseDatabase.getInstance().getReference();
+        reference = FirebaseDatabase.getInstance().getReference();
 
         //Email SharedPrederenes
         /*emailSharedPreferences=getSharedPreferences("EMAIL",MODE_PRIVATE);
@@ -83,9 +83,9 @@ public class HomescreenActivity extends BaseActivity {
         FloatingActionButton floatingActionButton = findViewById(R.id.floating_Button_Workorder_Fragement);
 
         //Adding navigation bdrawer button
-        ActionBar actionBar = getSupportActionBar();
+        /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);*/
 
         FragmentManager manager = getSupportFragmentManager();
 
@@ -95,6 +95,9 @@ public class HomescreenActivity extends BaseActivity {
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(HomescreenActivity.this, mDrawerLayout, toolbar, R.string.nav_drawer_settings, R.string.nav_drawer_dashboard);
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
+        //The following line is used to give the HamBurgerIcon color.
+        //We can also give the HamBurgerIcon color by Property named as "itemIconTint"
+        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.White));
         actionBarDrawerToggle.syncState();
 
 
@@ -102,19 +105,19 @@ public class HomescreenActivity extends BaseActivity {
         View header = navigationView.getHeaderView(0);
         navHeaderUsername = header.findViewById(R.id.textView_NavHeader_Name);
         navHeaderEmail = header.findViewById(R.id.textView_NavHeader_Email);
-        String email = baseActivityPreferenceHelper.getString("mail","");
-        Log.d(TAG,"Email is "+email);
-        String name = baseActivityPreferenceHelper.getString("name","");
+        String email = baseActivityPreferenceHelper.getString("mail", "");
+        Log.d(TAG, "Email is " + email);
+        String name = baseActivityPreferenceHelper.getString("name", "");
 
-        Log.d(TAG,"Values are: "+email);
-        Log.d(TAG,"Values are: "+name);
+        Log.d(TAG, "Values are: " + email);
+        Log.d(TAG, "Values are: " + name);
         DatabaseReference ref = reference.child("Users").child(email.substring(0, email.indexOf("@")));
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                Log.d(TAG,"An email is "+dataSnapshot.child("email").getValue().toString());
-                navHeaderUsername.setText(dataSnapshot.child("firstname").getValue().toString().concat(" " +dataSnapshot.child("lastname").getValue().toString()));
+                Log.d(TAG, "An email is " + dataSnapshot.child("email").getValue().toString());
+                navHeaderUsername.setText(dataSnapshot.child("firstname").getValue().toString().concat(" " + dataSnapshot.child("lastname").getValue().toString()));
                 navHeaderEmail.setText(dataSnapshot.child("email").getValue().toString());
             }
 
@@ -151,15 +154,11 @@ public class HomescreenActivity extends BaseActivity {
         });*/
 
 
-
         //navHeaderEmail.setText(PreferenceHelper.getInstance(this).ge);
         /*String email=navHeaderEmail.toString();
         DatabaseReference e =reference.child("Users").child("email" +
                 "");
         Log.d("email",""+email);*/
-
-
-
 
 
         //Add First fragment by default (WorkOrderFragment)
