@@ -2,36 +2,40 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="#FFF"
+    android:padding="12dp"
     android:layout_height="match_parent">
 
     <ImageView
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/login_id"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toTopOf="@id/textlayout_email_loginPage"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/login_id"
-        android:layout_width="360dp"
-        android:layout_height="225dp"
-        android:src="@drawable/logo" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textlayout_email_loginPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintTop_toBottomOf="@id/login_id">
 
         <EditText
             android:id="@+id/editText_LoginPage_Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/loginpage_email" />
+            android:layout_margin="4dp"
+            android:textColor="#262626"
+            android:hint="@string/loginpage_email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textSize="16sp" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -39,24 +43,34 @@
         android:id="@+id/textlayout_password_loginPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:layout_constraintTop_toBottomOf="@id/textlayout_email_loginPage">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/butoon_Login_LoginPage"
+        app:layout_constraintTop_toBottomOf="@id/textlayout_email_loginPage"
+        app:passwordToggleEnabled="true">
 
         <EditText
             android:id="@+id/editText_Loginpage_Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/loginpage_password" />
+            android:layout_margin="4dp"
+            android:hint="@string/loginpage_password"
+            android:textColor="#262626"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textSize="16sp" />
 
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/butoon_Login_LoginPage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:background="@drawable/rounded_button"
         android:text="@string/loginpage_loginbutton"
+        android:textAlignment="center"
+        android:textColor="@color/White"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textlayout_password_loginPage" />
@@ -68,9 +82,9 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:hint="@string/loginpage_signuptextview"
+        android:text="@string/loginpage_signuptextview"
         android:textAlignment="center"
-        android:textColor="#00F"
+        android:textColor="#3F51B5"
         app:layout_constraintTop_toBottomOf="@id/butoon_Login_LoginPage" />
 
 </android.support.constraint.ConstraintLayout>

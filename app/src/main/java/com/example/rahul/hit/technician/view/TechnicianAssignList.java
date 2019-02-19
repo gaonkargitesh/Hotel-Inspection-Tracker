@@ -1,6 +1,7 @@
 package com.example.rahul.hit.technician.view;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -40,6 +41,8 @@ public class TechnicianAssignList extends AppCompatActivity {
 
     Context context;
 
+
+
     RecyclerView assignTechnicianRecyclerView;
     DatabaseReference databaseReference;
     ArrayList<TechnicianModel> assignTechnicianList;
@@ -47,6 +50,13 @@ public class TechnicianAssignList extends AppCompatActivity {
 
     TextView name;
     TextView email;
+
+    private BroadcastReceiver receiver;
+
+
+
+    @BindView(R.id.assign_technician_list_linearLayout)
+    LinearLayout linearLayout;
 
 
     public TechnicianAssignList(){
@@ -57,6 +67,7 @@ public class TechnicianAssignList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_technician_assign_list);
+
 
         context=this;
         toolbar = findViewById(R.id.assign_technician_toolbar);
@@ -75,6 +86,8 @@ public class TechnicianAssignList extends AppCompatActivity {
         assignTechnicianRecyclerView=findViewById(R.id.assign_technician_RecyclerView);
         assignTechnicianRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         assignTechnicianList=new ArrayList<TechnicianModel>();
+        Intent intent = getIntent();
+        final String ID = intent.getStringExtra("ID");
 
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Technician");
 
@@ -85,7 +98,7 @@ public class TechnicianAssignList extends AppCompatActivity {
                     TechnicianModel technicianModel=dataSnapshot1.getValue(TechnicianModel.class);
                     assignTechnicianList.add(technicianModel);
                 }
-                technicianAssignAdapter=new TechnicianAssignAdapter(TechnicianAssignList.this,assignTechnicianList);
+                technicianAssignAdapter=new TechnicianAssignAdapter(TechnicianAssignList.this,assignTechnicianList,ID);
                 assignTechnicianRecyclerView.addItemDecoration(new DividerItemDecoration(assignTechnicianRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
                 assignTechnicianRecyclerView.setAdapter(technicianAssignAdapter);
@@ -96,17 +109,6 @@ public class TechnicianAssignList extends AppCompatActivity {
         });
     }
 
-    /*@OnClick(R.id.assign_technician_list_linearLayout)
-    public void OnClickLayout(View view) {
-        Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(context.getApplicationContext(),WorkorderFragment.class);
-        ((Activity)context).setResult(REQUEST_FOR_ACTIVITY_CODE,intent);
 
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Fragment fragment=getSupportFragmentManager().findFragmentById(R.id.work_order_fragment_container);
-        fragment.onActivityResult(requestCode,resultCode,data);
-    }*/
+
 }

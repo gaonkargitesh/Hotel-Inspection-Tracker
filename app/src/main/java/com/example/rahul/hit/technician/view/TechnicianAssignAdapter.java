@@ -1,6 +1,7 @@
 package com.example.rahul.hit.technician.view;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,11 @@ import com.example.rahul.hit.R;
 import com.example.rahul.hit.dashboard.view.AddTechnician;
 import com.example.rahul.hit.util.TechnicianModel;
 import com.example.rahul.hit.workorder.view.WorkorderFragment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,19 +38,26 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.app.Activity.RESULT_OK;
 import static com.example.rahul.hit.createcomplaint.view.CreateComplaintAdapter.REQUEST_FOR_ACTIVITY_CODE;
 
 public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssignAdapter.AssignTechnicianViewHolder> {
 
-    /*@BindView(R.id.assign_technician_list_linearLayout)
-    LinearLayout linearLayout;*/
+    @BindView(R.id.assign_technician_list_linearLayout)
+    LinearLayout linearLayout;
+
+    TextView name;
+    TextView email;
+
 
     private Context mcontext;
     private ArrayList<TechnicianModel> massignTechnicianList;
+    String mID;
 
-    TechnicianAssignAdapter(Context context, ArrayList<TechnicianModel> assignTechnicianList) {
+    TechnicianAssignAdapter(Context context, ArrayList<TechnicianModel> assignTechnicianList,String ID) {
         mcontext = context;
         massignTechnicianList = assignTechnicianList;
+        mID = ID;
     }
 
     @NonNull
@@ -59,9 +73,9 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
 
 
     @Override
-    public void onBindViewHolder(@NonNull AssignTechnicianViewHolder assignTechnicianViewHolder, int position) {
+    public void onBindViewHolder(@NonNull final AssignTechnicianViewHolder assignTechnicianViewHolder, int position) {
 
-        TechnicianModel technicianModel = massignTechnicianList.get(position);
+        final TechnicianModel technicianModel = massignTechnicianList.get(position);
 
         assignTechnicianViewHolder.name.setText(massignTechnicianList.get(position).getName());
         assignTechnicianViewHolder.email.setText(massignTechnicianList.get(position).getEmail());
@@ -69,10 +83,35 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
         assignTechnicianViewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppCompatActivity activity=(AppCompatActivity) v.getContext();
-                Fragment fragment=new WorkorderFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.assign_technician_list_linearLayout,fragment).commit();
-                Toast.makeText(mcontext, "clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mcontext, "cliced", Toast.LENGTH_SHORT).show();
+                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Create Complaint");
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                            /*String datasnapshotKey = dataSnapshot1.getKey();
+                            String idFromDatabase = datasnapshotKey.substring(0,datasnapshotKey.indexOf("_"));
+                            String id =*/
+                            String compkey=dataSnapshot1.getKey();
+                            String datasnapshotKey = dataSnapshot1.getKey();
+                            String idFromDatabase = datasnapshotKey.substring(0,datasnapshotKey.indexOf("_"));
+                            Log.d("idfromdatabase",""+idFromDatabase);
+                            if(idFromDatabase.equals(mID)){
+                                String techEmail = technicianModel.getEmail();
+                                reference.child(compkey).child("Assigned to").setValue(techEmail);
+                            }
+                            Log.d("firstkey",""+compkey);
+
+                            ((Activity)mcontext).finish();
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
@@ -99,11 +138,21 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
         fragment.getActivity().startActivityForResult(intent,REQUEST_FOR_ACTIVITY_CODE);
     }*/
 
+
+
+    /*public void broadcastIntent(View view){
+
+        Intent intent=new Intent("myINtenet");
+        intent.setAction("com.example.rahul.hit.MyIntent");
+        mcontext.sendBroadcast(intent);
+
+    }*/
+
+
     @Override
     public int getItemCount() {
         return massignTechnicianList.size();
     }
-
 
 
     class AssignTechnicianViewHolder extends RecyclerView.ViewHolder {

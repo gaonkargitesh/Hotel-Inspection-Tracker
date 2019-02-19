@@ -34,6 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.app.Activity.RESULT_OK;
 import static com.example.rahul.hit.createcomplaint.view.CreateComplaintAdapter.REQUEST_FOR_ACTIVITY_CODE;
 
 /**
@@ -44,7 +45,9 @@ public class CreateComplaintFragment extends Fragment {
     @BindView(R.id.floating_Button_CreateComplaint_Fragement)
     FloatingActionButton addCreateComplaintFloatingButton;
 
+
     Intent createCompButtonToAddComplaint;
+    private Intent assignTechToAssignTechList;
 
     RecyclerView createComplaintRecyclerView;
     DatabaseReference databaseReference;
@@ -60,6 +63,7 @@ public class CreateComplaintFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Create Complaint");
 
@@ -102,10 +106,6 @@ public class CreateComplaintFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
     @OnClick(R.id.floating_Button_CreateComplaint_Fragement)
     public void onButtonClick(View view)

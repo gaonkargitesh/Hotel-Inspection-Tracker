@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.MaskFilter;
 import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.rahul.hit.R;
@@ -29,6 +32,9 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
     public static final int REQUEST_FOR_ACTIVITY_CODE=1;
 
     private Intent assignTechToAssignTechList;
+
+    CreateComplaintModel createComplaintModel;
+
     @BindView(R.id.button_complaint_list_assignComplaint)
     Button assignTech;
 
@@ -45,6 +51,7 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
     @Override
     public CreateComplaintViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view=LayoutInflater.from(context).inflate(R.layout.item_complaint_list,parent,false);
+
         ButterKnife.bind(this,view);
         return new CreateComplaintViewHolder(view);
     }
@@ -52,11 +59,12 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
     @Override
     public void onBindViewHolder(@NonNull CreateComplaintViewHolder createComplaintViewHolder, int position) {
 
-        CreateComplaintModel createComplaintModel=createComplaints.get(position);
+        createComplaintModel=createComplaints.get(position);
 
         createComplaintViewHolder.title.setText(createComplaints.get(position).getTitle());
         createComplaintViewHolder.description.setText(createComplaints.get(position).getDescription());
         createComplaintViewHolder.priority.setText(createComplaints.get(position).getPriority());
+
         /*createComplaintViewHolder.assignTechnician.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,11 +79,13 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
 
 
 
+
     @OnClick(R.id.button_complaint_list_assignComplaint)
     public void OnClick(View view){
         assignTechToAssignTechList=new Intent(context,TechnicianAssignList.class);
-        ((Activity)context).startActivityForResult(assignTechToAssignTechList,REQUEST_FOR_ACTIVITY_CODE);
-        //context.startActivity(assignTechToAssignTechList);
+        assignTechToAssignTechList.putExtra("ID",createComplaintModel.getId());
+        Toast.makeText(context,createComplaintModel.getId(),Toast.LENGTH_LONG).show();
+        context.startActivity(assignTechToAssignTechList);
     }
 
 
@@ -96,11 +106,12 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
         @BindView(R.id.textView_complaint_list_compPriority)
         TextView priority;
 
-        /*@BindView(R.id.materialButton_complaint_list_assignComplaint)
-        MaterialButton assignTechnician;*/
 
         @BindView(R.id.imageView_complaint_list_compImage)
         ImageView complaint;
+
+        @BindView(R.id.createComplaint_CardView_Container)
+        CardView cardView;
 
         public CreateComplaintViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -109,6 +120,7 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
             this.description=itemView.findViewById(R.id.textView_complaint_list_compDescription);
             this.priority=itemView.findViewById(R.id.textView_complaint_list_compPriority);
             this.complaint=itemView.findViewById(R.id.imageView_complaint_list_compImage);
+            this.cardView=itemView.findViewById(R.id.createComplaint_CardView_Container);
             //this.assignTechnician=itemView.findViewById(R.id.materialButton_complaint_list_assignComplaint);
 
 

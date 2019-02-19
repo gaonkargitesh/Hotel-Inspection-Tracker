@@ -130,8 +130,18 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
             emailEditText.setError("Invalid Email Address");
         }
+        else if(!TextUtils.equals(password,confirmPassword)){
+            confirmPasswordEditText.setError("Password does not match");
+        }
+        else if(firstName.equals("")|| lastName.equals("")||email.equals("")||roomNo.equals("")||password.equals("")||confirmPassword.equals("")){
+            signupButton.setEnabled(false);
+        }
+        else if(!(firstName.equals("")|| lastName.equals("")||email.equals("")||roomNo.equals("")||password.equals("")||confirmPassword.equals(""))){
+            signupButton.setEnabled(true);
+        }
         else{
             Toast.makeText(this, "Registration Successful..", Toast.LENGTH_SHORT).show();
+            finish();
         }
         /*firebaseAuth.createUserWithEmailAndPassword(username,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

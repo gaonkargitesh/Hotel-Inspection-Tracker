@@ -1,138 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
-    tools:context=".signup.view.SignUpActivity">
+    android:background="#FFF"
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/signupPage_ImageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/logo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textLayout_SignupPage_FirstName"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/signupPage_ImageView">
 
-        <EditText
-            android:id="@+id/editText_SignupPage_FirstName"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        tools:context=".signup.view.SignUpActivity">
+
+
+        <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/signupPage_ImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textLayout_SignupPage_FirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/signuppage_firstname" />
-    </android.support.design.widget.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@id/signupPage_ImageView">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textLayout_SignupPage_LastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textLayout_SignupPage_FirstName">
+            <EditText
+                android:id="@+id/editText_SignupPage_FirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:textColor="#262626"
+                android:hint="@string/signuppage_firstname"
+                android:maxLines="1"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/editText_SignupPage_LastName"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textLayout_SignupPage_LastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/signuppage_lastname" />
+            app:layout_constraintTop_toBottomOf="@id/textLayout_SignupPage_FirstName">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/editText_SignupPage_LastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:textColor="#262626"
+                android:hint="@string/signuppage_lastname"
+                android:maxLines="1"
+                android:textSize="16sp" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textLayout_SignupPage_RoomNo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textLayout_SignupPage_LastName">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/editText_SignupPage_RoomNo"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textLayout_SignupPage_RoomNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/signuppage_roomno" />
+            app:layout_constraintTop_toBottomOf="@id/textLayout_SignupPage_LastName">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/editText_SignupPage_RoomNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:hint="@string/signuppage_roomno"
+                android:textColor="#262626"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textSize="16sp" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textLayout_SignupPAge_Email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textLayout_SignupPage_RoomNo">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/editText_SignupPage_Email"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textLayout_SignupPAge_Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/signuppage_email"/>
+            app:layout_constraintTop_toBottomOf="@id/textLayout_SignupPage_RoomNo">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/editText_SignupPage_Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:hint="@string/signuppage_email"
+                android:textColor="#262626"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textSize="16sp" />
+
+        </android.support.design.widget.TextInputLayout>
 
 
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/signupPage_Password_TextLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textLayout_SignupPAge_Email">
-
-        <EditText
-            android:id="@+id/editText_SignupPage_Password"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signupPage_Password_TextLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/signuppage_password" />
+            app:layout_constraintTop_toBottomOf="@id/textLayout_SignupPAge_Email"
+            app:passwordToggleEnabled="true">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/editText_SignupPage_Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:hint="@string/signuppage_password"
+                android:textColor="#262626"
+                android:inputType="textPassword"
+                android:maxLength="8"
+                android:maxLines="1"
+                android:textSize="16sp" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textLayout_SignupPage_ConfirmPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/signupPage_Password_TextLayout">
+        </android.support.design.widget.TextInputLayout>
 
-
-        <EditText
-            android:id="@+id/editText_SignupPage_ConfirmPassword"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textLayout_SignupPage_ConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/signuppage_confirmpassword" />
+            app:layout_constraintTop_toBottomOf="@id/signupPage_Password_TextLayout"
+            app:passwordToggleEnabled="true">
 
-    </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/button_SignupPage_SignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SIGN UP"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textLayout_SignupPage_ConfirmPassword" />
+            <EditText
+                android:id="@+id/editText_SignupPage_ConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:hint="@string/signuppage_confirmpassword"
+                android:inputType="textPassword"
+                android:maxLength="8"
+                android:textColor="#262626"
+                android:maxLines="1"
+                android:textSize="16sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_SignupPage_Login"
-        android:text="@string/signuppage_logintextview"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/button_SignupPage_SignUp"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:textColor="#00F"
-        />
+        </android.support.design.widget.TextInputLayout>
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/button_SignupPage_SignUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_button"
+            android:text="SIGN UP"
+            android:textColor="@color/White"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textLayout_SignupPage_ConfirmPassword" />
+
+        <TextView
+            android:id="@+id/textView_SignupPage_Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/signuppage_logintextview"
+            android:textAlignment="center"
+            android:textColor="#00F"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_SignupPage_SignUp" />
+
+
+    </android.support.constraint.ConstraintLayout>
 </ScrollView>

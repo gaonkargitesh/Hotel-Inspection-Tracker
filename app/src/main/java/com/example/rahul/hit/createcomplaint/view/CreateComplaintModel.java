@@ -5,6 +5,8 @@ public class CreateComplaintModel {
     private String description;
     private String priority;
     private String imageUrl;
+    private String id;
+    private String email;
 
     public CreateComplaintModel(){
         
@@ -42,10 +44,19 @@ public class CreateComplaintModel {
         this.imageUrl = imageUrl;
     }
 
-    CreateComplaintModel(String title, String description, String priority, String imageUrl){
+    CreateComplaintModel(String title, String description, String priority, String imageUrl, String id){
         this.title=title;
         this.description=description;
         this.priority=priority;
         this.imageUrl=imageUrl;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

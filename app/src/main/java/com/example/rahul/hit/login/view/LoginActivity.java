@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -100,21 +102,29 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (TextUtils.isEmpty(email)) {
             //Toast.makeText(LoginActivity.this, "email is empty", Toast.LENGTH_SHORT).show();
             //loginEmail.setError("Email is empty");
+            emailTextInputLayout.setErrorEnabled(true);
             emailTextInputLayout.setError("Email is empty");
-            emailTextInputLayout.setErrorEnabled(false         );
             return;
+        }
 
-        }
-        else if (TextUtils.isEmpty(password)) {
-            //Toast.makeText(LoginActivity.this, "Password is empty", Toast.LENGTH_SHORT).show();
-            //loginPassword.setError("Password is empty");
-            passwordTextInputLayout.setError("Password is empty");
-            passwordTextInputLayout.setErrorEnabled(false);
-            return;
-        }
-        else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+        if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
             loginEmail.setError("Invalid Email Address");
         }
+        if (TextUtils.isEmpty(password)) {
+            //Toast.makeText(LoginActivity.this, "Password is empty", Toast.LENGTH_SHORT).show();
+            //loginPassword.setError("Password is empty");
+            passwordTextInputLayout.setErrorEnabled(true);
+            passwordTextInputLayout.setError("Password is empty");
+            return;
+        }
+        if(loginEmail.getText() !=null && loginPassword.getText() !=null){
+            loginButton.setEnabled(true);
+        }
+        if(loginEmail.getText() ==null && loginPassword.getText() ==null){
+            loginButton.setEnabled(false);
+        }
+
+
         else{
             Toast.makeText(this, "Login Succeessful..", Toast.LENGTH_SHORT).show();
         }

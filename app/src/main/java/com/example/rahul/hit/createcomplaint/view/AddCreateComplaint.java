@@ -30,7 +30,6 @@ import android.widget.Toast;
 import com.example.rahul.hit.BaseActivity;
 import com.example.rahul.hit.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -159,6 +158,7 @@ public class AddCreateComplaint extends BaseActivity {
         final String Title=ComplaintTitle.getText().toString();
         final String Description=ComplaintDescription.getText().toString();
         final String imageURL=imageURLSaveComplaint;
+        final String id=String.valueOf(System.currentTimeMillis());
         Log.d(TAG,""+imageURL);
         RadioButton SelectPriority=findViewById(radioGroup.getCheckedRadioButtonId());
         priority=SelectPriority.getText().toString();
@@ -190,12 +190,17 @@ public class AddCreateComplaint extends BaseActivity {
 
         final String email = "_"+baseActivityPreferenceHelper.getString("mail","");
         Log.d(TAG,"In add create complaint email value is "+email);
-        final DatabaseReference ComplaintDatabase=mStorageDatabase.child("Create Complaint").child(String.valueOf(System.currentTimeMillis())+email.substring(0,email.indexOf("@")));
+
+        final DatabaseReference ComplaintDatabase=mStorageDatabase.child("Create Complaint");
+        //ComplaintDatabase.child(String.valueOf(System.currentTimeMillis())+email.substring(0,email.indexOf("@")));
+
         ComplaintDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final CreateComplaintModel createComplaintModel = new CreateComplaintModel(Title,Description,priority,imageURL);
-                mStorageDatabase.child("Create Complaint").child(String.valueOf(System.currentTimeMillis())+email.substring(0,email.indexOf("@"))).setValue(createComplaintModel);
+                final CreateComplaintModel createComplaintModel = new CreateComplaintModel(Title,Description,priority,imageURL, id);
+                //mStorageDatabase.child("Create Complaint").child(""+count+email.substring(0,email.indexOf("@"))).setValue(createComplaintModel);
+                ComplaintDatabase.child(String.valueOf(id)
+                        +email.substring(0,email.indexOf("@"))).setValue(createComplaintModel);
                 Toast.makeText(context, "Complaint added..", Toast.LENGTH_SHORT).show();
             }
 
