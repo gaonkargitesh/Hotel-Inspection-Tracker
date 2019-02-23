@@ -109,6 +109,8 @@ public class HomescreenActivity extends BaseActivity {
         Log.d(TAG, "Email is " + email);
         String name = baseActivityPreferenceHelper.getString("name", "");
 
+
+
         Log.d(TAG, "Values are: " + email);
         Log.d(TAG, "Values are: " + name);
         DatabaseReference ref = reference.child("Users").child(email.substring(0, email.indexOf("@")));

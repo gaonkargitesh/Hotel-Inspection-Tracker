@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -22,15 +23,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    ColorGenerator generator = ColorGenerator.MATERIAL;
-
-    String firstLetter1;
+    ColorGenerator generator;
     Context context;
     ArrayList<Users> userList;
 
     public UserAdapter(Context context,ArrayList<Users> userList){
         this.context=context;
         this.userList=userList;
+        this.generator= ColorGenerator.MATERIAL;
     }
 
 
@@ -48,20 +48,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         Users users=userList.get(position);
 
-        String firstLetter=String.valueOf(userList.get(position)).substring(0,1);
-        Log.d("Firstletter",""+firstLetter);
-
-        String letter="f";
-
-        firstLetter1= String.valueOf(String.valueOf(userList.get(position)).charAt(0));
-        Log.d("Firstletter1",""+firstLetter1);
+        String name = userList.get(position).getFirstname() + " " + userList.get(position).getLastname();
+        String firstLetter = name.substring(0,1);
+        Log.d("Firstletter1",""+firstLetter);
 
         userViewHolder.mFirstName.setText(userList.get(position).getFirstname());
-        userViewHolder.mLastName.setText(userList.get(position).getLastname());
+        userViewHolder.mLastName.setText(" "+userList.get(position).getLastname());
         userViewHolder.mEmail.setText(userList.get(position).getEmail());
         userViewHolder.mRoomNo.setText(userList.get(position).getRoomno());
 
-        TextDrawable drawable=TextDrawable.builder().buildRound(firstLetter1, generator.getRandomColor());
+        TextDrawable drawable=TextDrawable.builder().buildRound(firstLetter, generator.getColor(userList.get(position).getEmail()));
 
         Log.d("imageview","sdsffgjdfj");
         userViewHolder.userImageView.setImageDrawable(drawable);
@@ -78,7 +74,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         TextView mLastName;
         TextView mEmail;
         TextView mRoomNo;
-        CircleImageView userImageView;
+        ImageView userImageView;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);

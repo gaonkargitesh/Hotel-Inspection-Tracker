@@ -2,6 +2,7 @@ package com.example.rahul.hit.createcomplaint.view;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,32 +67,41 @@ public class CreateComplaintFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
 
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("Create Complaint");
+        /*databaseReference= FirebaseDatabase.getInstance().getReference().child("Create Complaint");
 
         complaintList=new ArrayList<CreateComplaintModel>();
+
+        createComplaintAdapter=new CreateComplaintAdapter(context,complaintList);
+
+        Log.d("complaintview",""+createComplaintRecyclerView);
+        createComplaintRecyclerView.setAdapter(createComplaintAdapter);
+        //Adding lbelow line to separate the data in the recycelrview
+        //createComplaintRecyclerView.addItemDecoration(new DividerItemDecoration(createComplaintRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                createComplaintAdapter.clearCollection();
+                Log.d("Complaint Fragment","Complaint called");
+                if (createComplaintAdapter != null)
+                    createComplaintAdapter.clearCollection();
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+
                     CreateComplaintModel createComplaintModel=dataSnapshot1.getValue(CreateComplaintModel.class);
                     complaintList.add(createComplaintModel);
                 }
-
-                createComplaintAdapter=new CreateComplaintAdapter(context,complaintList);
-
-                //Adding lbelow line to separate the data in the recycelrview
-                //createComplaintRecyclerView.addItemDecoration(new DividerItemDecoration(createComplaintRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-
-                createComplaintRecyclerView.setAdapter(createComplaintAdapter);
+                createComplaintAdapter.setCreateComplaints(complaintList);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
+
 
     }
 
@@ -102,6 +113,44 @@ public class CreateComplaintFragment extends Fragment {
         ButterKnife.bind(this, view);
         context = getActivity();
         createComplaintRecyclerView=view.findViewById(R.id.create_Complaint_RecyclerView);
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("Create Complaint");
+
+        complaintList=new ArrayList<CreateComplaintModel>();
+
+        createComplaintAdapter=new CreateComplaintAdapter(context,complaintList);
+
+        Log.d("complaintview",""+createComplaintRecyclerView);
+        createComplaintRecyclerView.setAdapter(createComplaintAdapter);
+        //Adding lbelow line to separate the data in the recycelrview
+        //createComplaintRecyclerView.addItemDecoration(new DividerItemDecoration(createComplaintRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                createComplaintAdapter.clearCollection();
+                Log.d("Complaint Fragment","Complaint called");
+                if (createComplaintAdapter != null)
+                    createComplaintAdapter.clearCollection();
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+
+                    Log.d("data1",""+dataSnapshot1.child("Assigned to").getValue());
+                    if(dataSnapshot1.child("Assigned to").getValue() ==null) {
+                        CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
+                        complaintList.add(createComplaintModel);
+                    }
+
+                }
+                createComplaintAdapter.setCreateComplaints(complaintList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         createComplaintRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         return view;
     }
@@ -114,4 +163,11 @@ public class CreateComplaintFragment extends Fragment {
         startActivity(createCompButtonToAddComplaint);
     }
 
+    class MyBroadCast extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+        }
+    }
 }

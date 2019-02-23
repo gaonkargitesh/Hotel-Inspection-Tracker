@@ -91,7 +91,7 @@ public class TechnicianAssignList extends AppCompatActivity {
 
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Technician");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){

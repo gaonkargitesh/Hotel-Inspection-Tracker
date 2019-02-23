@@ -7,14 +7,21 @@
     tools:context=".workorder.view.WorkorderFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <FrameLayout
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/insideContainer_Workorder">
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="8dp"
+        android:id="@+id/workOrder_RecyclerView"
+        >
 
 
-    </FrameLayout>
-    
+    </android.support.v7.widget.RecyclerView>
+
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

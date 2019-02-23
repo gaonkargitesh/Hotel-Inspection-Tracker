@@ -85,7 +85,7 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
             public void onClick(View v) {
                 Toast.makeText(mcontext, "cliced", Toast.LENGTH_SHORT).show();
                 final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Create Complaint");
-                reference.addValueEventListener(new ValueEventListener() {
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
@@ -102,7 +102,13 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
                             }
                             Log.d("firstkey",""+compkey);
 
+                            if(reference.child(compkey).child("Assigned to") !=null){
+
+
+                            }
+
                             ((Activity)mcontext).finish();
+
 
                         }
                     }
