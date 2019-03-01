@@ -2,6 +2,8 @@ package com.example.rahul.hit.dashboard.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuffColorFilter;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -24,12 +26,13 @@ public class TechnicianAdapter extends RecyclerView.Adapter<TechnicianAdapter.Te
 
     private Context context;
     ArrayList<TechnicianModel> technicianList;
+
     ColorGenerator generator;
 
     public TechnicianAdapter(Context context, ArrayList<TechnicianModel> technicianList){
         this.context=context;
         this.technicianList=technicianList;
-        this.generator=ColorGenerator.MATERIAL;
+        this.generator=ColorGenerator.DEFAULT;
     }
 
     @NonNull
@@ -43,7 +46,7 @@ public class TechnicianAdapter extends RecyclerView.Adapter<TechnicianAdapter.Te
 
         TechnicianModel technicianModel=technicianList.get(position);
         String name = technicianList.get(position).getName();
-        String firstLetter = name.substring(0,1);
+        String firstLetter = name.substring(0,1).toUpperCase();
         Log.d("tech firstletter",""+firstLetter);
 
         technicianViewHolder.mName.setText(technicianList.get(position).getName());
@@ -53,6 +56,7 @@ public class TechnicianAdapter extends RecyclerView.Adapter<TechnicianAdapter.Te
 
 
         TextDrawable drawable=TextDrawable.builder().buildRound(firstLetter,generator.getColor(technicianList.get(position).getName()));
+
         technicianViewHolder.imageView.setImageDrawable(drawable);
 
     }

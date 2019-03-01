@@ -13,12 +13,11 @@
         />
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:padding="8dp"
-        android:src="@drawable/launcherscreen"
-        app:civ_border_width="0dp"
+        android:id="@+id/userImage"
         android:layout_margin="8dp"
         />
 

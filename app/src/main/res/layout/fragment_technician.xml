@@ -13,6 +13,8 @@
         android:id="@+id/floating_Button_AddTechnicianPage_AddTechnician"
         android:layout_margin="20dp"
         android:src="@drawable/add_technician"
+        android:backgroundTint="#00F"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
 
@@ -24,8 +26,6 @@
         android:id="@+id/technicianList_RecyclerView"
         app:layout_constraintTop_toTopOf="parent"
         >
-
-
 
     </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>

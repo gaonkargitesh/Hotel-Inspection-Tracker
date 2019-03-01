@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,10 +18,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.rahul.hit.BaseActivity;
 import com.example.rahul.hit.MainActivity;
 import com.example.rahul.hit.R;
@@ -43,8 +49,10 @@ import static com.example.rahul.hit.createcomplaint.view.CreateComplaintAdapter.
 
 public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssignAdapter.AssignTechnicianViewHolder> {
 
-    @BindView(R.id.assign_technician_list_linearLayout)
-    LinearLayout linearLayout;
+    @BindView(R.id.assign_technician_list_relativeLayout)
+    RelativeLayout relativeLayout;
+
+    ColorGenerator generator;
 
     TextView name;
     TextView email;
@@ -58,6 +66,7 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
         mcontext = context;
         massignTechnicianList = assignTechnicianList;
         mID = ID;
+        this.generator=ColorGenerator.DEFAULT;
     }
 
     @NonNull
@@ -77,10 +86,18 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
 
         final TechnicianModel technicianModel = massignTechnicianList.get(position);
 
+        String name = massignTechnicianList.get(position).getName();
+        String firstLetter = name.substring(0,1).toUpperCase();
+
         assignTechnicianViewHolder.name.setText(massignTechnicianList.get(position).getName());
         assignTechnicianViewHolder.email.setText(massignTechnicianList.get(position).getEmail());
 
-        assignTechnicianViewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
+        String letter=name.toString();
+
+
+        TextDrawable drawable=TextDrawable.builder().buildRound(firstLetter, generator.getColor(massignTechnicianList.get(position).getName()));
+        assignTechnicianViewHolder.profileImage.setImageDrawable(drawable);
+        assignTechnicianViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mcontext, "cliced", Toast.LENGTH_SHORT).show();
@@ -98,13 +115,11 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
                             Log.d("idfromdatabase",""+idFromDatabase);
                             if(idFromDatabase.equals(mID)){
                                 String techEmail = technicianModel.getEmail();
-                                reference.child(compkey).child("Assigned to").setValue(techEmail);
+                                reference.child(compkey).child("AssignedTo").setValue(techEmail);
                             }
                             Log.d("firstkey",""+compkey);
 
-                            if(reference.child(compkey).child("Assigned to") !=null){
-
-
+                            if(reference.child(compkey).child("AssignedTo") !=null){
                             }
 
                             ((Activity)mcontext).finish();
@@ -165,15 +180,15 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
 
         TextView name;
         TextView email;
-        LinearLayout linearLayout;
+        ImageView profileImage;
+        RelativeLayout relativeLayout;
 
         public AssignTechnicianViewHolder(@NonNull final View itemView) {
             super(itemView);
             this.name = itemView.findViewById(R.id.textView_AssignTechnician_Name);
             this.email = itemView.findViewById(R.id.textView_AssignTechnician_Email);
-            this.linearLayout = itemView.findViewById(R.id.assign_technician_list_linearLayout);
+            this.profileImage=itemView.findViewById(R.id.imageView_AssignTechnician_Image);
+            this.relativeLayout = itemView.findViewById(R.id.assign_technician_list_relativeLayout);
         }
     }
-
-
 }

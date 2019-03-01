@@ -28,7 +28,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".technician.view.TechnicianAssignList"></activity>
+        <activity android:name=".workorder.view.WorkOrderDetails"></activity>
+        <activity android:name=".technician.view.TechnicianAssignList" />
         <activity android:name=".dashboard.view.AddTechnician" />
         <activity android:name=".MainActivity" />
         <activity
@@ -53,11 +54,9 @@
         <activity android:name=".workorder.view.AddWorkOrder" />
         <activity android:name=".createcomplaint.view.AddCreateComplaint" />
 
-
         <receiver android:name=".technician.view.TechnicianBroadcastReceiver">
             <intent-filter>
-                <action android:name="com.javacodegeeks.android.A_CUSTOM_INTENT">
-                </action>
+                <action android:name="com.javacodegeeks.android.A_CUSTOM_INTENT"></action>
             </intent-filter>
         </receiver>
 

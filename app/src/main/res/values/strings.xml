@@ -36,9 +36,11 @@
 
 
     <string name="add_create_complaint">Add Complaint</string>
-    <string name="technician_name">Technician Name :</string>
+    <string name="technician_name">Technician Name</string>
     <string name="email">Email</string>
     <string name="phone_number">Phone Number</string>
     <string name="job_profile">Job Profile</string>
     <string name="add_technician">Add Technician</string>
+
+
 </resources>

@@ -77,9 +77,9 @@ public class WorkorderFragment extends Fragment {
                     workOrderAdapter.clearCollection();
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
 
-                    Log.d("data1",""+dataSnapshot1.child("Assigned to").getValue());
+                    Log.d("data1",""+dataSnapshot1.child("AssignedTo").getValue());
 
-                    if(dataSnapshot1.child("Assigned to").getValue() !=null) {
+                    if(dataSnapshot1.child("AssignedTo").getValue() !=null) {
                         WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
                         workOrderList.add(workOrderModel);
                     }

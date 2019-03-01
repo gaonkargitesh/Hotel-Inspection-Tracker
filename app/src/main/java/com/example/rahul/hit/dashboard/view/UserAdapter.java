@@ -30,7 +30,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public UserAdapter(Context context,ArrayList<Users> userList){
         this.context=context;
         this.userList=userList;
-        this.generator= ColorGenerator.MATERIAL;
+        this.generator= ColorGenerator.DEFAULT;
     }
 
 
@@ -49,11 +49,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         Users users=userList.get(position);
 
         String name = userList.get(position).getFirstname() + " " + userList.get(position).getLastname();
-        String firstLetter = name.substring(0,1);
+        String firstLetter = name.substring(0,1).toUpperCase();
         Log.d("Firstletter1",""+firstLetter);
 
         userViewHolder.mFirstName.setText(userList.get(position).getFirstname());
-        userViewHolder.mLastName.setText(" "+userList.get(position).getLastname());
+        userViewHolder.mLastName.setText(userList.get(position).getLastname());
         userViewHolder.mEmail.setText(userList.get(position).getEmail());
         userViewHolder.mRoomNo.setText(userList.get(position).getRoomno());
 

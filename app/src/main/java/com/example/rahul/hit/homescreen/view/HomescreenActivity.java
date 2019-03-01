@@ -13,14 +13,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.bumptech.glide.Glide;
 import com.example.rahul.hit.BaseActivity;
 import com.example.rahul.hit.R;
@@ -53,12 +57,15 @@ public class HomescreenActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
     private static final String TAG = "HomescreenActivity";
-    private android.support.v7.widget.Toolbar toolbar;
+    Toolbar toolbar;
     PreferenceHelper homepreferencehelper;
 
     TextView navHeaderUsername;
     TextView navHeaderEmail;
+    ImageView navHeaderImageView;
     DatabaseReference reference;
+
+    ColorGenerator colorGenerator;
 
     Intent homescreenLogoutToLogin;
     //Button logoutButton;
@@ -75,6 +82,7 @@ public class HomescreenActivity extends BaseActivity {
 
         reference = FirebaseDatabase.getInstance().getReference();
 
+        colorGenerator=ColorGenerator.DEFAULT;
         //Email SharedPrederenes
         /*emailSharedPreferences=getSharedPreferences("EMAIL",MODE_PRIVATE);
         baseActivityPreferenceHelper.putBoolean("EMAIL",);*/
@@ -101,13 +109,16 @@ public class HomescreenActivity extends BaseActivity {
         actionBarDrawerToggle.syncState();
 
 
+
+
         navigationView = findViewById(R.id.navigation_view_homescreen);
         View header = navigationView.getHeaderView(0);
         navHeaderUsername = header.findViewById(R.id.textView_NavHeader_Name);
         navHeaderEmail = header.findViewById(R.id.textView_NavHeader_Email);
-        String email = baseActivityPreferenceHelper.getString("mail", "");
+        navHeaderImageView=header.findViewById(R.id.userImage);
+        final String email = baseActivityPreferenceHelper.getString("mail", "");
         Log.d(TAG, "Email is " + email);
-        String name = baseActivityPreferenceHelper.getString("name", "");
+        final String name = baseActivityPreferenceHelper.getString("name", "");
 
 
 
@@ -121,6 +132,8 @@ public class HomescreenActivity extends BaseActivity {
                 Log.d(TAG, "An email is " + dataSnapshot.child("email").getValue().toString());
                 navHeaderUsername.setText(dataSnapshot.child("firstname").getValue().toString().concat(" " + dataSnapshot.child("lastname").getValue().toString()));
                 navHeaderEmail.setText(dataSnapshot.child("email").getValue().toString());
+
+
             }
 
             @Override
@@ -128,6 +141,9 @@ public class HomescreenActivity extends BaseActivity {
 
             }
         });
+
+        TextDrawable drawable=TextDrawable.builder().buildRound(email.substring(0,1).toUpperCase(), colorGenerator.getColor(email));
+        navHeaderImageView.setImageDrawable(drawable);
 
 
         //DatabaseReference e=reference.child("Users").child(email.)
@@ -168,6 +184,7 @@ public class HomescreenActivity extends BaseActivity {
         Log.d("WorkOrderClass", "Before Add method");
         setTitle("Work Order");
         addFragment(workorderFragment);
+
         Log.d("WorkOrderClass", "After Add method");
 
         //navigationView.setCheckedItem(R.id.item_workorder_navigation_drawer);
@@ -295,6 +312,7 @@ public class HomescreenActivity extends BaseActivity {
 
     @Override
     protected void init() {
+
 
     }
 

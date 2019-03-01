@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,10 +54,8 @@ public class TechnicianAssignList extends AppCompatActivity {
 
     private BroadcastReceiver receiver;
 
-
-
-    @BindView(R.id.assign_technician_list_linearLayout)
-    LinearLayout linearLayout;
+    @BindView(R.id.assign_technician_list_relativeLayout)
+    RelativeLayout relativeLayout;
 
 
     public TechnicianAssignList(){

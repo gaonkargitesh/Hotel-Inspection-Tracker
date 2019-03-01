@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".workorder.view.WorkOrderDetails">
+    <LinearLayout
+        android:id="@+id/workOrder_Details_Toolbar_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/workOrder_Details_Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00F"
+            app:title="Work Order Details"
+            app:titleTextColor="#FFF">
+
+        </android.support.v7.widget.Toolbar>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="center"
+        android:src="@drawable/logo"
+        android:id="@+id/imageView_WorkOrderDetails_Image"
+        app:layout_constraintTop_toBottomOf="@id/workOrder_Details_Toolbar_Layout"/>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textLayout_WorkOrderDetails_Title"
+
+        app:layout_constraintTop_toBottomOf="@id/imageView_WorkOrderDetails_Image"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_WorkOrderDetails_Title"
+            android:hint="Title"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textLayout_WorkOrderDetails_Description"
+        app:layout_constraintTop_toBottomOf="@id/textLayout_WorkOrderDetails_Title"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_WorkOrderDetails_Description"
+            android:hint="Description"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textLayout_WorkOrderDetails_Priority"
+        app:layout_constraintTop_toBottomOf="@id/textLayout_WorkOrderDetails_Description"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_WorkOrderDetails_Priority"
+            android:hint="Priority"
+            android:inputType="none"
+            android:enabled="false"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textLayout_WorkOrderDetails_AssignedTo"
+        app:layout_constraintTop_toBottomOf="@id/textLayout_WorkOrderDetails_Priority"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_WorkOrderDetails_AssignedTo"
+            android:hint="Assigned To"
+            android:inputType="none"
+            android:enabled="false"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_WorkOrderDetails_Fix"
+        android:hint="FIXED"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+</android.support.constraint.ConstraintLayout>

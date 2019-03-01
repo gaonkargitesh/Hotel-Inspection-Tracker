@@ -108,7 +108,6 @@ public class AddTechnician extends AppCompatActivity {
     public void OnButtonClick(View view){
         Log.d("check","inside buttonclick");
         addTechnician();
-        finish();
     }
 
     private void addTechnician() {
@@ -121,27 +120,40 @@ public class AddTechnician extends AppCompatActivity {
         final String password=TechPassword.getText().toString();
 
         if(TextUtils.isEmpty(name)){
-            nameTextInputLayout.setErrorEnabled(false);
-            nameTextInputLayout.setError("Name is empty");
+            TechName.setError("Name is empty");
+            return;
         }
-        if(TextUtils.isEmpty(email)){
+        else if(TextUtils.isEmpty(email)){
+            TechEmail.setError("Email is empty");
+            return;
+        }
+        else if(TextUtils.isEmpty(phoneNumber)){
+            TechPhoneNo.setError("Phone number is empty");
+            return;
+        }
+        else if(TextUtils.isEmpty(jobProfile)){
+            TechJobProfile.setError("Job Profile is empty");
+            return;
+        }
+        else if(TextUtils.isEmpty((password))){
+            TechPassword.setError("Password is empty");
+            return;
+        }
+        else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+            TechEmail.setError("Invalid Email Address");
+        }
+        else if(name.equals("") && email.equals("") && phoneNumber.equals("") && jobProfile.equals("") && password.equals(""))
+        {
+            //addTechnician.setVisibility(View.INVISIBLE);
+        }
+        else if(!(name.equals("") && email.equals("") && phoneNumber.equals("") && jobProfile.equals("") &&password.equals("")))
+        {
+            addTechnician.setVisibility(View.VISIBLE);
+            finish();
+        }
+        else{
+            Toast.makeText(this, "Technician Added.", Toast.LENGTH_SHORT).show();
 
-            nameTextInputLayout.setErrorEnabled(false);
-            nameTextInputLayout.setError("Email is empty");
-        }
-        if(TextUtils.isEmpty(phoneNumber)){
-
-            nameTextInputLayout.setErrorEnabled(false);
-            nameTextInputLayout.setError("Phone number is empty");
-        }
-        if(TextUtils.isEmpty(jobProfile)){
-
-            nameTextInputLayout.setErrorEnabled(false);
-            nameTextInputLayout.setError("Job Profile is empty");
-        }
-        if(TextUtils.isEmpty((password))){
-            nameTextInputLayout.setErrorEnabled(false);
-            nameTextInputLayout.setError("Password is empty");
         }
 
         /*mTechnicianDbReference= FirebaseDatabase.getInstance().getReference().child("Technician").push();
@@ -160,6 +172,7 @@ public class AddTechnician extends AppCompatActivity {
                 else{
                     final TechnicianModel technicianModel=new TechnicianModel(name,email,phoneNumber,jobProfile,password);
                     mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@"))).setValue(technicianModel);
+
                 }
             }
 
@@ -168,6 +181,7 @@ public class AddTechnician extends AppCompatActivity {
 
             }
         });
+
 
     }
 }

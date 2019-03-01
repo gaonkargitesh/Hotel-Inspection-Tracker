@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/createComplaint_CardView_Container"
+    android:id="@+id/work_Order_CardView_Container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
@@ -33,7 +33,12 @@
             android:id="@+id/textView_workOrder_list_compTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:hint="first compllaint"
+            android:maxLines="1"
             android:textColor="#262626"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/imageVie_workOrder_list_compImage" />
@@ -42,20 +47,45 @@
             android:id="@+id/textView_workOrder_list_compDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:hint="shjfhjsdfh"
+            android:maxLines="2"
             app:layout_constraintTop_toBottomOf="@id/textView_workOrder_list_compTitle" />
 
         <TextView
             android:id="@+id/textView_workOrder_list_compPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:hint="HIGH"
+            android:maxLines="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_workOrder_list_compDescription" />
+
+        <TextView
+            android:id="@+id/assignedTo_workOrderLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="16dp"
-            android:paddingBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:hint="Assigned to: "
+            android:paddingBottom="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_workOrder_list_compDescription"
+            app:layout_constraintTop_toBottomOf="@id/textView_workOrder_list_compPriority"
             />
 
+        <TextView
+            android:id="@+id/textView_workOrder_list_compAssignedTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:maxLines="1"
+            app:layout_constraintLeft_toRightOf="@id/assignedTo_workOrderLabel"
+            app:layout_constraintTop_toTopOf="@id/assignedTo_workOrderLabel" />
 
 
         <!--<TextView

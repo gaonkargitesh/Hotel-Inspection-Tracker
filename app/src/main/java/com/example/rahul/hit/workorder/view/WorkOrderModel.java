@@ -6,7 +6,7 @@ public class WorkOrderModel {
     private String priority;
     private String imageUrl;
     private String id;
-    private String email;
+    private String AssignedTo;
 
     public WorkOrderModel(){
 
@@ -44,12 +44,13 @@ public class WorkOrderModel {
         this.imageUrl = imageUrl;
     }
 
-    WorkOrderModel(String title, String description, String priority, String imageUrl, String id){
+    WorkOrderModel(String title, String description, String priority, String imageUrl, String id,String AssignedTo){
         this.title=title;
         this.description=description;
         this.priority=priority;
         this.imageUrl=imageUrl;
         this.id = id;
+        this.AssignedTo=AssignedTo;
     }
 
     public String getId() {
@@ -58,5 +59,14 @@ public class WorkOrderModel {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+
+    public String getAssignedTo() {
+        return AssignedTo;
+    }
+
+    public void setAssignedTo(String assignedTo) {
+        AssignedTo = assignedTo;
     }
 }

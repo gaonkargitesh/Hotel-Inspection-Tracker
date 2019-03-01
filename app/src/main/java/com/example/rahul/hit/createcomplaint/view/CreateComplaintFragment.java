@@ -136,8 +136,8 @@ public class CreateComplaintFragment extends Fragment {
                     createComplaintAdapter.clearCollection();
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
 
-                    Log.d("data1",""+dataSnapshot1.child("Assigned to").getValue());
-                    if(dataSnapshot1.child("Assigned to").getValue() ==null) {
+                    Log.d("data1",""+dataSnapshot1.child("AssignedTo").getValue());
+                    if(dataSnapshot1.child("AssignedTo").getValue() ==null) {
                         CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
                         complaintList.add(createComplaintModel);
                     }

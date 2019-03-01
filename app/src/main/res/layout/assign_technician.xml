@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/assign_technician_list_relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         android:clickable="true"
         android:focusable="true"
-        android:id="@+id/assign_technician_list_linearLayout"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView_AssignTechnician_Name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:hint="Gitesh Gaonkar"
             android:focusable="true"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:hint="Gitesh Gaonkar"
+            android:layout_toRightOf="@id/imageView_AssignTechnician_Image"
+            android:layout_toEndOf="@id/imageView_AssignTechnician_Image"
+            android:paddingTop="8dp"
+
+             />
+
+        <ImageView
+            android:id="@+id/imageView_AssignTechnician_Image"
+            android:layout_width="48dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_height="48dp"
+            android:layout_margin="8dp" />
 
         <TextView
             android:id="@+id/textView_AssignTechnician_Email"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"
+            android:focusable="true"
             android:hint="giteshgaonkar369@gmail.com"
+            android:layout_toEndOf="@id/imageView_AssignTechnician_Image"
+            android:layout_toRightOf="@id/imageView_AssignTechnician_Image"
+            android:layout_below="@id/textView_AssignTechnician_Name"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
-            android:focusable="true"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_AssignTechnician_Name" />
 
-    </LinearLayout>
+            />
+
+    </RelativeLayout>
 
 
 </android.support.constraint.ConstraintLayout>
