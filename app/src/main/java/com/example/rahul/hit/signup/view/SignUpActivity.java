@@ -198,7 +198,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference usersRef = mDatabase.child("Users").child(email.substring(0, email.indexOf("@")));
-        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() != null) { // User is already registered user
@@ -214,6 +214,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("password").setValue(password);
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("confirmpassword").setValue(confirmPassword);
                         mDatabase.child("Users").child(email.substring(0,email.indexOf("@"))).child("role").setValue("admin");
+                        baseActivityPreferenceHelper.putString("role","admin");
                     }
                     else
                     {
@@ -225,6 +226,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("role").setValue("User");
                         baseActivityPreferenceHelper.putString("full_name", firstName);
                         baseActivityPreferenceHelper.putString("mail", email);
+                        baseActivityPreferenceHelper.putString("role","User");
                         Log.d("Signup Activity", "Values are: " + AppConstant.BundleKey.fullName);
                         Log.d("Signup Activity", "Values are: " + AppConstant.BundleKey.email);
                         //signupToHomeScreenIntent = new Intent(SignUpActivity.this, HomescreenActivity.class);

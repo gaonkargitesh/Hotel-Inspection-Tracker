@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.rahul.hit.R;
@@ -66,6 +67,8 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
                 intent.putExtra("assignedToData",workOrderViewHolder.AssignedTo.getText().toString());
                 intent.putExtra("Imagedata",workOrderModel.getImageUrl());
 
+                intent.putExtra("ID",workOrderModel.getId());
+                Toast.makeText(context, ""+workOrderModel.getId(), Toast.LENGTH_SHORT).show();
                 Log.d("imagekey",""+workOrderModel.getImageUrl());
 
                 context.startActivity(intent);

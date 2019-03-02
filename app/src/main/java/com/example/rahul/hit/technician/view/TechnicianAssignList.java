@@ -107,7 +107,4 @@ public class TechnicianAssignList extends AppCompatActivity {
             }
         });
     }
-
-
-
 }

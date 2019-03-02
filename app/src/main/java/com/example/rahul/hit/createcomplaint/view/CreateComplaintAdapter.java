@@ -171,5 +171,4 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
             this.assigntechnician = itemView.findViewById(R.id.button_complaint_list_assignComplaint);
         }
     }
-
 }

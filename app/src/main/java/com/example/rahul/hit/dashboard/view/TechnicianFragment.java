@@ -55,12 +55,16 @@ public class TechnicianFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("Technician");
+        /*databaseReference= FirebaseDatabase.getInstance().getReference().child("Technician");
         technicianList=new ArrayList<TechnicianModel>();
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                technicianAdapter.clearCollection();
+                if(technicianAdapter!=null){
+                    technicianAdapter.clearCollection();
+                }
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                     TechnicianModel technicianModel=dataSnapshot1.getValue(TechnicianModel.class);
                     technicianList.add(technicianModel);
@@ -75,7 +79,7 @@ public class TechnicianFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
     }
 
     @Override
@@ -85,7 +89,37 @@ public class TechnicianFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_technician, container, false);
         ButterKnife.bind(this,view);
         context=getActivity();
+
         technicianListRecyclerView=view.findViewById(R.id.technicianList_RecyclerView);
+
+        technicianList=new ArrayList<TechnicianModel>();
+        technicianAdapter=new TechnicianAdapter(context,technicianList);
+        technicianListRecyclerView.addItemDecoration(new DividerItemDecoration(technicianListRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+        technicianListRecyclerView.setAdapter(technicianAdapter);
+
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("Technician");
+
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                technicianAdapter.clearCollection();
+                if(technicianAdapter!=null){
+                    technicianAdapter.clearCollection();
+                }
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    TechnicianModel technicianModel=dataSnapshot1.getValue(TechnicianModel.class);
+                    technicianList.add(technicianModel);
+                }
+                technicianAdapter.setTechnician(technicianList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         technicianListRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         return view;
     }

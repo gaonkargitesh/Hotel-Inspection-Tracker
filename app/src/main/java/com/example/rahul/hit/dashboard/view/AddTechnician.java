@@ -161,7 +161,7 @@ public class AddTechnician extends AppCompatActivity {
         TechnicianModel technicianModel=new TechnicianModel();
         //technicianModel.put();*/
         DatabaseReference mDatabase= mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@")));
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getValue()!=null){
@@ -172,6 +172,7 @@ public class AddTechnician extends AppCompatActivity {
                 else{
                     final TechnicianModel technicianModel=new TechnicianModel(name,email,phoneNumber,jobProfile,password);
                     mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@"))).setValue(technicianModel);
+                    mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@"))).child("role").setValue("Technician");
 
                 }
             }

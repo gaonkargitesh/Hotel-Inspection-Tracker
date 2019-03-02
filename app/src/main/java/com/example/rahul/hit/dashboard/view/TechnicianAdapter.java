@@ -63,7 +63,19 @@ public class TechnicianAdapter extends RecyclerView.Adapter<TechnicianAdapter.Te
 
     @Override
     public int getItemCount() {
-        return technicianList.size();
+         return technicianList.size();
+    }
+
+    public void setTechnician(ArrayList<TechnicianModel> collection) {
+        this.technicianList = collection;
+        notifyDataSetChanged();
+    }
+
+    public void clearCollection() {
+        if (technicianList != null) {
+            technicianList.clear();
+            notifyDataSetChanged();
+        }
     }
 
     class TechnicianViewHolder extends RecyclerView.ViewHolder{

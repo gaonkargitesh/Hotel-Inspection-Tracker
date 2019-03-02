@@ -118,6 +118,8 @@ public class HomescreenActivity extends BaseActivity {
         navHeaderImageView=header.findViewById(R.id.userImage);
         final String email = baseActivityPreferenceHelper.getString("mail", "");
         Log.d(TAG, "Email is " + email);
+        final  String role=baseActivityPreferenceHelper.getString("role","");
+        Log.d("role",""+role);
         final String name = baseActivityPreferenceHelper.getString("name", "");
 
 
