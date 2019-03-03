@@ -118,6 +118,7 @@ public class AddTechnician extends AppCompatActivity {
         final String phoneNumber=TechPhoneNo.getText().toString();
         final String jobProfile=TechJobProfile.getText().toString();
         final String password=TechPassword.getText().toString();
+        final String role="Technician";
 
         if(TextUtils.isEmpty(name)){
             TechName.setError("Name is empty");
@@ -160,7 +161,7 @@ public class AddTechnician extends AppCompatActivity {
         ArrayList<TechnicianModel> techList= new ArrayList<>();
         TechnicianModel technicianModel=new TechnicianModel();
         //technicianModel.put();*/
-        DatabaseReference mDatabase= mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@")));
+        DatabaseReference mDatabase= mTechnicianDbReference.child("Users").child(email.substring(0,email.indexOf("@")));
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -170,9 +171,9 @@ public class AddTechnician extends AppCompatActivity {
                     Toast.makeText(AddTechnician.this, "exists", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    final TechnicianModel technicianModel=new TechnicianModel(name,email,phoneNumber,jobProfile,password);
-                    mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@"))).setValue(technicianModel);
-                    mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@"))).child("role").setValue("Technician");
+                    final TechnicianModel technicianModel=new TechnicianModel(name,email,phoneNumber,jobProfile,password,role);
+                    mTechnicianDbReference.child("Users").child(email.substring(0,email.indexOf("@"))).setValue(technicianModel);
+                    //mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@"))).child("role").setValue("Technician");
 
                 }
             }

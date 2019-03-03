@@ -101,6 +101,8 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         final String lastName = lastNameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
         final String confirmPassword = confirmPasswordEditText.getText().toString();
+        final String role="User";
+        final String role1="Admin";
         final String fullname = firstName + " " + lastName;
 
         if (TextUtils.isEmpty(firstName)) {
@@ -213,17 +215,18 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("lastname").setValue(lastName);
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("password").setValue(password);
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("confirmpassword").setValue(confirmPassword);
-                        mDatabase.child("Users").child(email.substring(0,email.indexOf("@"))).child("role").setValue("admin");
-                        baseActivityPreferenceHelper.putString("role","admin");
+                        mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("role").setValue(role1);
+                        //mDatabase.child("Users").child(email.substring(0,email.indexOf("@"))).child("role").setValue("admin");
+                        //baseActivityPreferenceHelper.putString("role","admin");
                     }
                     else
                     {
-                        final Users users = new Users(firstName, roomNo, email, lastName, password, confirmPassword);
+                        final Users users = new Users(firstName, roomNo, email, lastName, password, confirmPassword, role);
 
 
                         //usersRef.child("Users").child(email.substring(0,email.indexOf("@"))).setValue(users);
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).setValue(users);
-                        mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("role").setValue("User");
+                        //mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("role").setValue("User");
                         baseActivityPreferenceHelper.putString("full_name", firstName);
                         baseActivityPreferenceHelper.putString("mail", email);
                         baseActivityPreferenceHelper.putString("role","User");
@@ -273,7 +276,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
 
         if (v == signupButton) {
             userSignUp();
-            //finish();
+            finish();
         }
         if (v == loginTextView) {
             signupToLoginTextviewIntent = new Intent(SignUpActivity.this, LoginActivity.class);

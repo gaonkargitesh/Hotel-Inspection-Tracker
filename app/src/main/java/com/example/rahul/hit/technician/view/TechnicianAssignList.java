@@ -88,14 +88,16 @@ public class TechnicianAssignList extends AppCompatActivity {
         Intent intent = getIntent();
         final String ID = intent.getStringExtra("ID");
 
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("Technician");
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("Users");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                     TechnicianModel technicianModel=dataSnapshot1.getValue(TechnicianModel.class);
-                    assignTechnicianList.add(technicianModel);
+                    if(technicianModel.getRole().equals("Technician")){
+                        assignTechnicianList.add(technicianModel);
+                    }
                 }
                 technicianAssignAdapter=new TechnicianAssignAdapter(TechnicianAssignList.this,assignTechnicianList,ID);
                 assignTechnicianRecyclerView.addItemDecoration(new DividerItemDecoration(assignTechnicianRecyclerView.getContext(), DividerItemDecoration.VERTICAL));

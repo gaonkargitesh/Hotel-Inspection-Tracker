@@ -98,7 +98,7 @@ public class TechnicianFragment extends Fragment {
 
         technicianListRecyclerView.setAdapter(technicianAdapter);
 
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("Technician");
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("Users");
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -110,7 +110,10 @@ public class TechnicianFragment extends Fragment {
                 }
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                     TechnicianModel technicianModel=dataSnapshot1.getValue(TechnicianModel.class);
-                    technicianList.add(technicianModel);
+                    if(technicianModel.getRole().equals("Technician")){
+                        technicianList.add(technicianModel);
+                    }
+
                 }
                 technicianAdapter.setTechnician(technicianList);
             }

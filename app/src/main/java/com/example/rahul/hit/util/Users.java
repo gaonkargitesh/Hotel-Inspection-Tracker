@@ -8,6 +8,7 @@ public class Users {
     private String lastname;
     private String password;
     private String confirmpassword;
+    private String role;
 
 
     public Users(String lastname, String password) {
@@ -67,14 +68,22 @@ public class Users {
     public Users(){
 
     }
-    public Users(String firstname, String roomno, String email, String lastname, String password, String confirmpassword){
+    public Users(String firstname, String roomno, String email, String lastname, String password, String confirmpassword,String role){
         this.firstname = firstname;
         this.roomno=roomno;
         this.email=email;
         this.lastname = lastname;
         this.password=password;
         this.confirmpassword=confirmpassword;
+        this.role=role;
 
+    }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

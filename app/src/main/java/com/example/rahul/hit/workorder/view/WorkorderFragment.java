@@ -19,6 +19,8 @@ import android.webkit.WebView;
 import com.example.rahul.hit.R;
 import com.example.rahul.hit.createcomplaint.view.CreateComplaintAdapter;
 import com.example.rahul.hit.createcomplaint.view.CreateComplaintModel;
+import com.example.rahul.hit.util.TechnicianModel;
+import com.example.rahul.hit.util.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,6 +65,7 @@ public class WorkorderFragment extends Fragment {
         workOrderRecyclerView=view.findViewById(R.id.workOrder_RecyclerView);
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Create Complaint");
 
+
         workOrderList=new ArrayList<WorkOrderModel>();
 
         workOrderAdapter=new WorkOrderAdapter(context,workOrderList);
@@ -79,9 +82,20 @@ public class WorkorderFragment extends Fragment {
 
                     Log.d("data1",""+dataSnapshot1.child("AssignedTo").getValue());
 
+                    Users users= dataSnapshot1.getValue(Users.class);
+                    String useremail=users.getEmail();
+                    Log.d("email in workorder",""+useremail);
+                    TechnicianModel technicianModel=dataSnapshot1.getValue(TechnicianModel.class);
+                    String techemail=technicianModel.getEmail();
+                    Log.d("2nd email in work order",""+techemail);
                     if(dataSnapshot1.child("AssignedTo").getValue() !=null) {
                         WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
+
+
                         workOrderList.add(workOrderModel);
+                    }
+                    if(dataSnapshot1.child("AssignedTo").getValue() ==technicianModel.getEmail()){
+
                     }
 
                 }

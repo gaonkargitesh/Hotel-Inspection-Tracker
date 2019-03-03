@@ -58,6 +58,7 @@ public class CreateComplaintFragment extends Fragment {
 
 
     Context context;
+
     public CreateComplaintFragment() {
         // Required empty public constructor
     }
@@ -112,18 +113,17 @@ public class CreateComplaintFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_complaint_fragement, container, false);
         ButterKnife.bind(this, view);
         context = getActivity();
-        createComplaintRecyclerView=view.findViewById(R.id.create_Complaint_RecyclerView);
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("Create Complaint");
+        createComplaintRecyclerView = view.findViewById(R.id.create_Complaint_RecyclerView);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Create Complaint");
 
-        complaintList=new ArrayList<CreateComplaintModel>();
+        complaintList = new ArrayList<CreateComplaintModel>();
 
-        createComplaintAdapter=new CreateComplaintAdapter(context,complaintList);
+        createComplaintAdapter = new CreateComplaintAdapter(context, complaintList);
 
-        Log.d("complaintview",""+createComplaintRecyclerView);
+        Log.d("complaintview", "" + createComplaintRecyclerView);
         createComplaintRecyclerView.setAdapter(createComplaintAdapter);
         //Adding lbelow line to separate the data in the recycelrview
         //createComplaintRecyclerView.addItemDecoration(new DividerItemDecoration(createComplaintRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -131,13 +131,12 @@ public class CreateComplaintFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 createComplaintAdapter.clearCollection();
-                Log.d("Complaint Fragment","Complaint called");
+                Log.d("Complaint Fragment", "Complaint called");
                 if (createComplaintAdapter != null)
                     createComplaintAdapter.clearCollection();
-                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-
-                    Log.d("data1",""+dataSnapshot1.child("AssignedTo").getValue());
-                    if(dataSnapshot1.child("AssignedTo").getValue() ==null) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Log.d("data1", "" + dataSnapshot1.child("AssignedTo").getValue());
+                    if (dataSnapshot1.child("AssignedTo").getValue() == null) {
                         CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
                         complaintList.add(createComplaintModel);
                     }
@@ -157,13 +156,12 @@ public class CreateComplaintFragment extends Fragment {
 
 
     @OnClick(R.id.floating_Button_CreateComplaint_Fragement)
-    public void onButtonClick(View view)
-    {
-        createCompButtonToAddComplaint=new Intent(context, AddCreateComplaint.class);
+    public void onButtonClick(View view) {
+        createCompButtonToAddComplaint = new Intent(context, AddCreateComplaint.class);
         startActivity(createCompButtonToAddComplaint);
     }
 
-    class MyBroadCast extends BroadcastReceiver{
+    class MyBroadCast extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {

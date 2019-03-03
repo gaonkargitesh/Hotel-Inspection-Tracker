@@ -188,7 +188,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
         DatabaseReference users= mDatabase.child("Users");
-        users.addListenerForSingleValueEvent(new ValueEventListener() {
+        users.addValueEventListener(new ValueEventListener() {
 
             boolean checkAuthentication= false;
             @Override

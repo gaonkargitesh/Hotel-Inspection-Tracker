@@ -28,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class  UserFragment extends Fragment {
+public class UserFragment extends Fragment {
 
     DatabaseReference databaseReference;
     RecyclerView userListRecyclerView;
@@ -45,18 +45,20 @@ public class  UserFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("Users");
-        userList=new ArrayList<Users>();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        userList = new ArrayList<Users>();
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-                    Users users=dataSnapshot1.getValue(Users.class);
-                    userList.add(users);
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Users users = dataSnapshot1.getValue(Users.class);
+                    if (users.getRole().equals("User")) {
+                        userList.add(users);
+                    }
                 }
-                userAdapter=new UserAdapter(context,userList);
+                userAdapter = new UserAdapter(context, userList);
                 userListRecyclerView.addItemDecoration(new DividerItemDecoration(userListRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
                 userListRecyclerView.setAdapter(userAdapter);
@@ -73,11 +75,11 @@ public class  UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_user, container, false);
-        context=getActivity();
-        userListRecyclerView=view.findViewById(R.id.userList_RecyclerView);
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        context = getActivity();
+        userListRecyclerView = view.findViewById(R.id.userList_RecyclerView);
         userListRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        return  view;
+        return view;
     }
 
 }

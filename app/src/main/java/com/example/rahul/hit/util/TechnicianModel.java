@@ -7,6 +7,7 @@ public class TechnicianModel {
     private String name;
     private String email;
     private String password;
+    private String role;
 
     public String getName() {
         return name;
@@ -49,12 +50,13 @@ public class TechnicianModel {
     }
 
 
-    public TechnicianModel(String name,String email,String phoneNo,String jobPro,String password){
+    public TechnicianModel(String name,String email,String phoneNo,String jobPro,String password,String role){
         this.name=name;
         this.email=email;
         this.phoneNo=phoneNo;
         this.jobPro=jobPro;
         this.password=password;
+        this.role=role;
     }
 
 
@@ -64,5 +66,13 @@ public class TechnicianModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

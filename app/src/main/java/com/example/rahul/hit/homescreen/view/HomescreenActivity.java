@@ -33,6 +33,7 @@ import com.example.rahul.hit.dashboard.view.DashboardFragment;
 import com.example.rahul.hit.login.view.LoginActivity;
 import com.example.rahul.hit.settings.view.SettingsFragment;
 import com.example.rahul.hit.util.PreferenceHelper;
+import com.example.rahul.hit.util.TechnicianModel;
 import com.example.rahul.hit.util.Users;
 import com.example.rahul.hit.workorder.view.WorkorderFragment;
 import com.google.firebase.database.DataSnapshot;
@@ -88,7 +89,7 @@ public class HomescreenActivity extends BaseActivity {
         baseActivityPreferenceHelper.putBoolean("EMAIL",);*/
 
 
-        FloatingActionButton floatingActionButton = findViewById(R.id.floating_Button_Workorder_Fragement);
+        final FloatingActionButton floatingActionButton = findViewById(R.id.floating_Button_Workorder_Fragement);
 
         //Adding navigation bdrawer button
         /*ActionBar actionBar = getSupportActionBar();
@@ -124,16 +125,43 @@ public class HomescreenActivity extends BaseActivity {
 
 
 
-        Log.d(TAG, "Values are: " + email);
-        Log.d(TAG, "Values are: " + name);
-        DatabaseReference ref = reference.child("Users").child(email.substring(0, email.indexOf("@")));
+        /*Log.d(TAG, "Values are: " + email);
+        Log.d(TAG, "Values are: " + name);*/
+        final DatabaseReference ref = reference.child("Users").child(email.substring(0, email.indexOf("@")));
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                Log.d(TAG, "An email is " + dataSnapshot.child("email").getValue().toString());
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    Users user = dataSnapshot.getValue(Users.class);
+                    TechnicianModel technicianModel=dataSnapshot.getValue(TechnicianModel.class);
+                    Log.d("fulldata",""+dataSnapshot1);
+                    Log.d("keys",""+dataSnapshot1.getKey());
+
+                    Log.d("users",""+user.getRole());
+                    Log.d("technician",""+technicianModel.getRole());
+
+                    if(technicianModel.getRole().equals("Technician")){
+                        //if (dataSnapshot1.child("role").equals("Technician"))
+                        navHeaderUsername.setText(dataSnapshot.child("name").getValue().toString());
+                        navHeaderEmail.setText(dataSnapshot.child("email").getValue().toString());
+                        Log.d(TAG,"Tehnican is set");
+                    }
+                    if(user.getRole().equals("User")){
+                        navHeaderUsername.setText(dataSnapshot.child("firstname").getValue().toString().concat(" " + dataSnapshot.child("lastname").getValue().toString()));
+                        navHeaderEmail.setText(dataSnapshot.child("email").getValue().toString());
+                        Log.d(TAG,"Users is set");
+                    }
+                    if(user.getRole().equals("Admin")){
+                        navHeaderUsername.setText(dataSnapshot.child("firstname").getValue().toString().concat(" " + dataSnapshot.child("lastname").getValue().toString()));
+                        navHeaderEmail.setText(dataSnapshot.child("email").getValue().toString());
+                        Log.d(TAG,"Admin is set");
+                    }
+
+                }
+                /*Log.d(TAG, "An email is " + dataSnapshot.child("email").getValue().toString());
                 navHeaderUsername.setText(dataSnapshot.child("firstname").getValue().toString().concat(" " + dataSnapshot.child("lastname").getValue().toString()));
-                navHeaderEmail.setText(dataSnapshot.child("email").getValue().toString());
+                navHeaderEmail.setText(dataSnapshot.child("email").getValue().toString());*/
 
 
             }

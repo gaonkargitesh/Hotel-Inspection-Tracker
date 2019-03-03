@@ -111,7 +111,7 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
                             String id =*/
                             String compkey=dataSnapshot1.getKey();
                             String datasnapshotKey = dataSnapshot1.getKey();
-                            String idFromDatabase   = datasnapshotKey.substring(0,datasnapshotKey.indexOf("_"));
+                            String idFromDatabase  = datasnapshotKey.substring(0,datasnapshotKey.indexOf("_"));
                             Log.d("idfromdatabase",""+idFromDatabase);
                             if(idFromDatabase.equals(mID)){
                                 String techEmail = technicianModel.getEmail();
