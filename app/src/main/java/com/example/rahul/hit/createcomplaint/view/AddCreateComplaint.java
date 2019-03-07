@@ -1,6 +1,7 @@
 package com.example.rahul.hit.createcomplaint.view;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,21 +9,28 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -36,6 +44,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -53,6 +62,13 @@ public class AddCreateComplaint extends BaseActivity {
 
     private static final String TAG = "AddCreateComplaint";
     public String imageURLSaveComplaint;
+
+
+    @BindView(R.id.textLayout_Title_AddComplaintPage)
+    TextInputLayout titleTextInputLayout;
+
+    @BindView(R.id.textLayout_Description_AddComplaintPage)
+    TextInputLayout descriptionTextInputLayout;
 
     @BindView(R.id.editText_Description_AddComplaintPage)
     EditText ComplaintDescription;
@@ -101,17 +117,28 @@ public class AddCreateComplaint extends BaseActivity {
 
     Uri uri;
 
+    DatabaseReference ComplaintDatabase;
     DatabaseReference mStorageDatabase;
     StorageReference storageReference;
 
+    CoordinatorLayout coordinatorLayout;
+
+    private ProgressBar progressBar;
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
+
+
     private String mDefectImageUrl;
     private String priority="";
+    double progressfile;
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_create_complaint);
+
+        progressBar=findViewById(R.id.progressBar);
 
         //FirebaseApp.initializeApp(this);
         mStorageDatabase=FirebaseDatabase.getInstance().getReference();
@@ -130,6 +157,9 @@ public class AddCreateComplaint extends BaseActivity {
                 finish();
             }
         });
+
+        //SaveComplaint.setEnabled(false);
+
 
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,17 +211,47 @@ public class AddCreateComplaint extends BaseActivity {
 
 
         Log.d(TAG, "saveComplaint: Inside savecomplaint"+imageURL);
+        /*if (imageURL.isEmpty()){
+            Toast.makeText(context, "Please attach image", Toast.LENGTH_SHORT).show();
+        }*/
         if(TextUtils.isEmpty(Title)) {
-            Toast.makeText(this, "Title is empty", Toast.LENGTH_SHORT).show();
+            titleTextInputLayout.setError("Title is empty");
+            return;
+            //Toast.makeText(this, "Title is empty", Toast.LENGTH_SHORT).show();
+
         }
         if(TextUtils.isEmpty(Description)){
-            Toast.makeText(this, "Description is empty", Toast.LENGTH_SHORT).show();
+            descriptionTextInputLayout.setError("Description is empty");
+            return;
+            //Toast.makeText(this, "Description is empty", Toast.LENGTH_SHORT).show();
         }
+
+        TextWatcher tw = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                updateSaveButton();
+            }
+        };
+
+        ComplaintTitle.addTextChangedListener(tw);
+        ComplaintDescription.addTextChangedListener(tw);
+        /*if(ComplaintTitle.getText()!=null && ComplaintDescription.getText()!=null){
+
+        }*/
+        SaveComplaint.setEnabled(ComplaintTitle.getText()!=null && ComplaintDescription.getText()!=null);
 
         final String email = "_"+baseActivityPreferenceHelper.getString("mail","");
         Log.d(TAG,"In add create complaint email value is "+email);
 
-        final DatabaseReference ComplaintDatabase=mStorageDatabase.child("Create Complaint");
+        ComplaintDatabase=mStorageDatabase.child("Create Complaint");
         //ComplaintDatabase.child(String.valueOf(System.currentTimeMillis())+email.substring(0,email.indexOf("@")));
 
         ComplaintDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -210,6 +270,10 @@ public class AddCreateComplaint extends BaseActivity {
             }
         });
         finish();
+    }
+
+    private void updateSaveButton() {
+        SaveComplaint.setEnabled(ComplaintTitle.getText().length()>0 && ComplaintDescription.getText().length()>0   );
     }
 
     @OnClick({R.id.radioButton_AddCreateComplaintPage_LowPriority,
@@ -353,11 +417,24 @@ public class AddCreateComplaint extends BaseActivity {
                                         }
                                     });
                                 }
+                            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                    progressBar.setVisibility(View.VISIBLE);
+                                    double progressfile=(100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                                    progressBar.setProgress((int)progressfile);
+                                    if(progressfile==100){
+                                        progressBar.setVisibility(View.INVISIBLE);
+                                    }
+                                    Log.d(TAG, "onProgress: "+taskSnapshot.getBytesTransferred());
+
+                                }
                             });
                             //Log.d(TAG,"Inside else: "+STURL);
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             // Log.d(TAG, String.valueOf(bitmap));
-
+                            complaintImage.setMaxHeight(200);
+                            complaintImage.setMaxWidth(370);
                             complaintImage.setImageBitmap(bitmap);
 
                         } catch (Exception e) {
@@ -384,12 +461,48 @@ public class AddCreateComplaint extends BaseActivity {
                                     }
                                 });
                             }
+                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                progressBar.setVisibility(View.VISIBLE);
+                                progressfile=(100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                                progressBar.setProgress((int)progressfile);
+                                if(progressfile==100){
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(context, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
                         });
 
                         //Log.d(TAG,"inside Gallery: "+STURL);
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             // Log.d(TAG, String.valueOf(bitmap));
+
+                            /*new Thread(new Runnable() {
+                                public void run() {
+                                    while (progressStatus < 100) {
+                                        progressStatus += 1;
+                                        // Update the progress bar and display the
+                                        //current value in the text view
+                                        handler.post(new Runnable() {
+                                            public void run() {
+                                                progressBar.setProgress(progressStatus);
+                                                //textView.setText(progressStatus+"/"+progressBar.getMax());
+                                            }
+                                        });
+                                        try {
+                                            // Sleep for 200 milliseconds.
+                                            Thread.sleep(200);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }).start();*/
+                            complaintImage.setMaxHeight(200);
+                            complaintImage.setMaxWidth(370);
 
                             complaintImage.setImageBitmap(bitmap);
                         } catch (IOException e) {

@@ -28,6 +28,7 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.bumptech.glide.Glide;
 import com.example.rahul.hit.BaseActivity;
 import com.example.rahul.hit.R;
+import com.example.rahul.hit.constants.AppConstant;
 import com.example.rahul.hit.createcomplaint.view.CreateComplaintFragment;
 import com.example.rahul.hit.dashboard.view.DashboardFragment;
 import com.example.rahul.hit.login.view.LoginActivity;
@@ -119,8 +120,10 @@ public class HomescreenActivity extends BaseActivity {
         navHeaderImageView=header.findViewById(R.id.userImage);
         final String email = baseActivityPreferenceHelper.getString("mail", "");
         Log.d(TAG, "Email is " + email);
-        final  String role=baseActivityPreferenceHelper.getString("role","");
-        Log.d("role",""+role);
+        final  String role=baseActivityPreferenceHelper.getString("loginrole","");
+        AppConstant.BundleKey.userRole = role;
+        AppConstant.BundleKey.email=email;
+        Log.d("loginrole",""+role);
         final String name = baseActivityPreferenceHelper.getString("name", "");
 
 

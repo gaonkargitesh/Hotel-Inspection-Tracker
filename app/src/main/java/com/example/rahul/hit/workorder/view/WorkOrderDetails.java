@@ -1,7 +1,9 @@
 package com.example.rahul.hit.workorder.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -90,7 +92,59 @@ public class WorkOrderDetails extends AppCompatActivity {
     @OnClick(R.id.button_WorkOrderDetails_Fix)
     public void onClick(View view){
 
-        databaseReference=FirebaseDatabase.getInstance().getReference().child("Create Complaint");
+        AlertDialog.Builder builder= new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to fix and close the complaint?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                databaseReference=FirebaseDatabase.getInstance().getReference().child("Create Complaint");
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+
+                            String compid=dataSnapshot1.getKey();
+                            Log.d("compid",""+compid);
+                            String idFromDatasnapshot = compid.substring(0,compid.indexOf("_"));
+                            Log.d("Xyz","ID's from Datasnapshot "+idFromDatasnapshot);
+                            Log.d("Abcd","Condition: "+idFromDatasnapshot.equals(id));
+                            if(idFromDatasnapshot.equals(id)){
+                                databaseReference.child(compid).removeValue();
+                                Toast.makeText(WorkOrderDetails.this, "removed", Toast.LENGTH_SHORT).show();
+                            }
+                    /*else{
+                        Toast.makeText(WorkOrderDetails.this, "Different", Toast.LENGTH_SHORT).show();
+                    }*/
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.create().show();
+
+
+    }
+
+}
+
+//Code for Removing complaint
+
+/*databaseReference=FirebaseDatabase.getInstance().getReference().child("Create Complaint");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -106,9 +160,9 @@ public class WorkOrderDetails extends AppCompatActivity {
                         databaseReference.child(compid).removeValue();
                         Toast.makeText(WorkOrderDetails.this, "removed", Toast.LENGTH_SHORT).show();
                     }
-                    /*else{
+                    *//*else{
                         Toast.makeText(WorkOrderDetails.this, "Different", Toast.LENGTH_SHORT).show();
-                    }*/
+                    }*//*
                 }
             }
 
@@ -117,7 +171,4 @@ public class WorkOrderDetails extends AppCompatActivity {
 
             }
         });
-        finish();
-    }
-
-}
+        finish();*/

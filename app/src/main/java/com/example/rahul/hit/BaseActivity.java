@@ -12,7 +12,7 @@ import com.example.rahul.hit.util.PreferenceHelper;
 public abstract class BaseActivity extends AppCompatActivity {
 
 
-    protected PreferenceHelper baseActivityPreferenceHelper;
+    protected static PreferenceHelper baseActivityPreferenceHelper;
 
     public SharedPreferences mSharedPreferences;
     @Override

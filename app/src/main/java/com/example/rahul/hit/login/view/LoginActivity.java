@@ -194,6 +194,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Log.d(TAG, "Loginq datanapor"+dataSnapshot1);
                     Log.d(TAG, "On datasnapshot change value is" + dataSnapshot1.child("email").getValue());
                     Log.d(TAG, "On datasnapshot change value is" + dataSnapshot1.child("password").getValue());
                     if (dataSnapshot1.getValue() != null && dataSnapshot1.child("email").getValue().toString().equalsIgnoreCase(email)
@@ -206,6 +207,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     mPreferenceHelper.putString("team_name ",mTeamName);*/
                         baseActivityPreferenceHelper.putBoolean(IS_LOGIN, true);
                         baseActivityPreferenceHelper.putString("mail", email);
+                        baseActivityPreferenceHelper.putString("loginrole",dataSnapshot1.child("role").getValue().toString());
                         loginPageToHomeScreenIntent = new Intent(LoginActivity.this, HomescreenActivity.class);
                         loginPageToHomeScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(loginPageToHomeScreenIntent);

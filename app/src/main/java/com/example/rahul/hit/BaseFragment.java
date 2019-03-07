@@ -1,6 +1,7 @@
 package com.example.rahul.hit;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,15 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.rahul.hit.util.PreferenceHelper;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BaseFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BaseFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public abstract class BaseFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +22,11 @@ public abstract class BaseFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    protected PreferenceHelper baseFragmentPreferenceHelper;
+
+    public SharedPreferences mSharedPreferences;
+
+    Context context;
 
 
     public BaseFragment() {
@@ -37,10 +37,11 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
+        baseFragmentPreferenceHelper = PreferenceHelper.getInstance(context);
     }
 
 
-    abstract void init();
+    protected abstract void init();
 
 
     /**
