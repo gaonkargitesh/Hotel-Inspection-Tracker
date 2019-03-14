@@ -74,10 +74,8 @@ public class WorkorderFragment extends BaseFragment {
         final String emailassign = AppConstant.BundleKey.email;
 
         Log.d("WORKORDERLOG ", "Role in workOrderFragment " + userRoleAssign);
-        Log.d("WORKORDERLOG ", "email in workOrderFragment " + emailassign);
+        Log.d(TAG, "check value "+emailassign);
 
-
-        Log.d("WORKORDERLOG", "email assigned technician: " + (emailassign.substring(0, emailassign.indexOf("@"))));
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Create Complaint");
 
         workOrderList = new ArrayList<WorkOrderModel>();
@@ -94,25 +92,11 @@ public class WorkorderFragment extends BaseFragment {
                     workOrderAdapter.clearCollection();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                    //Log.d("data1",""+dataSnapshot1.child("AssignedTo").getValue());
+                    Log.d("data1",""+dataSnapshot1.child("AssignedTo").getValue());
                     Log.d(TAG, "onDataChange: Workorder" + dataSnapshot1.getKey());
 
-                    //Log.d("WORKORDERLOG", "Tech assigned boolea:  "+dataSnapshot1.child("AssignedTo").getValue().equals(emailassign));
-                    //Log.d("checktech",""+dataSnapshot1.child("AssignedTo").getValue().equals(emailassign));
 
-                    /*Log.d("NEWLOG1", "onDataChange: "+(dataSnapshot1.child("AssignedTo").getValue() == emailassign *//*&& dataSnapshot.getValue().
-                            equals(emailassign.substring(0, emailassign.indexOf("@")))*//*|| dataSnapshot1.child("AssignedTo").getValue()!=null ));
-
-                    Log.d("NEWLOG2", "onDataChange: "+(dataSnapshot1.child("AssignedTo").getValue() == emailassign *//*|| dataSnapshot.getValue().
-                            equals(emailassign.substring(0, emailassign.indexOf("@")))*//*&& dataSnapshot1.child("AssignedTo").getValue()!=null ));*/
-
-                    //Log.d("Datansaphot OWrkorder", "onDataChange: Inside workorderfragment "+dataSnapshot1);
-                    //Users users= dataSnapshot1.getValue(Users.class);
-                    //String useremail=users.getEmail();
-                    //Log.d("email in workorder",""+useremail);
-                    //TechnicianModel technicianModel=dataSnapshot1.getValue(TechnicianModel.class);
-                    //String techemail=technicianModel.getEmail();
-                    //Log.d("2nd email in work order",""+techemail);
+                    Log.d("Datansaphot OWrkorder", "onDataChange: Inside workorderfragment "+dataSnapshot1);
                     switch (userRoleAssign) {
                         case "Admin":
                             Log.d("WORKORDERLOG", "inside admin swith");
@@ -123,22 +107,18 @@ public class WorkorderFragment extends BaseFragment {
                             }
                             break;
                         case "Technician":
-                            //Log.d("WORKORDERLOG", "onDataChange: Inside ttech switch");
-                            /*if (dataSnapshot1.child("AssignedTo").getValue() == emailassign && dataSnapshot.getValue().
-                                    equals(emailassign.substring(0, emailassign.indexOf("@")))&& dataSnapshot1.child("AssignedTo").getValue()!=null ) {
-                                Log.d("WORKORDERLOG", "onDataChange: second switch tech call");
+                            Log.d(TAG, "check value: "+dataSnapshot1.child("AssignedTo").getValue());
+                            if((dataSnapshot1.child("AssignedTo").getValue()!=null && dataSnapshot1.child("AssignedTo").getValue().equals(emailassign)) || dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
+                                    equals(emailassign.substring(0, emailassign.indexOf("@")))){
                                 WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
                                 workOrderList.add(workOrderModel);
-                            }*/
-                            /*if (dataSnapshot1.child("AssignedTo").getValue() == emailassign || dataSnapshot1.child("AssignedTo").getValue()!=null ) {
-                                Log.d("WORKORDERLOG", "onDataChange: second switch tech call");
-                                WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
-                                workOrderList.add(workOrderModel);
-                            }*/
+                            }
                             break;
                         case "User":
                             Log.d("WORKORDERLOG", "onDataChange: Indside user switch");
-                            if (dataSnapshot1.child("AssignedTo").getValue() != null && dataSnapshot1.getKey().
+                            Log.d("Nikhil",""+dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
+                                    equals(emailassign.substring(0, emailassign.indexOf("@"))));
+                            if (dataSnapshot1.child("AssignedTo").getValue()!=null && dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
                                     equals(emailassign.substring(0, emailassign.indexOf("@")))) {
                                 Log.d("WORKORDERLOG", "onDataChange: third switch user call");
                                 WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
@@ -149,23 +129,6 @@ public class WorkorderFragment extends BaseFragment {
                             Log.d(TAG, "onDataChange: Nothing is called");
                             break;
                     }
-
-                    /*if(dataSnapshot1.child("AssignedTo").getValue()==emailassign && dataSnapshot.getValue().equals(emailassign.substring(0,emailassign.indexOf("@")))){
-                        Log.d(TAG, "onDataChange: second tech call");
-                        WorkOrderModel workOrderModel=dataSnapshot1.getValue(WorkOrderModel.class);
-                        workOrderList.add(workOrderModel);
-                    }
-
-                    //Admin workorders
-                    else if(dataSnapshot1.child("AssignedTo").getValue() !=null) {
-                        Log.d(TAG, "onDataChange: first admin call");
-                        WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
-                        workOrderList.add(workOrderModel);
-                    }*/
-                    //Technician workorder
-
-                    //Users workorderr
-
                 }
                 workOrderAdapter.setCreateComplaints(workOrderList);
             }

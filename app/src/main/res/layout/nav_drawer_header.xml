@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#fdbb14"
+    android:background="#00F"
     android:orientation="vertical">
 
     <ImageView
@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView_NavHeader_Name"
         android:textSize="16sp"
+        android:textColor="#FFF"
         android:padding="8dp"
         />
 
@@ -33,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:textColor="#FFF"
         android:textSize="16sp"
         android:id="@+id/textView_NavHeader_Email"
         />

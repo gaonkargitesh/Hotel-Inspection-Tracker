@@ -26,6 +26,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_margin="8dp"
         android:scaleType="center"
         android:src="@drawable/logo"
         android:id="@+id/imageView_WorkOrderDetails_Image"
@@ -36,7 +37,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textLayout_WorkOrderDetails_Title"
-
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         app:layout_constraintTop_toBottomOf="@id/imageView_WorkOrderDetails_Image"
         >
 
@@ -51,6 +55,9 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:id="@+id/textLayout_WorkOrderDetails_Description"
         app:layout_constraintTop_toBottomOf="@id/textLayout_WorkOrderDetails_Title"
         >
@@ -66,6 +73,9 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:id="@+id/textLayout_WorkOrderDetails_Priority"
         app:layout_constraintTop_toBottomOf="@id/textLayout_WorkOrderDetails_Description"
         >
@@ -83,6 +93,9 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:id="@+id/textLayout_WorkOrderDetails_AssignedTo"
         app:layout_constraintTop_toBottomOf="@id/textLayout_WorkOrderDetails_Priority"
         >
@@ -103,6 +116,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/button_WorkOrderDetails_Fix"
         android:hint="FIXED"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 

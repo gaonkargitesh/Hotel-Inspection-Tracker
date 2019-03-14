@@ -48,7 +48,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         Users users=userList.get(position);
 
-        String name = userList.get(position).getFirstname() + " " + userList.get(position).getLastname();
+        String name = userList.get(position).getFirstname() + "" + userList.get(position).getLastname();
         String firstLetter = name.substring(0,1).toUpperCase();
         Log.d("Firstletter1",""+firstLetter);
 
@@ -58,8 +58,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         userViewHolder.mRoomNo.setText(userList.get(position).getRoomno());
 
         TextDrawable drawable=TextDrawable.builder().buildRound(firstLetter, generator.getColor(userList.get(position).getEmail()));
-
-        Log.d("imageview","sdsffgjdfj");
         userViewHolder.userImageView.setImageDrawable(drawable);
     }
 

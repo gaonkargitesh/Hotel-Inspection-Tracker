@@ -23,7 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rahul.hit.R;
+import com.example.rahul.hit.constants.AppConstant;
 import com.example.rahul.hit.technician.view.TechnicianAssignList;
+import com.example.rahul.hit.workorder.view.WorkOrderModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +39,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
+import static android.support.constraint.Constraints.TAG;
 import static com.example.rahul.hit.createcomplaint.view.CreateComplaintAdapter.REQUEST_FOR_ACTIVITY_CODE;
 
 /**
@@ -114,6 +117,13 @@ public class CreateComplaintFragment extends Fragment {
         ButterKnife.bind(this, view);
         context = getActivity();
         createComplaintRecyclerView = view.findViewById(R.id.create_Complaint_RecyclerView);
+
+        final String userRoleAssign = AppConstant.BundleKey.userRole;
+        final String emailassign = AppConstant.BundleKey.email;
+
+        Log.d(TAG, "complaintinfo"+userRoleAssign);
+        Log.d(TAG, "complaintinfo"+emailassign);
+
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Create Complaint");
 
         complaintList = new ArrayList<CreateComplaintModel>();
@@ -136,12 +146,44 @@ public class CreateComplaintFragment extends Fragment {
                     createComplaintAdapter.clearCollection();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Log.d("data1", "" + dataSnapshot1.child("AssignedTo").getValue());
-                    if (dataSnapshot1.child("AssignedTo").getValue() == null) {
+                    switch (userRoleAssign) {
+                        case "Admin":
+                            Log.d("WORKORDERLOG", "inside admin swith");
+                            if (dataSnapshot1.child("AssignedTo").getValue() != null) {
+                                Log.d("WORKORDERLOG", "onDataChange: first switch admin call");
+                                CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
+                                complaintList.add(createComplaintModel);
+                            }
+                            break;
+                        case "Technician":
+                            Log.d(TAG, "check value: "+dataSnapshot1.child("AssignedTo").getValue());
+                            if(dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
+                                    equals(emailassign.substring(0, emailassign.indexOf("@")))){
+                                CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
+                                complaintList.add(createComplaintModel);
+                            }
+                            break;
+                        case "User":
+                            Log.d("WORKORDERLOG", "onDataChange: Indside user switch");
+                            Log.d("Nikhil",""+dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
+                                    equals(emailassign.substring(0, emailassign.indexOf("@"))));
+                            if (dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
+                                    equals(emailassign.substring(0, emailassign.indexOf("@")))) {
+                                Log.d("WORKORDERLOG", "onDataChange: third switch user call");
+                                CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
+                                complaintList.add(createComplaintModel);
+                            }
+
+                        default:
+                            Log.d(TAG, "onDataChange: Nothing is called");
+                            break;
+                    }
+                }
+                    /*if (dataSnapshot1.child("AssignedTo").getValue() == null) {
                         CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
                         complaintList.add(createComplaintModel);
-                    }
+                    }*/
 
-                }
                 createComplaintAdapter.setCreateComplaints(complaintList);
             }
 

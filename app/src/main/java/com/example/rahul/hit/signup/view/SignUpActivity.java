@@ -135,12 +135,12 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         else if(!TextUtils.equals(password,confirmPassword)){
             confirmPasswordEditText.setError("Password does not match");
         }
-        else if(firstName.equals("")|| lastName.equals("")||email.equals("")||roomNo.equals("")||password.equals("")||confirmPassword.equals("")){
+        /*else if(firstName.equals("")|| lastName.equals("")||email.equals("")||roomNo.equals("")||password.equals("")||confirmPassword.equals("")){
             signupButton.setEnabled(false);
         }
         else if(!(firstName.equals("")|| lastName.equals("")||email.equals("")||roomNo.equals("")||password.equals("")||confirmPassword.equals(""))){
             signupButton.setEnabled(true);
-        }
+        }*/
         else{
             Toast.makeText(this, "Registration Successful..", Toast.LENGTH_SHORT).show();
             finish();

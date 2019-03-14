@@ -433,8 +433,8 @@ public class AddCreateComplaint extends BaseActivity {
                             //Log.d(TAG,"Inside else: "+STURL);
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             // Log.d(TAG, String.valueOf(bitmap));
-                            complaintImage.setMaxHeight(200);
-                            complaintImage.setMaxWidth(370);
+                            /*complaintImage.setMaxHeight(200);
+                            complaintImage.setMaxWidth(370);*/
                             complaintImage.setImageBitmap(bitmap);
 
                         } catch (Exception e) {
@@ -501,8 +501,8 @@ public class AddCreateComplaint extends BaseActivity {
                                     }
                                 }
                             }).start();*/
-                            complaintImage.setMaxHeight(200);
-                            complaintImage.setMaxWidth(370);
+                            /*complaintImage.setMaxHeight(200);
+                            complaintImage.setMaxWidth(370);*/
 
                             complaintImage.setImageBitmap(bitmap);
                         } catch (IOException e) {
