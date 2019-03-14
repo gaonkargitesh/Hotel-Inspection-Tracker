@@ -273,13 +273,14 @@ public class HomescreenActivity extends BaseActivity {
                     replaceFragment(dashboardFragment);
                     /*FragmentManager fragmentManager=getSupportFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.frame_layout,dashboardFragment).commit();*/
-                } else if (id == R.id.item_settings_navigation_drawer) {
+                } /*else if (id == R.id.item_settings_navigation_drawer) {
                     setTitle("Settings");
                     SettingsFragment settingsFragment = new SettingsFragment();
                     replaceFragment(settingsFragment);
-                    /*FragmentManager fragmentManager=getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.frame_layout,settingsFragment).commit();*/
-                } else if (id == R.id.item_logout_navigation_drawer) {
+                    FragmentManager fragmentManager=getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.frame_layout,settingsFragment).commit();
+                }*/
+                else if (id == R.id.item_logout_navigation_drawer) {
                     sharedPreferences = getSharedPreferences("HIT_PREFERENCE", MODE_PRIVATE);
                     baseActivityPreferenceHelper.putBoolean(IS_LOGIN, false);
                     Intent intent = new Intent(HomescreenActivity.this, LoginActivity.class);

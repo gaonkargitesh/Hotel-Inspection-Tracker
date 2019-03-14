@@ -149,7 +149,7 @@ public class CreateComplaintFragment extends Fragment {
                     switch (userRoleAssign) {
                         case "Admin":
                             Log.d("WORKORDERLOG", "inside admin swith");
-                            if (dataSnapshot1.child("AssignedTo").getValue() != null) {
+                            if (dataSnapshot1.child("AssignedTo").getValue() == null) {
                                 Log.d("WORKORDERLOG", "onDataChange: first switch admin call");
                                 CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
                                 complaintList.add(createComplaintModel);
@@ -157,7 +157,7 @@ public class CreateComplaintFragment extends Fragment {
                             break;
                         case "Technician":
                             Log.d(TAG, "check value: "+dataSnapshot1.child("AssignedTo").getValue());
-                            if(dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
+                            if(dataSnapshot1.child("AssignedTo").getValue() == null && dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
                                     equals(emailassign.substring(0, emailassign.indexOf("@")))){
                                 CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
                                 complaintList.add(createComplaintModel);
@@ -167,7 +167,7 @@ public class CreateComplaintFragment extends Fragment {
                             Log.d("WORKORDERLOG", "onDataChange: Indside user switch");
                             Log.d("Nikhil",""+dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
                                     equals(emailassign.substring(0, emailassign.indexOf("@"))));
-                            if (dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
+                            if (dataSnapshot1.child("AssignedTo").getValue() == null && dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
                                     equals(emailassign.substring(0, emailassign.indexOf("@")))) {
                                 Log.d("WORKORDERLOG", "onDataChange: third switch user call");
                                 CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);

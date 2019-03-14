@@ -15,9 +15,9 @@
             android:id="@+id/item_dashboard_navigation_drawer"
             android:title="Dashboard" />
 
-        <item
+        <!--<item
             android:id="@+id/item_settings_navigation_drawer"
-            android:title="Settings" />
+            android:title="Settings" />-->
 
         <item
             android:id="@+id/item_logout_navigation_drawer"
