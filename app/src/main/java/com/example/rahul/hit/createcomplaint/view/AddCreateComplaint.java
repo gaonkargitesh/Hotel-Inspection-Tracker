@@ -425,6 +425,7 @@ public class AddCreateComplaint extends BaseActivity {
                                     progressBar.setProgress((int)progressfile);
                                     if(progressfile==100){
                                         progressBar.setVisibility(View.INVISIBLE);
+                                        //progressBar.
                                     }
                                     Log.d(TAG, "onProgress: "+taskSnapshot.getBytesTransferred());
 

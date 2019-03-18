@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.rahul.hit.R;
+import com.example.rahul.hit.constants.AppConstant;
 import com.example.rahul.hit.technician.view.TechnicianAssignList;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,6 +47,8 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
 
 
     private Context context;
+    private final String userRoleAssign = AppConstant.BundleKey.userRole;
+    final String emailassign = AppConstant.BundleKey.email;
     private ArrayList<CreateComplaintModel> createComplaints;
 
     public CreateComplaintAdapter(Context context, ArrayList<CreateComplaintModel> createComplaints) {
@@ -74,15 +77,23 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
         createComplaintViewHolder.description.setText(createComplaints.get(position).getDescription());
         createComplaintViewHolder.priority.setText(createComplaints.get(position).getPriority());
 
-        createComplaintViewHolder.assigntechnician.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                assignTechToAssignTechList = new Intent(context, TechnicianAssignList.class);
-                assignTechToAssignTechList.putExtra("ID", createComplaints.get(createComplaintViewHolder.getAdapterPosition()).getId());
-                Toast.makeText(context, createComplaints.get(createComplaintViewHolder.getAdapterPosition()).getId(), Toast.LENGTH_LONG).show();
-                context.startActivity(assignTechToAssignTechList);
-            }
-        });
+        if (userRoleAssign.equals("User")){
+            createComplaintViewHolder.assigntechnician.setVisibility(View.GONE);
+        }
+        if(userRoleAssign.equals("Technician")){
+            createComplaintViewHolder.assigntechnician.setVisibility(View.INVISIBLE);
+        }
+        if(userRoleAssign.equals("Admin")) {
+            createComplaintViewHolder.assigntechnician.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    assignTechToAssignTechList = new Intent(context, TechnicianAssignList.class);
+                    assignTechToAssignTechList.putExtra("ID", createComplaints.get(createComplaintViewHolder.getAdapterPosition()).getId());
+                    Toast.makeText(context, createComplaints.get(createComplaintViewHolder.getAdapterPosition()).getId(), Toast.LENGTH_LONG).show();
+                    context.startActivity(assignTechToAssignTechList);
+                }
+            });
+        }
 
         //hideView();
 
@@ -94,34 +105,6 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
 
 
 
-    /*@OnClick(R.id.button_complaint_list_assignComplaint)
-    public void OnClick(View view){
-        assignTechToAssignTechList=new Intent(context,TechnicianAssignList.class);
-        assignTechToAssignTechList.putExtra("ID",createComplaintModel.getId());
-        Toast.makeText(context,createComplaintModel.getId(),Toast.LENGTH_LONG).show();
-        context.startActivity(assignTechToAssignTechList);
-    }*/
-
-    /*private void hideView() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Create Complaint");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    for (DataSnapshot dataSnapshot2 : dataSnapshot1.getChildren()) {
-                        String key = dataSnapshot2.getKey();
-                        Log.d("DS2 key", "key:" + key);
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }*/
 
     public void setCreateComplaints(ArrayList<CreateComplaintModel> collection) {
         this.createComplaints = collection;

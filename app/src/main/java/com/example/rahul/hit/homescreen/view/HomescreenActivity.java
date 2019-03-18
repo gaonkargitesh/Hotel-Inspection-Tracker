@@ -81,6 +81,8 @@ public class HomescreenActivity extends BaseActivity {
         //Replacing actionbar as toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        final String userRoleAssign = AppConstant.BundleKey.userRole;
+        final String emailassign = AppConstant.BundleKey.email;
 
         reference = FirebaseDatabase.getInstance().getReference();
 
@@ -126,7 +128,13 @@ public class HomescreenActivity extends BaseActivity {
         Log.d("loginrole",""+role);
         final String name = baseActivityPreferenceHelper.getString("name", "");
 
-
+        //Using role it will invisible the dashboard item of Navigation Drawer
+        if(role.equals("User")){
+            navigationView.getMenu().findItem(R.id.item_dashboard_navigation_drawer).setVisible(false);
+        }
+        if(role.equals("Technician")){
+            navigationView.getMenu().findItem(R.id.item_dashboard_navigation_drawer).setVisible(false);
+        }
 
         /*Log.d(TAG, "Values are: " + email);
         Log.d(TAG, "Values are: " + name);*/
@@ -178,6 +186,11 @@ public class HomescreenActivity extends BaseActivity {
         TextDrawable drawable=TextDrawable.builder().buildRound(email.substring(0,1).toUpperCase(), colorGenerator.getColor(email));
         navHeaderImageView.setImageDrawable(drawable);
 
+        if(userRoleAssign.equals("Admin")){
+            //Menu menu=navigationView.getMenu();
+            //menu.findItem(R.id.item_dashboard_navigation_drawer).setVisible(false);
+            //navigationView.getMenu().findItem(R.id.item_dashboard_navigation_drawer).setVisible(false);
+        }
 
         //DatabaseReference e=reference.child("Users").child(email.)
 
@@ -342,6 +355,18 @@ public class HomescreenActivity extends BaseActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }*/
+
+   /* @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(userRoleAssign.equals("Technician")){
+            navigationView.getMenu().findItem(R.id.item_dashboard_navigation_drawer).setVisible(false);
+        }
+        if(userRoleAssign.equals("User")){
+            navigationView.getMenu().findItem(R.id.item_dashboard_navigation_drawer).setVisible(false);
+        }
+        return super.onCreateOptionsMenu(menu);
+
     }*/
 
     @Override

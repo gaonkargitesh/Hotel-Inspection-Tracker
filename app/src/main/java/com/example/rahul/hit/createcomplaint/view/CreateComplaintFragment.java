@@ -40,6 +40,7 @@ import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
 import static android.support.constraint.Constraints.TAG;
+import static android.view.View.INVISIBLE;
 import static com.example.rahul.hit.createcomplaint.view.CreateComplaintAdapter.REQUEST_FOR_ACTIVITY_CODE;
 
 /**
@@ -59,6 +60,7 @@ public class CreateComplaintFragment extends Fragment {
     ArrayList<CreateComplaintModel> complaintList;
     CreateComplaintAdapter createComplaintAdapter;
 
+    Button assignButton;
 
     Context context;
 
@@ -117,6 +119,7 @@ public class CreateComplaintFragment extends Fragment {
         ButterKnife.bind(this, view);
         context = getActivity();
         createComplaintRecyclerView = view.findViewById(R.id.create_Complaint_RecyclerView);
+        assignButton=view.findViewById(R.id.button_complaint_list_assignComplaint);
 
         final String userRoleAssign = AppConstant.BundleKey.userRole;
         final String emailassign = AppConstant.BundleKey.email;
@@ -152,10 +155,11 @@ public class CreateComplaintFragment extends Fragment {
                             if (dataSnapshot1.child("AssignedTo").getValue() == null) {
                                 Log.d("WORKORDERLOG", "onDataChange: first switch admin call");
                                 CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
-                                complaintList.add(createComplaintModel);
+                                complaintList.add(0,createComplaintModel);
                             }
                             break;
                         case "Technician":
+                            //assignButton.setEnabled(false);
                             Log.d(TAG, "check value: "+dataSnapshot1.child("AssignedTo").getValue());
                             if(dataSnapshot1.child("AssignedTo").getValue() == null && dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
                                     equals(emailassign.substring(0, emailassign.indexOf("@")))){
@@ -164,6 +168,7 @@ public class CreateComplaintFragment extends Fragment {
                             }
                             break;
                         case "User":
+
                             Log.d("WORKORDERLOG", "onDataChange: Indside user switch");
                             Log.d("Nikhil",""+dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
                                     equals(emailassign.substring(0, emailassign.indexOf("@"))));
@@ -171,7 +176,9 @@ public class CreateComplaintFragment extends Fragment {
                                     equals(emailassign.substring(0, emailassign.indexOf("@")))) {
                                 Log.d("WORKORDERLOG", "onDataChange: third switch user call");
                                 CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
+                                //assignButton.setVisibility(View.GONE);
                                 complaintList.add(createComplaintModel);
+                                //assignButton.setVisibility(View.GONE);
                             }
 
                         default:

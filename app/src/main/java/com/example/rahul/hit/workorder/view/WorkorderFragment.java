@@ -70,11 +70,10 @@ public class WorkorderFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         context = getActivity();
         workOrderRecyclerView = view.findViewById(R.id.workOrder_RecyclerView);
+
         final String userRoleAssign = AppConstant.BundleKey.userRole;
         final String emailassign = AppConstant.BundleKey.email;
 
-        Log.d("WORKORDERLOG ", "Role in workOrderFragment " + userRoleAssign);
-        Log.d(TAG, "check value "+emailassign);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Create Complaint");
 
@@ -87,46 +86,34 @@ public class WorkorderFragment extends BaseFragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //workOrderAdapter.clearCollection();
-                Log.d("Complaint Fragment", "Complaint called");
+
                 if (workOrderAdapter != null)
                     workOrderAdapter.clearCollection();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                    Log.d("data1",""+dataSnapshot1.child("AssignedTo").getValue());
-                    Log.d(TAG, "onDataChange: Workorder" + dataSnapshot1.getKey());
-
-
-                    Log.d("Datansaphot OWrkorder", "onDataChange: Inside workorderfragment "+dataSnapshot1);
                     switch (userRoleAssign) {
                         case "Admin":
-                            Log.d("WORKORDERLOG", "inside admin swith");
                             if (dataSnapshot1.child("AssignedTo").getValue() != null) {
                                 Log.d("WORKORDERLOG", "onDataChange: first switch admin call");
                                 WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
-                                workOrderList.add(workOrderModel);
+                                workOrderList.add(0, workOrderModel);
                             }
                             break;
                         case "Technician":
-                            Log.d(TAG, "check value: "+dataSnapshot1.child("AssignedTo").getValue());
-                            if((dataSnapshot1.child("AssignedTo").getValue()!=null && dataSnapshot1.child("AssignedTo").getValue().equals(emailassign)) || dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
-                                    equals(emailassign.substring(0, emailassign.indexOf("@")))){
+                            if ((dataSnapshot1.child("AssignedTo").getValue() != null && dataSnapshot1.child("AssignedTo").getValue().equals(emailassign)) || dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_") + 1).
+                                    equals(emailassign.substring(0, emailassign.indexOf("@")))) {
                                 WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
-                                workOrderList.add(workOrderModel);
+                                workOrderList.add(0, workOrderModel);
                             }
                             break;
                         case "User":
-                            Log.d("WORKORDERLOG", "onDataChange: Indside user switch");
-                            Log.d("Nikhil",""+dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
-                                    equals(emailassign.substring(0, emailassign.indexOf("@"))));
-                            if (dataSnapshot1.child("AssignedTo").getValue()!=null && dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
+                            if (dataSnapshot1.child("AssignedTo").getValue() != null && dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_") + 1).
                                     equals(emailassign.substring(0, emailassign.indexOf("@")))) {
                                 Log.d("WORKORDERLOG", "onDataChange: third switch user call");
                                 WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
-                                workOrderList.add(workOrderModel);
+                                workOrderList.add(0, workOrderModel);
                             }
-
                         default:
-                            Log.d(TAG, "onDataChange: Nothing is called");
                             break;
                     }
                 }
@@ -139,28 +126,16 @@ public class WorkorderFragment extends BaseFragment {
             }
         });
         workOrderRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-
         return view;
-
-
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     protected void init() {
 
     }
-
-    @OnClick(R.id.floating_Button_Workorder_Fragement)
-    public void onFloatingButtonClick(View view) {
-        workorderButtonToAddWorkOrder = new Intent(context, AddWorkOrder.class);
-        startActivity(workorderButtonToAddWorkOrder);
-    }
-
-
 }

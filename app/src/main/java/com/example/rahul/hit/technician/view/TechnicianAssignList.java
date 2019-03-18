@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -94,6 +95,7 @@ public class TechnicianAssignList extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    Log.d("Hello", " "+dataSnapshot1.getValue());
                     TechnicianModel technicianModel=dataSnapshot1.getValue(TechnicianModel.class);
                     if(technicianModel.getRole().equals("Technician")){
                         assignTechnicianList.add(technicianModel);

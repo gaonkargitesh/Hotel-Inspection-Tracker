@@ -92,11 +92,10 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
         assignTechnicianViewHolder.name.setText(massignTechnicianList.get(position).getName());
         assignTechnicianViewHolder.email.setText(massignTechnicianList.get(position).getEmail());
 
-        String letter=name.toString();
-
-
         TextDrawable drawable=TextDrawable.builder().buildRound(firstLetter, generator.getColor(massignTechnicianList.get(position).getName()));
         assignTechnicianViewHolder.profileImage.setImageDrawable(drawable);
+
+
         assignTechnicianViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +172,19 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
     @Override
     public int getItemCount() {
         return massignTechnicianList.size();
+    }
+
+
+    public void setTechnician(ArrayList<TechnicianModel> collection) {
+        this.massignTechnicianList = collection;
+        notifyDataSetChanged();
+    }
+
+    public void clearCollection() {
+        if (massignTechnicianList != null) {
+            massignTechnicianList.clear();
+            notifyDataSetChanged();
+        }
     }
 
 

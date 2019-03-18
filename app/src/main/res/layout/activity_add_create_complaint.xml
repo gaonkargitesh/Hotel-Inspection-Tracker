@@ -72,6 +72,7 @@
         </android.support.design.widget.TextInputLayout>
 
 
+
         <RadioGroup
             android:id="@+id/radioGroup_AddComplaint"
             android:layout_width="match_parent"
@@ -91,7 +92,7 @@
 
             <RadioButton
                 android:id="@+id/radioButton_AddCreateComplaintPage_LowPriority"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
@@ -102,7 +103,7 @@
 
             <RadioButton
                 android:id="@+id/radioButton_AddCreateComplaintPage_MediumPriority"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
@@ -112,7 +113,7 @@
 
             <RadioButton
                 android:id="@+id/radioButton_AddCreateComplaintPage_HighPriority"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
