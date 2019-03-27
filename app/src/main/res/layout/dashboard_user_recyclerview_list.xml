@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="8dp"
-    android:paddingRight="8dp"
     android:paddingTop="8dp"
+    android:paddingRight="8dp"
     android:paddingBottom="4dp">
 
     <ImageView
@@ -20,21 +20,22 @@
     <TextView
         android:id="@+id/textView_userList_firstName"
         android:layout_width="wrap_content"
-        android:hint="Gitesh"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:hint="Gitesh"
         app:layout_constraintLeft_toRightOf="@id/imageView_userList_firstLetter"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_userList_lastName"
-        android:layout_width="wrap_content"
-        android:hint="Gaonkar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:hint="Gaonkar"
         app:layout_constraintLeft_toRightOf="@id/textView_userList_firstName"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!--app:layout_constraintLeft_toRightOf="@id/textView_userList_firstName"-->
 
     <TextView
         android:id="@+id/textView_userList_email"

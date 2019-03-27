@@ -115,11 +115,13 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
                             if(idFromDatabase.equals(mID)){
                                 String techEmail = technicianModel.getEmail();
                                 reference.child(compkey).child("AssignedTo").setValue(techEmail);
+                                reference.child(compkey).child("status").setValue("In Progress");
                             }
                             Log.d("firstkey",""+compkey);
 
                             if(reference.child(compkey).child("AssignedTo") !=null){
                             }
+
 
                             ((Activity)mcontext).finish();
 

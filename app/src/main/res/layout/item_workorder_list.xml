@@ -66,17 +66,42 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_workOrder_list_compDescription" />
 
+
         <TextView
-            android:id="@+id/assignedTo_workOrderLabel"
+            android:id="@+id/textView_workOrder_list_workOrderStatusLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
-            android:hint="Assigned to: "
-            android:paddingBottom="8dp"
+            android:hint="Status : "
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_workOrder_list_compPriority"
+            android:layout_marginStart="16dp" />
+
+
+        <TextView
+            android:id="@+id/textView_workOrder_list_workOrderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="OPEN"
+            app:layout_constraintStart_toEndOf="@id/textView_workOrder_list_workOrderStatusLabel"
+            app:layout_constraintTop_toBottomOf="@id/textView_workOrder_list_compPriority"
             />
+
+        <TextView
+            android:id="@+id/assignedTo_workOrderLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:hint="Assigned to: "
+            android:paddingBottom="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_workOrder_list_workOrderStatusLabel" />
+
+
 
         <TextView
             android:id="@+id/textView_workOrder_list_compAssignedTo"

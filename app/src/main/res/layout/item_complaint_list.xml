@@ -2,6 +2,7 @@
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/createComplaint_CardView_Container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -20,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <ImageView
             android:id="@+id/imageView_complaint_list_compImage"
             android:layout_width="match_parent"
@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:hint="Helloo"
             android:textColor="#262626"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/imageView_complaint_list_compImage" />
@@ -44,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:hint="Hello"
             app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compTitle" />
 
         <TextView
@@ -51,17 +53,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginBottom="16dp"
-            android:paddingBottom="16dp"
+            android:hint="Hello"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compDescription"
+            />
 
+        <TextView
+            android:id="@+id/textView_complaint_list_compStatusLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Status : "
+            android:textColor="#F00"
+            android:textColorHint="#F00"
+            android:paddingBottom="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compPriority"
+
+            />
+
+        <TextView
+            android:id="@+id/textView_complaint_list_compStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:hint="OPEN"
+            android:textColor="#F00"
+            android:textColorHint="#F00"
+            android:paddingBottom="16dp"
+            app:layout_constraintStart_toEndOf="@id/textView_complaint_list_compStatusLabel"
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compPriority"
             />
 
         <Button
             android:id="@+id/button_complaint_list_assignComplaint"
-            android:layout_width="wrap_content"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
@@ -69,10 +97,10 @@
             android:text="ASSIGN"
             android:textColor="#00F"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@id/textView_complaint_list_compPriority"
+            app:layout_constraintBottom_toBottomOf="@id/textView_complaint_list_compStatus"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compDescription"
-            app:layout_constraintTop_toTopOf="@id/textView_complaint_list_compPriority" />
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compPriority"
+            app:layout_constraintTop_toTopOf="@id/textView_complaint_list_compStatus" />
 
         <!--<TextView
             android:id="@+id/textView_complaint_list_assignComplaint"

@@ -100,8 +100,10 @@ public class WorkorderFragment extends BaseFragment {
                             }
                             break;
                         case "Technician":
-                            if ((dataSnapshot1.child("AssignedTo").getValue() != null && dataSnapshot1.child("AssignedTo").getValue().equals(emailassign)) || dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_") + 1).
-                                    equals(emailassign.substring(0, emailassign.indexOf("@")))) {
+                            if (dataSnapshot1.child("AssignedTo").getValue() != null &&
+                                    (dataSnapshot1.child("AssignedTo").getValue().equals(emailassign) ||
+                                    dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_") + 1).
+                                    equals(emailassign.substring(0, emailassign.indexOf("@"))))) {
                                 WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
                                 workOrderList.add(0, workOrderModel);
                             }
@@ -112,6 +114,7 @@ public class WorkorderFragment extends BaseFragment {
                                 Log.d("WORKORDERLOG", "onDataChange: third switch user call");
                                 WorkOrderModel workOrderModel = dataSnapshot1.getValue(WorkOrderModel.class);
                                 workOrderList.add(0, workOrderModel);
+                                workOrderRecyclerView.setClickable(false);
                             }
                         default:
                             break;

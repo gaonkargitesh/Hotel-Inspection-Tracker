@@ -2,10 +2,12 @@ package com.example.rahul.hit.workorder.view;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -110,8 +112,12 @@ public class WorkOrderDetails extends AppCompatActivity {
                             Log.d("Xyz","ID's from Datasnapshot "+idFromDatasnapshot);
                             Log.d("Abcd","Condition: "+idFromDatasnapshot.equals(id));
                             if(idFromDatasnapshot.equals(id)){
-                                databaseReference.child(compid).removeValue();
-                                Toast.makeText(WorkOrderDetails.this, "removed", Toast.LENGTH_SHORT).show();
+
+                                databaseReference.child(compid).child("status").setValue("Completed");
+
+                                //Deletes the Work Order from the database
+                                /*databaseReference.child(compid).removeValue();
+                                Toast.makeText(WorkOrderDetails.this, "removed", Toast.LENGTH_SHORT).show();*/
                             }
                     /*else{
                         Toast.makeText(WorkOrderDetails.this, "Different", Toast.LENGTH_SHORT).show();

@@ -61,8 +61,6 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
     @Override
     public CreateComplaintViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_complaint_list, parent, false);
-
-
         ButterKnife.bind(this, view);
         return new CreateComplaintViewHolder(view);
     }
@@ -76,12 +74,13 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
         createComplaintViewHolder.title.setText(createComplaints.get(position).getTitle());
         createComplaintViewHolder.description.setText(createComplaints.get(position).getDescription());
         createComplaintViewHolder.priority.setText(createComplaints.get(position).getPriority());
+        createComplaintViewHolder.status.setText(createComplaints.get(position).getStatus());
 
         if (userRoleAssign.equals("User")){
             createComplaintViewHolder.assigntechnician.setVisibility(View.GONE);
         }
         if(userRoleAssign.equals("Technician")){
-            createComplaintViewHolder.assigntechnician.setVisibility(View.INVISIBLE);
+            createComplaintViewHolder.assigntechnician.setVisibility(View.GONE);
         }
         if(userRoleAssign.equals("Admin")) {
             createComplaintViewHolder.assigntechnician.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +132,8 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
 
         @BindView(R.id.textView_complaint_list_compPriority)
         TextView priority;
+        @BindView(R.id.textView_complaint_list_compStatus)
+        TextView status;
 
         @BindView(R.id.button_complaint_list_assignComplaint)
         Button assigntechnician;
@@ -149,6 +150,7 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
             this.title = itemView.findViewById(R.id.textView_complaint_list_compTitle);
             this.description = itemView.findViewById(R.id.textView_complaint_list_compDescription);
             this.priority = itemView.findViewById(R.id.textView_complaint_list_compPriority);
+            this.status=itemView.findViewById(R.id.textView_complaint_list_compStatus);
             this.complaint = itemView.findViewById(R.id.imageView_complaint_list_compImage);
             this.cardView = itemView.findViewById(R.id.createComplaint_CardView_Container);
             this.assigntechnician = itemView.findViewById(R.id.button_complaint_list_assignComplaint);

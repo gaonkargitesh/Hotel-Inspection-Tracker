@@ -164,7 +164,7 @@ public class CreateComplaintFragment extends Fragment {
                             if(dataSnapshot1.child("AssignedTo").getValue() == null && dataSnapshot1.getKey().substring(dataSnapshot1.getKey().indexOf("_")+1).
                                     equals(emailassign.substring(0, emailassign.indexOf("@")))){
                                 CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
-                                complaintList.add(createComplaintModel);
+                                complaintList.add(0,createComplaintModel);
                             }
                             break;
                         case "User":
@@ -177,7 +177,7 @@ public class CreateComplaintFragment extends Fragment {
                                 Log.d("WORKORDERLOG", "onDataChange: third switch user call");
                                 CreateComplaintModel createComplaintModel = dataSnapshot1.getValue(CreateComplaintModel.class);
                                 //assignButton.setVisibility(View.GONE);
-                                complaintList.add(createComplaintModel);
+                                complaintList.add(0,createComplaintModel);
                                 //assignButton.setVisibility(View.GONE);
                             }
 

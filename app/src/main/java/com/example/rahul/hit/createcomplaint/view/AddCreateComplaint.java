@@ -189,6 +189,7 @@ public class AddCreateComplaint extends BaseActivity {
         final String Description=ComplaintDescription.getText().toString();
         final String imageURL=imageURLSaveComplaint;
         final String id=String.valueOf(System.currentTimeMillis());
+        final String status="Open";
         Log.d(TAG,""+imageURL);
         RadioButton SelectPriority=findViewById(radioGroup.getCheckedRadioButtonId());
         priority=SelectPriority.getText().toString();
@@ -257,7 +258,7 @@ public class AddCreateComplaint extends BaseActivity {
         ComplaintDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final CreateComplaintModel createComplaintModel = new CreateComplaintModel(Title,Description,priority,imageURL, id);
+                final CreateComplaintModel createComplaintModel = new CreateComplaintModel(Title,Description,priority,imageURL, id,status);
                 //mStorageDatabase.child("Create Complaint").child(""+count+email.substring(0,email.indexOf("@"))).setValue(createComplaintModel);
                 ComplaintDatabase.child(String.valueOf(id)
                         +email.substring(0,email.indexOf("@"))).setValue(createComplaintModel);

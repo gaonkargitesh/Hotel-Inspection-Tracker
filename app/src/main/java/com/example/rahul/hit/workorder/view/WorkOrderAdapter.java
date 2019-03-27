@@ -3,6 +3,8 @@ package com.example.rahul.hit.workorder.view;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -18,8 +20,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.rahul.hit.R;
+import com.example.rahul.hit.constants.AppConstant;
 import com.example.rahul.hit.createcomplaint.view.CreateComplaintAdapter;
 import com.example.rahul.hit.createcomplaint.view.CreateComplaintModel;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -51,29 +56,58 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
 
         final WorkOrderModel workOrderModel=workOrderList.get(position);
 
-
         workOrderViewHolder.title.setText(workOrderList.get(position).getTitle());
         workOrderViewHolder.description.setText(workOrderList.get(position).getDescription());
         workOrderViewHolder.priority.setText(workOrderList.get(position).getPriority());
         workOrderViewHolder.AssignedTo.setText(workOrderList.get(position).getAssignedTo());
 
-        workOrderViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context,WorkOrderDetails.class);
-                intent.putExtra("titledata",workOrderViewHolder.title.getText().toString());
-                intent.putExtra("descriptiondata",workOrderViewHolder.description.getText().toString());
-                intent.putExtra("prioritydata",workOrderViewHolder.priority.getText().toString());
-                intent.putExtra("assignedToData",workOrderViewHolder.AssignedTo.getText().toString());
-                intent.putExtra("Imagedata",workOrderModel.getImageUrl());
+        if(workOrderList.get(position).getStatus().equals("In Progress")){
+            workOrderViewHolder.status.setText(workOrderList.get(position).getStatus());
+            workOrderViewHolder.status.setTextColor(Color.YELLOW);
+            workOrderViewHolder.statusLabel.setTextColor(Color.YELLOW);
+        }
 
-                intent.putExtra("ID",workOrderModel.getId());
-                Toast.makeText(context, ""+workOrderModel.getId(), Toast.LENGTH_SHORT).show();
-                Log.d("imagekey",""+workOrderModel.getImageUrl());
+        if(workOrderList.get(position).getStatus().equals("Completed")){
+            workOrderViewHolder.status.setText(workOrderList.get(position).getStatus());
+            workOrderViewHolder.status.setTextColor(Color.GREEN);
+            workOrderViewHolder.statusLabel.setTextColor(Color.GREEN);
+            workOrderViewHolder.cardView.setClickable(false);
+            workOrderViewHolder.cardView.setCardBackgroundColor(Color.LTGRAY);
+            //workOrderViewHolder.complaint.setColorFilter(Color.LTGRAY);
 
-                context.startActivity(intent);
-            }
-        });
+            workOrderViewHolder.complaint.setColorFilter(Color.LTGRAY, PorterDuff.Mode.LIGHTEN);
+
+        }
+
+        Log.d("sat", "onBindViewHolder: "+workOrderModel.getStatus());
+
+        workOrderViewHolder.status.setText(workOrderList.get(position).getStatus());
+
+        Log.d("msg", "onBindViewHolder: "+workOrderList.get(position).getStatus());
+
+        if(AppConstant.BundleKey.userRole.equals("User")){
+            workOrderViewHolder.cardView.setClickable(false);
+        }
+        else {
+            workOrderViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context,WorkOrderDetails.class);
+                    intent.putExtra("titledata",workOrderViewHolder.title.getText().toString());
+                    intent.putExtra("descriptiondata",workOrderViewHolder.description.getText().toString());
+                    intent.putExtra("prioritydata",workOrderViewHolder.priority.getText().toString());
+                    intent.putExtra("assignedToData",workOrderViewHolder.AssignedTo.getText().toString());
+                    intent.putExtra("Imagedata",workOrderModel.getImageUrl());
+
+                    intent.putExtra("ID",workOrderModel.getId());
+                    Toast.makeText(context, ""+workOrderModel.getId(), Toast.LENGTH_SHORT).show();
+                    Log.d("imagekey",""+workOrderModel.getImageUrl());
+
+                    context.startActivity(intent);
+                }
+            });
+        }
+
 
         Glide.with(context).load(workOrderList.get(position).getImageUrl()).into(workOrderViewHolder.complaint);
     }
@@ -105,6 +139,13 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
         @BindView(R.id.textView_workOrder_list_compPriority)
         TextView priority;
 
+        @BindView(R.id.textView_workOrder_list_workOrderStatus)
+        TextView status;
+
+        @BindView(R.id.textView_workOrder_list_workOrderStatusLabel)
+        TextView statusLabel;
+
+
         @BindView(R.id.imageVie_workOrder_list_compImage)
         ImageView complaint;
 
@@ -123,7 +164,8 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
             this.complaint=itemView.findViewById(R.id.imageVie_workOrder_list_compImage);
             this.AssignedTo=itemView.findViewById(R.id.textView_workOrder_list_compAssignedTo);
             this.cardView=itemView.findViewById(R.id.work_Order_CardView_Container);
-
+            this.status=itemView.findViewById(R.id.textView_workOrder_list_workOrderStatus);
+            this.statusLabel=itemView.findViewById(R.id.textView_workOrder_list_workOrderStatusLabel);
         }
     }
 }
