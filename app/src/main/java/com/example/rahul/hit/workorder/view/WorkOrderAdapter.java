@@ -63,15 +63,15 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
 
         if(workOrderList.get(position).getStatus().equals("In Progress")){
             workOrderViewHolder.status.setText(workOrderList.get(position).getStatus());
-            workOrderViewHolder.status.setHintTextColor(Color.YELLOW);
-            workOrderViewHolder.statusLabel.setTextColor(Color.YELLOW);
+            workOrderViewHolder.status.setTextColor(Color.parseColor("#f2ec14"));
+            workOrderViewHolder.statusLabel.setHintTextColor(Color.parseColor("#f2ec14"));
         }
 
         if(workOrderList.get(position).getStatus().equals("Completed")){
             workOrderViewHolder.status.setText(workOrderList.get(position).getStatus());
 
-            workOrderViewHolder.statusLabel.setHintTextColor(Color.parseColor("#7FFF00"));
-            workOrderViewHolder.status.setTextColor(Color.parseColor("#7FFF00"));
+            workOrderViewHolder.statusLabel.setHintTextColor(Color.parseColor("#19ff19"));
+            workOrderViewHolder.status.setTextColor(Color.parseColor("#19ff19"));
 
             workOrderViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#DCDCDC"));
             //workOrderViewHolder.complaint.setColorFilter(Color.LTGRAY);

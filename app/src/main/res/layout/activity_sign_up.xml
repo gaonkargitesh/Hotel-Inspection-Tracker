@@ -10,8 +10,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
+        android:id="@+id/layoutConstraint_SignUpPage"
         android:padding="12dp"
         tools:context=".signup.view.SignUpActivity">
 
@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:textColor="#262626"
+                android:inputType="text"
                 android:hint="@string/signuppage_firstname"
                 android:maxLines="1"
                 android:textSize="16sp" />
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:textColor="#262626"
+                android:inputType="text"
                 android:hint="@string/signuppage_lastname"
                 android:maxLines="1"
                 android:textSize="16sp" />

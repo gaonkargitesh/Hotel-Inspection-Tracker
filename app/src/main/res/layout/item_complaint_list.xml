@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:hint="Hello"
+            android:textColor="#000"
             app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compTitle" />
 
         <TextView
@@ -54,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:hint="Hello"
+            android:textColor="#000"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compDescription"
             />

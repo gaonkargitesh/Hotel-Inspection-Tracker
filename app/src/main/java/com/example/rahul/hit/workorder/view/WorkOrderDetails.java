@@ -3,6 +3,7 @@ package com.example.rahul.hit.workorder.view;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -72,6 +73,11 @@ public class WorkOrderDetails extends AppCompatActivity {
             }
         });
 
+
+        //This will change the status bar color.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.parseColor("#303F9F"));
+        }
 
         String titleData=getIntent().getExtras().getString("titledata");
         String descriptionData=getIntent().getExtras().getString("descriptiondata");

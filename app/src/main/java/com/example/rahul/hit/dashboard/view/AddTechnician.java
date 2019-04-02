@@ -72,9 +72,8 @@ public class AddTechnician extends AppCompatActivity {
     @BindView(R.id.buttton_AddTechnicianPage_AddTech)
     Button addTechnician;
 
-
-
-    CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.layoutConstraint_AddTechnicianPage)
+    ConstraintLayout constraintLayout;
 
     private RecyclerView technicianRecyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -95,7 +94,7 @@ public class AddTechnician extends AppCompatActivity {
         }
 
 
-        toolbar=findViewById(R.id.add_Technician_Toolbar);
+        toolbar = findViewById(R.id.add_Technician_Toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back_arrow);
 
@@ -106,60 +105,59 @@ public class AddTechnician extends AppCompatActivity {
             }
         });
 
-        mTechnicianDbReference=FirebaseDatabase.getInstance().getReference();
+        mTechnicianDbReference = FirebaseDatabase.getInstance().getReference();
         ButterKnife.bind(this);
 
     }
 
     @OnClick(R.id.buttton_AddTechnicianPage_AddTech)
-    public void OnButtonClick(View view){
-        Log.d("check","inside buttonclick");
+    public void OnButtonClick(View view) {
+        Log.d("check", "inside buttonclick");
         addTechnician();
+
     }
 
     private void addTechnician() {
 
-        Log.d("check","Inside addtehcnicaan");
-        final String name=TechName.getText().toString();
-        final String email=TechEmail.getText().toString();
-        final String phoneNumber=TechPhoneNo.getText().toString();
-        final String jobProfile=TechJobProfile.getText().toString();
-        final String password=TechPassword.getText().toString();
-        final String role="Technician";
+        Log.d("check", "Inside addtehcnicaan");
+        final String name = TechName.getText().toString();
+        final String email = TechEmail.getText().toString();
+        final String phoneNumber = TechPhoneNo.getText().toString();
+        final String jobProfile = TechJobProfile.getText().toString();
+        final String password = TechPassword.getText().toString();
+        final String role = "Technician";
 
-        if(TextUtils.isEmpty(name)){
+        if (TextUtils.isEmpty(name)) {
             TechName.setError("Name is empty");
             return;
-        }
-        else if(TextUtils.isEmpty(email)){
+        } else if (TextUtils.isEmpty(email)) {
             TechEmail.setError("Email is empty");
             return;
-        }
-        else if(TextUtils.isEmpty(phoneNumber)){
+        } else if (TextUtils.isEmpty(phoneNumber)) {
             TechPhoneNo.setError("Phone number is empty");
             return;
-        }
-        else if(TextUtils.isEmpty(jobProfile)){
+        } else if (TextUtils.isEmpty(jobProfile)) {
             TechJobProfile.setError("Job Profile is empty");
             return;
-        }
-        else if(TextUtils.isEmpty((password))){
+        } else if (TextUtils.isEmpty((password))) {
             TechPassword.setError("Password is empty");
             return;
-        }
-        else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
+        } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
             TechEmail.setError("Invalid Email Address");
-        }
-        else if(name.equals("") && email.equals("") && phoneNumber.equals("") && jobProfile.equals("") && password.equals(""))
-        {
+        } else if (name.equals("") && email.equals("") && phoneNumber.equals("") && jobProfile.equals("") && password.equals("")) {
             //addTechnician.setVisibility(View.INVISIBLE);
-        }
-        else if(!(name.equals("") && email.equals("") && phoneNumber.equals("") && jobProfile.equals("") &&password.equals("")))
-        {
+        } else if (!(TechName.getText() != null && TechEmail.getText() != null && TechPhoneNo.getText() != null
+                && TechJobProfile.getText() != null && TechPassword.getText() != null)) {
+            addTechnician.setClickable(false);
+            addTechnician.setEnabled(false);
+            addTechnician.setVisibility(View.INVISIBLE);
+        } else if (TechName.getText() != null && TechEmail.getText() != null && TechPhoneNo.getText() != null
+                && TechJobProfile.getText() != null && TechPassword.getText() != null) {
+            addTechnician.setClickable(true);
+            addTechnician.setEnabled(true);
             addTechnician.setVisibility(View.VISIBLE);
-            finish();
-        }
-        else{
+
+        } else {
             Toast.makeText(this, "Technician Added.", Toast.LENGTH_SHORT).show();
 
         }
@@ -168,18 +166,22 @@ public class AddTechnician extends AppCompatActivity {
         ArrayList<TechnicianModel> techList= new ArrayList<>();
         TechnicianModel technicianModel=new TechnicianModel();
         //technicianModel.put();*/
-        DatabaseReference mDatabase= mTechnicianDbReference.child("Users").child(email.substring(0,email.indexOf("@")));
+        DatabaseReference mDatabase = mTechnicianDbReference.child("Users").child(email.substring(0, email.indexOf("@")));
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue()!=null){
+                Log.d("msh", "onDataChange: "+dataSnapshot.getValue());
+                if (dataSnapshot.getValue() != null && dataSnapshot.child("email").getValue().toString().equalsIgnoreCase(email)) {
                     /*Snackbar snackbar=Snackbar.make(coordinatorLayout,"Technician already exists...!!",Snackbar.LENGTH_SHORT);
                     snackbar.show();*/
-                    Toast.makeText(AddTechnician.this, "exists", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    final TechnicianModel technicianModel=new TechnicianModel(name,email,phoneNumber,jobProfile,password,role);
-                    mTechnicianDbReference.child("Users").child(email.substring(0,email.indexOf("@"))).setValue(technicianModel);
+                    //Toast.makeText(AddTechnician.this, "exists", Toast.LENGTH_SHORT).show();
+                    Snackbar snackbar=Snackbar.make(constraintLayout,"Technician already exists.",Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                } else {
+                    final TechnicianModel technicianModel = new TechnicianModel(name, email, phoneNumber, jobProfile, password, role);
+                    mTechnicianDbReference.child("Users").child(email.substring(0, email.indexOf("@"))).setValue(technicianModel);
+
+                    finish();
                     //mTechnicianDbReference.child("Technician").child(email.substring(0,email.indexOf("@"))).child("role").setValue("Technician");
 
                 }

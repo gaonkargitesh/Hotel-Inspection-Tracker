@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -64,6 +66,8 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
     //@BindView(R.id.button_SignupPage_SignUp)
     Button signupButton;
 
+    ConstraintLayout constraintLayout;
+
     Intent signupToLoginTextviewIntent;
     Intent signupToHomeScreenIntent;
     FirebaseAuth firebaseAuth;
@@ -78,6 +82,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
             getWindow().setStatusBarColor(Color.BLACK);
         }
 
+        constraintLayout=findViewById(R.id.layoutConstraint_SignUpPage);
         firstNameEditText = findViewById(R.id.editText_SignupPage_FirstName);
         lastNameEditText = findViewById(R.id.editText_SignupPage_LastName);
         roomNoEditText = findViewById(R.id.editText_SignupPage_RoomNo);
@@ -107,8 +112,8 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         final String lastName = lastNameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
         final String confirmPassword = confirmPasswordEditText.getText().toString();
-        final String role="User";
-        final String role1="Admin";
+        final String role = "User";
+        final String role1 = "Admin";
         final String fullname = firstName + " " + lastName;
 
         if (TextUtils.isEmpty(firstName)) {
@@ -138,10 +143,20 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
             emailEditText.setError("Invalid Email Address");
             return;
-        }
-        else if(!TextUtils.equals(password,confirmPassword)){
+        } else if (!TextUtils.equals(password, confirmPassword)) {
             confirmPasswordEditText.setError("Password does not match");
             return;
+        } else if (firstNameEditText.getText() != null && lastNameEditText.getText() != null && emailEditText.getText() != null
+                && roomNoEditText.getText() != null && passwordEditText.getText() != null && confirmPasswordEditText.getText() != null) {
+            signupButton.setVisibility(View.VISIBLE);
+            signupButton.setEnabled(true);
+            signupButton.setClickable(true);
+        }
+        else if ((firstNameEditText.getText() != null && lastNameEditText.getText() != null && emailEditText.getText() != null
+                && roomNoEditText.getText() != null && passwordEditText.getText() != null && confirmPasswordEditText.getText() != null)) {
+            signupButton.setVisibility(View.INVISIBLE);
+            signupButton.setEnabled(false);
+            signupButton.setClickable(false);
         }
         /*else if(firstName.equals("")|| lastName.equals("")||email.equals("")||roomNo.equals("")||password.equals("")||confirmPassword.equals("")){
             signupButton.setEnabled(false);
@@ -149,9 +164,9 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         else if(!(firstName.equals("")|| lastName.equals("")||email.equals("")||roomNo.equals("")||password.equals("")||confirmPassword.equals(""))){
             signupButton.setEnabled(true);
         }*/
-        else{
-            Toast.makeText(this, "Registration Successful..", Toast.LENGTH_SHORT).show();
-            finish();
+        else {
+            //Toast.makeText(this, "Registration Successful..", Toast.LENGTH_SHORT).show();
+
         }
         /*firebaseAuth.createUserWithEmailAndPassword(username,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -211,24 +226,26 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() != null) { // User is already registered user
+                if (dataSnapshot.getValue() != null && dataSnapshot.child("email").getValue().toString().equalsIgnoreCase(email)) { // User is already registered user
                     //Show Error Message
-                    Toast.makeText(SignUpActivity.this, "User already exists..", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpActivity.this, "User already exists..", Toast.LENGTH_SHORT).show();
+                    Snackbar snackbar=Snackbar.make(constraintLayout,"User already exists.",Snackbar.LENGTH_LONG);
+                    snackbar.show();
                 } else {
                     //Perform Next Step as Validation is successful
 
-                    if(email.contains("gitesh@admin.com")){
+                    if (email.contains("gitesh@admin.com")) {
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("email").setValue(email);
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("firstname").setValue(firstName);
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("lastname").setValue(lastName);
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("password").setValue(password);
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("confirmpassword").setValue(confirmPassword);
                         mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("role").setValue(role1);
+                        Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                        finish();
                         //mDatabase.child("Users").child(email.substring(0,email.indexOf("@"))).child("role").setValue("admin");
                         //baseActivityPreferenceHelper.putString("role","admin");
-                    }
-                    else
-                    {
+                    } else {
                         final Users users = new Users(firstName, roomNo, email, lastName, password, confirmPassword, role);
 
 
@@ -237,9 +254,11 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
                         //mDatabase.child("Users").child(email.substring(0, email.indexOf("@"))).child("role").setValue("User");
                         baseActivityPreferenceHelper.putString("full_name", firstName);
                         baseActivityPreferenceHelper.putString("mail", email);
-                        baseActivityPreferenceHelper.putString("role","User");
+                        baseActivityPreferenceHelper.putString("role", "User");
                         Log.d("Signup Activity", "Values are: " + AppConstant.BundleKey.fullName);
                         Log.d("Signup Activity", "Values are: " + AppConstant.BundleKey.email);
+                        Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                        finish();
                         //signupToHomeScreenIntent = new Intent(SignUpActivity.this, HomescreenActivity.class);
                         //startActivity(signupToHomeScreenIntent);
                         //finish();
@@ -284,7 +303,6 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
 
         if (v == signupButton) {
             userSignUp();
-            finish();
         }
         if (v == loginTextView) {
             signupToLoginTextviewIntent = new Intent(SignUpActivity.this, LoginActivity.class);

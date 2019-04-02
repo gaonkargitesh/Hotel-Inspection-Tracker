@@ -16,7 +16,7 @@
             android:id="@+id/workOrder_Details_Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#00F"
+            android:background="@color/colorPrimary"
             app:title="Work Order Details"
             app:titleTextColor="#FFF">
 
@@ -116,6 +116,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/button_WorkOrderDetails_Fix"
         android:hint="FIXED"
+        android:background="@drawable/rounded_button"
+        android:textColorHint="#FFF"
         android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         />
