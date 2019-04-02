@@ -62,11 +62,11 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
     private ArrayList<TechnicianModel> massignTechnicianList;
     String mID;
 
-    TechnicianAssignAdapter(Context context, ArrayList<TechnicianModel> assignTechnicianList,String ID) {
+    TechnicianAssignAdapter(Context context, ArrayList<TechnicianModel> assignTechnicianList, String ID) {
         mcontext = context;
         massignTechnicianList = assignTechnicianList;
         mID = ID;
-        this.generator=ColorGenerator.DEFAULT;
+        this.generator = ColorGenerator.DEFAULT;
     }
 
     @NonNull
@@ -77,7 +77,6 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
         ButterKnife.bind(this, view);
         return new AssignTechnicianViewHolder(view);
         //return new AssignTechnicianViewHolder(LayoutInflater.from(mcontext).inflate(R.layout.assign_technician,parent,false));
-
     }
 
 
@@ -87,19 +86,18 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
         final TechnicianModel technicianModel = massignTechnicianList.get(position);
 
         String name = massignTechnicianList.get(position).getName();
-        String firstLetter = name.substring(0,1).toUpperCase();
+        String firstLetter = name.substring(0, 1).toUpperCase();
 
         assignTechnicianViewHolder.name.setText(massignTechnicianList.get(position).getName());
         assignTechnicianViewHolder.email.setText(massignTechnicianList.get(position).getEmail());
 
-        TextDrawable drawable=TextDrawable.builder().buildRound(firstLetter, generator.getColor(massignTechnicianList.get(position).getName()));
+        TextDrawable drawable = TextDrawable.builder().buildRound(firstLetter, generator.getColor(massignTechnicianList.get(position).getName()));
         assignTechnicianViewHolder.profileImage.setImageDrawable(drawable);
-
 
         assignTechnicianViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mcontext, "cliced", Toast.LENGTH_SHORT).show();
+
                 final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Create Complaint");
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -108,27 +106,22 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
                             /*String datasnapshotKey = dataSnapshot1.getKey();
                             String idFromDatabase = datasnapshotKey.substring(0,datasnapshotKey.indexOf("_"));
                             String id =*/
-                            String compkey=dataSnapshot1.getKey();
+                            String compkey = dataSnapshot1.getKey();
                             String datasnapshotKey = dataSnapshot1.getKey();
-                            String idFromDatabase  = datasnapshotKey.substring(0,datasnapshotKey.indexOf("_"));
-                            Log.d("idfromdatabase",""+idFromDatabase);
-                            if(idFromDatabase.equals(mID)){
+                            String idFromDatabase = datasnapshotKey.substring(0, datasnapshotKey.indexOf("_"));
+                            Log.d("idfromdatabase", "" + idFromDatabase);
+                            if (idFromDatabase.equals(mID)) {
                                 String techEmail = technicianModel.getEmail();
                                 reference.child(compkey).child("AssignedTo").setValue(techEmail);
                                 reference.child(compkey).child("status").setValue("In Progress");
                             }
-                            Log.d("firstkey",""+compkey);
+                            Log.d("firstkey", "" + compkey);
 
-                            if(reference.child(compkey).child("AssignedTo") !=null){
+                            if (reference.child(compkey).child("AssignedTo") != null) {
                             }
-
-
-                            ((Activity)mcontext).finish();
-
-
+                            ((Activity) mcontext).finish();
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -201,7 +194,7 @@ public class TechnicianAssignAdapter extends RecyclerView.Adapter<TechnicianAssi
             super(itemView);
             this.name = itemView.findViewById(R.id.textView_AssignTechnician_Name);
             this.email = itemView.findViewById(R.id.textView_AssignTechnician_Email);
-            this.profileImage=itemView.findViewById(R.id.imageView_AssignTechnician_Image);
+            this.profileImage = itemView.findViewById(R.id.imageView_AssignTechnician_Image);
             this.relativeLayout = itemView.findViewById(R.id.assign_technician_list_relativeLayout);
         }
     }

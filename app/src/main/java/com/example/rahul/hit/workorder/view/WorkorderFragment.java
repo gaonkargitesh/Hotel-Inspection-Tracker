@@ -37,6 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static android.support.constraint.Constraints.TAG;
+import static android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,6 +71,9 @@ public class WorkorderFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         context = getActivity();
         workOrderRecyclerView = view.findViewById(R.id.workOrder_RecyclerView);
+
+
+
 
         final String userRoleAssign = AppConstant.BundleKey.userRole;
         final String emailassign = AppConstant.BundleKey.email;

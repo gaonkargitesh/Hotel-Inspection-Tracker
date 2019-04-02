@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:fillViewport="true">
 
     <android.support.constraint.ConstraintLayout
@@ -24,8 +23,7 @@
                 android:id="@+id/create_complaint_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#586"
-                android:backgroundTint="#00F"
+                android:background="@color/colorPrimary"
                 app:title="@string/add_create_complaint"
                 app:titleTextColor="#FFF" />
 
@@ -156,7 +154,7 @@
             android:layout_margin="4dp"
             android:orientation="vertical"
             android:id="@+id/linearLayout_Image"
-            app:layout_constraintBottom_toTopOf="@id/button_AddComplaint_Save"
+
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_AddComplaint_Upload">
@@ -185,9 +183,13 @@
         <Button
             android:id="@+id/button_AddComplaint_Save"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:text="Save"
+            android:background="@drawable/rounded_button"
             android:layout_margin="8dp"
+            android:visibility="gone"
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayout_Image"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

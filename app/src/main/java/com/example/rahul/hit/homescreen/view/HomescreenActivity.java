@@ -2,6 +2,8 @@ package com.example.rahul.hit.homescreen.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -86,6 +88,10 @@ public class HomescreenActivity extends BaseActivity {
 
         reference = FirebaseDatabase.getInstance().getReference();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.parseColor("#303F9F"));
+        }
+
         colorGenerator=ColorGenerator.DEFAULT;
         //Email SharedPrederenes
         /*emailSharedPreferences=getSharedPreferences("EMAIL",MODE_PRIVATE);
@@ -116,6 +122,8 @@ public class HomescreenActivity extends BaseActivity {
 
 
         navigationView = findViewById(R.id.navigation_view_homescreen);
+
+
         View header = navigationView.getHeaderView(0);
         navHeaderUsername = header.findViewById(R.id.textView_NavHeader_Name);
         navHeaderEmail = header.findViewById(R.id.textView_NavHeader_Email);
@@ -231,6 +239,7 @@ public class HomescreenActivity extends BaseActivity {
         setTitle("Work Order");
         addFragment(workorderFragment);
 
+
         Log.d("WorkOrderClass", "After Add method");
 
         //navigationView.setCheckedItem(R.id.item_workorder_navigation_drawer);
@@ -238,6 +247,7 @@ public class HomescreenActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Log.d("WorkOrderClass", "inside onNangigationItemSelected" + menuItem);
+
 
                 /*int id =menuItem.getItemId();
 
@@ -270,6 +280,7 @@ public class HomescreenActivity extends BaseActivity {
                     setTitle("Work Order");
                     WorkorderFragment workorderFragment = new WorkorderFragment();
                     replaceFragment(workorderFragment);
+
                     /*FragmentManager fragmentManager=getSupportFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.frame_layout,workorderFragment).commit();*/
                 } else if (id == R.id.item_create_complaint_navigation_drawer) {

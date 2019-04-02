@@ -92,6 +92,8 @@ public class TechnicianFragment extends Fragment {
 
         technicianListRecyclerView=view.findViewById(R.id.technicianList_RecyclerView);
 
+
+
         technicianList=new ArrayList<TechnicianModel>();
         technicianAdapter=new TechnicianAdapter(context,technicianList);
         technicianListRecyclerView.addItemDecoration(new DividerItemDecoration(technicianListRecyclerView.getContext(), DividerItemDecoration.VERTICAL));

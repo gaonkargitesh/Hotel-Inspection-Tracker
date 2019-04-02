@@ -2,8 +2,13 @@ package com.example.rahul.hit.login.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -44,6 +49,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     PreferenceHelper helper;
 
+    ConstraintLayout constraintLayout;
+
     TextInputLayout emailTextInputLayout;
     TextInputLayout passwordTextInputLayout;
 
@@ -59,6 +66,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
+
+
         ButterKnife.bind(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -68,6 +80,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         passwordTextInputLayout=findViewById(R.id.textlayout_password_loginPage);
 
 
+        constraintLayout=findViewById(R.id.loginPage_constraintLayout);
         loginEmail = findViewById(R.id.editText_LoginPage_Email);
         loginPassword = findViewById(R.id.editText_Loginpage_Password);
         loginButton = findViewById(R.id.butoon_Login_LoginPage);
@@ -109,6 +122,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
             loginEmail.setError("Invalid Email Address");
+            return;
         }
         if (TextUtils.isEmpty(password)) {
             //Toast.makeText(LoginActivity.this, "Password is empty", Toast.LENGTH_SHORT).show();
@@ -119,14 +133,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
         if(loginEmail.getText() !=null && loginPassword.getText() !=null){
             loginButton.setEnabled(true);
+            loginButton.setClickable(true);
         }
         if(loginEmail.getText() ==null && loginPassword.getText() ==null){
             loginButton.setEnabled(false);
+            loginButton.setClickable(false);
         }
 
 
         else{
-            Toast.makeText(this, "Login Succeessful..", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Login Succeessful..", Toast.LENGTH_SHORT).show();
+
         }
 
 
@@ -201,20 +218,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             && dataSnapshot1.child("password").getValue().toString().equals(password)) {
                         //Navigate to home screen
                         loginPageToHomeScreenIntent = new Intent(LoginActivity.this, HomescreenActivity.class);
-                        /*Intent intent = new Intent(LoginActivity.this,HomescreenActivity.class);*/
-                    /*mPreferenceHelper.putBoolean("is_Login",true);
-                    mPreferenceHelper.putString("e-mail",mail);
-                    mPreferenceHelper.putString("team_name ",mTeamName);*/
                         baseActivityPreferenceHelper.putBoolean(IS_LOGIN, true);
                         baseActivityPreferenceHelper.putString("mail", email);
                         baseActivityPreferenceHelper.putString("loginrole",dataSnapshot1.child("role").getValue().toString());
                         loginPageToHomeScreenIntent = new Intent(LoginActivity.this, HomescreenActivity.class);
                         loginPageToHomeScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         startActivity(loginPageToHomeScreenIntent);
                         finish();
-                    } /*else {
-                        Toast.makeText(LoginActivity.this, "Email or Password is incorrect", Toast.LENGTH_LONG).show();
-                    }*/
+                    } else {
+                        //Toast.makeText(LoginActivity.this, "Email or Password is incorrect", Toast.LENGTH_LONG).show();
+                        Snackbar snackbar=Snackbar.make(constraintLayout,"Email or Password is incorrect",Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    }
                 }
 
                 //The code is not working .. app is getting crashed.... New Users cannot login...

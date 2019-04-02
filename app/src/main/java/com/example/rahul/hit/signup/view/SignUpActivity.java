@@ -2,6 +2,8 @@ package com.example.rahul.hit.signup.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -72,6 +74,10 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
+
         firstNameEditText = findViewById(R.id.editText_SignupPage_FirstName);
         lastNameEditText = findViewById(R.id.editText_SignupPage_LastName);
         roomNoEditText = findViewById(R.id.editText_SignupPage_RoomNo);
@@ -131,9 +137,11 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
             return;
         } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
             emailEditText.setError("Invalid Email Address");
+            return;
         }
         else if(!TextUtils.equals(password,confirmPassword)){
             confirmPasswordEditText.setError("Password does not match");
+            return;
         }
         /*else if(firstName.equals("")|| lastName.equals("")||email.equals("")||roomNo.equals("")||password.equals("")||confirmPassword.equals("")){
             signupButton.setEnabled(false);

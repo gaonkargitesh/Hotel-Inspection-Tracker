@@ -52,6 +52,7 @@
             android:layout_marginRight="16dp"
             android:hint="shjfhjsdfh"
             android:maxLines="2"
+            android:textColor=""
             app:layout_constraintTop_toBottomOf="@id/textView_workOrder_list_compTitle" />
 
         <TextView

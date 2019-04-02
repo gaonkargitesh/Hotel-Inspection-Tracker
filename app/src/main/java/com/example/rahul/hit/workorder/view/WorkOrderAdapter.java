@@ -63,20 +63,21 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
 
         if(workOrderList.get(position).getStatus().equals("In Progress")){
             workOrderViewHolder.status.setText(workOrderList.get(position).getStatus());
-            workOrderViewHolder.status.setTextColor(Color.YELLOW);
+            workOrderViewHolder.status.setHintTextColor(Color.YELLOW);
             workOrderViewHolder.statusLabel.setTextColor(Color.YELLOW);
         }
 
         if(workOrderList.get(position).getStatus().equals("Completed")){
             workOrderViewHolder.status.setText(workOrderList.get(position).getStatus());
-            workOrderViewHolder.status.setTextColor(Color.GREEN);
-            workOrderViewHolder.statusLabel.setTextColor(Color.GREEN);
-            workOrderViewHolder.cardView.setClickable(false);
-            workOrderViewHolder.cardView.setCardBackgroundColor(Color.LTGRAY);
+
+            workOrderViewHolder.statusLabel.setHintTextColor(Color.parseColor("#7FFF00"));
+            workOrderViewHolder.status.setTextColor(Color.parseColor("#7FFF00"));
+
+            workOrderViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#DCDCDC"));
             //workOrderViewHolder.complaint.setColorFilter(Color.LTGRAY);
-
-            workOrderViewHolder.complaint.setColorFilter(Color.LTGRAY, PorterDuff.Mode.LIGHTEN);
-
+            workOrderViewHolder.complaint.setColorFilter(Color.parseColor("#DCDCDC"), PorterDuff.Mode.LIGHTEN);
+            workOrderViewHolder.cardView.setClickable(false);
+            workOrderViewHolder.cardView.setEnabled(false);
         }
 
         Log.d("sat", "onBindViewHolder: "+workOrderModel.getStatus());
@@ -100,7 +101,7 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
                     intent.putExtra("Imagedata",workOrderModel.getImageUrl());
 
                     intent.putExtra("ID",workOrderModel.getId());
-                    Toast.makeText(context, ""+workOrderModel.getId(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, ""+workOrderModel.getId(), Toast.LENGTH_SHORT).show();
                     Log.d("imagekey",""+workOrderModel.getImageUrl());
 
                     context.startActivity(intent);

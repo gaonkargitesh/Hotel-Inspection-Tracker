@@ -52,7 +52,6 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
     private ArrayList<CreateComplaintModel> createComplaints;
 
     public CreateComplaintAdapter(Context context, ArrayList<CreateComplaintModel> createComplaints) {
-
         this.context = context;
         this.createComplaints = createComplaints;
     }
@@ -88,7 +87,7 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
                 public void onClick(View v) {
                     assignTechToAssignTechList = new Intent(context, TechnicianAssignList.class);
                     assignTechToAssignTechList.putExtra("ID", createComplaints.get(createComplaintViewHolder.getAdapterPosition()).getId());
-                    Toast.makeText(context, createComplaints.get(createComplaintViewHolder.getAdapterPosition()).getId(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context, createComplaints.get(createComplaintViewHolder.getAdapterPosition()).getId(), Toast.LENGTH_LONG).show();
                     context.startActivity(assignTechToAssignTechList);
                 }
             });

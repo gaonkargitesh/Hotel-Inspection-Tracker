@@ -7,7 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -33,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rahul.hit.BaseActivity;
@@ -102,6 +105,7 @@ public class AddCreateComplaint extends BaseActivity {
     @BindView(R.id.radioGroup_AddComplaint)
     RadioGroup radioGroup;
 
+
     //Earlier used to perform camera actions
 
     /*private static final int CAMERA_REQUEST_CODE = 1;
@@ -129,7 +133,7 @@ public class AddCreateComplaint extends BaseActivity {
 
 
     private String mDefectImageUrl;
-    private String priority="";
+    private String priority = "";
     double progressfile;
     Toolbar toolbar;
 
@@ -138,16 +142,20 @@ public class AddCreateComplaint extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_create_complaint);
 
-        progressBar=findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
 
         //FirebaseApp.initializeApp(this);
-        mStorageDatabase=FirebaseDatabase.getInstance().getReference();
+        mStorageDatabase = FirebaseDatabase.getInstance().getReference();
         storageReference = FirebaseStorage.getInstance().getReference();
         ButterKnife.bind(this);
 
         context = this;
         toolbar = findViewById(R.id.create_complaint_toolbar);
         setSupportActionBar(toolbar);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.parseColor("#303F9F"));
+        }
 
         toolbar.setNavigationIcon(R.drawable.back_arrow);
         toolbar.setTitle(R.string.add_create_complaint);
@@ -184,44 +192,44 @@ public class AddCreateComplaint extends BaseActivity {
     }
 
     @OnClick(R.id.button_AddComplaint_Save)
-    public void saveComplaint(){
-        final String Title=ComplaintTitle.getText().toString();
-        final String Description=ComplaintDescription.getText().toString();
-        final String imageURL=imageURLSaveComplaint;
-        final String id=String.valueOf(System.currentTimeMillis());
-        final String status="Open";
-        Log.d(TAG,""+imageURL);
-        RadioButton SelectPriority=findViewById(radioGroup.getCheckedRadioButtonId());
-        priority=SelectPriority.getText().toString();
+    public void saveComplaint() {
+        final String Title = ComplaintTitle.getText().toString();
+        final String Description = ComplaintDescription.getText().toString();
+        final String imageURL = imageURLSaveComplaint;
+        final String id = String.valueOf(System.currentTimeMillis());
+        final String status = "Open";
+        Log.d(TAG, "" + imageURL);
+        RadioButton SelectPriority = findViewById(radioGroup.getCheckedRadioButtonId());
+        priority = SelectPriority.getText().toString();
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int i) {
-                switch (i){
+                switch (i) {
                     case R.id.radioButton_AddCreateComplaintPage_LowPriority:
-                        priority="Low";
+                        priority = "Low";
                         break;
                     case R.id.radioButton_AddCreateComplaintPage_MediumPriority:
-                        priority="Medium";
+                        priority = "Medium";
                         break;
                     case R.id.radioButton_AddCreateComplaintPage_HighPriority:
-                        priority="High";
+                        priority = "High";
                         break;
                 }
             }
         });
 
 
-        Log.d(TAG, "saveComplaint: Inside savecomplaint"+imageURL);
+        Log.d(TAG, "saveComplaint: Inside savecomplaint" + imageURL);
         /*if (imageURL.isEmpty()){
             Toast.makeText(context, "Please attach image", Toast.LENGTH_SHORT).show();
         }*/
-        if(TextUtils.isEmpty(Title)) {
+        if (TextUtils.isEmpty(Title)) {
             titleTextInputLayout.setError("Title is empty");
             return;
             //Toast.makeText(this, "Title is empty", Toast.LENGTH_SHORT).show();
 
         }
-        if(TextUtils.isEmpty(Description)){
+        if (TextUtils.isEmpty(Description)) {
             descriptionTextInputLayout.setError("Description is empty");
             return;
             //Toast.makeText(this, "Description is empty", Toast.LENGTH_SHORT).show();
@@ -247,21 +255,22 @@ public class AddCreateComplaint extends BaseActivity {
         /*if(ComplaintTitle.getText()!=null && ComplaintDescription.getText()!=null){
 
         }*/
-        SaveComplaint.setEnabled(ComplaintTitle.getText()!=null && ComplaintDescription.getText()!=null);
 
-        final String email = "_"+baseActivityPreferenceHelper.getString("mail","");
-        Log.d(TAG,"In add create complaint email value is "+email);
+        SaveComplaint.setEnabled(ComplaintTitle.getText() != null && ComplaintDescription.getText() != null);
 
-        ComplaintDatabase=mStorageDatabase.child("Create Complaint");
+        final String email = "_" + baseActivityPreferenceHelper.getString("mail", "");
+        Log.d(TAG, "In add create complaint email value is " + email);
+
+        ComplaintDatabase = mStorageDatabase.child("Create Complaint");
         //ComplaintDatabase.child(String.valueOf(System.currentTimeMillis())+email.substring(0,email.indexOf("@")));
 
         ComplaintDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final CreateComplaintModel createComplaintModel = new CreateComplaintModel(Title,Description,priority,imageURL, id,status);
+                final CreateComplaintModel createComplaintModel = new CreateComplaintModel(Title, Description, priority, imageURL, id, status);
                 //mStorageDatabase.child("Create Complaint").child(""+count+email.substring(0,email.indexOf("@"))).setValue(createComplaintModel);
                 ComplaintDatabase.child(String.valueOf(id)
-                        +email.substring(0,email.indexOf("@"))).setValue(createComplaintModel);
+                        + email.substring(0, email.indexOf("@"))).setValue(createComplaintModel);
                 Toast.makeText(context, "Complaint added..", Toast.LENGTH_SHORT).show();
             }
 
@@ -274,7 +283,7 @@ public class AddCreateComplaint extends BaseActivity {
     }
 
     private void updateSaveButton() {
-        SaveComplaint.setEnabled(ComplaintTitle.getText().length()>0 && ComplaintDescription.getText().length()>0   );
+        SaveComplaint.setEnabled(ComplaintTitle.getText().length() > 0 && ComplaintDescription.getText().length() > 0);
     }
 
     @OnClick({R.id.radioButton_AddCreateComplaintPage_LowPriority,
@@ -307,7 +316,7 @@ public class AddCreateComplaint extends BaseActivity {
                             == PackageManager.PERMISSION_DENIED) {
                         ActivityCompat.requestPermissions(AddCreateComplaint.this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST);
                     } else {
-                        Log.d(TAG,"In else of camera dialog");
+                        Log.d(TAG, "In else of camera dialog");
                         openCameraIntent();
                     }
                 }
@@ -328,10 +337,10 @@ public class AddCreateComplaint extends BaseActivity {
 
     public void openCameraIntent() {
         Intent imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        Log.d(TAG,"before photo null declaration");
+        Log.d(TAG, "before photo null declaration");
         File photoFile = null;
         try {
-            Log.d(TAG,"inside try of phorofile");
+            Log.d(TAG, "inside try of phorofile");
             photoFile = createImageFile();
             // Continue only if the File was successfully created
             if (photoFile != null) {
@@ -349,11 +358,11 @@ public class AddCreateComplaint extends BaseActivity {
 
     private File createImageFile() throws IOException {
         // Create an image file name
-        Log.d(TAG,"before timestamp");
+        Log.d(TAG, "before timestamp");
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        Log.d(TAG,"After timestamp");
+        Log.d(TAG, "After timestamp");
         String imageFileName = "JPEG_" + timeStamp + "_";
-        Log.d(TAG," "+imageFileName);
+        Log.d(TAG, " " + imageFileName);
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -405,16 +414,16 @@ public class AddCreateComplaint extends BaseActivity {
                             Uri uri = FileProvider.getUriForFile(this,
                                     getApplicationContext().getPackageName() + ".fileprovider",
                                     file);
-                            final StorageReference filepath=storageReference.child("Photos").child(uri.getLastPathSegment());
+                            final StorageReference filepath = storageReference.child("Photos").child(uri.getLastPathSegment());
                             filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
                                         public void onSuccess(Uri uri) {
-                                            mDefectImageUrl=uri.toString();
-                                            imageURLSaveComplaint=mDefectImageUrl;
-                                            Log.d(TAG, "onSuccess: "+imageURLSaveComplaint);
+                                            mDefectImageUrl = uri.toString();
+                                            imageURLSaveComplaint = mDefectImageUrl;
+                                            Log.d(TAG, "onSuccess: " + imageURLSaveComplaint);
                                         }
                                     });
                                 }
@@ -422,13 +431,16 @@ public class AddCreateComplaint extends BaseActivity {
                                 @Override
                                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                                     progressBar.setVisibility(View.VISIBLE);
-                                    double progressfile=(100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-                                    progressBar.setProgress((int)progressfile);
-                                    if(progressfile==100){
-                                        progressBar.setVisibility(View.INVISIBLE);
-                                        //progressBar.
+                                    double progressfile = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                                    progressBar.setProgress((int) progressfile);
+                                    if (progressfile == 100) {
+                                        progressBar.setVisibility(View.VISIBLE);
+                                        SaveComplaint.setVisibility(View.VISIBLE);
+                                        SaveComplaint.setEnabled(true);
+                                        SaveComplaint.setClickable(true);
+
                                     }
-                                    Log.d(TAG, "onProgress: "+taskSnapshot.getBytesTransferred());
+                                    Log.d(TAG, "onProgress: " + taskSnapshot.getBytesTransferred());
 
                                 }
                             });
@@ -450,16 +462,16 @@ public class AddCreateComplaint extends BaseActivity {
                     if (data != null) {
                         Uri uri = data.getData();
 
-                        final StorageReference filepath=storageReference.child("Photos").child(uri.getLastPathSegment());
+                        final StorageReference filepath = storageReference.child("Photos").child(uri.getLastPathSegment());
                         filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        mDefectImageUrl= uri.toString();
-                                        imageURLSaveComplaint=mDefectImageUrl;
-                                        Log.d(TAG, "onSuccess: "+imageURLSaveComplaint);
+                                        mDefectImageUrl = uri.toString();
+                                        imageURLSaveComplaint = mDefectImageUrl;
+                                        Log.d(TAG, "onSuccess: " + imageURLSaveComplaint);
                                     }
                                 });
                             }
@@ -467,10 +479,13 @@ public class AddCreateComplaint extends BaseActivity {
                             @Override
                             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                                 progressBar.setVisibility(View.VISIBLE);
-                                progressfile=(100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-                                progressBar.setProgress((int)progressfile);
-                                if(progressfile==100){
-                                    progressBar.setVisibility(View.INVISIBLE);
+                                progressfile = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                                progressBar.setProgress((int) progressfile);
+                                if (progressfile == 100) {
+                                    progressBar.setVisibility(View.VISIBLE);
+                                    SaveComplaint.setVisibility(View.VISIBLE);
+                                    SaveComplaint.setClickable(true);
+                                    SaveComplaint.setEnabled(true);
                                     Toast.makeText(context, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                 }
 
