@@ -1,5 +1,7 @@
 package com.example.rahul.hit.workorder.view;
 
+//import android.app.AlertDialog;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -47,6 +49,9 @@ public class WorkOrderDetails extends AppCompatActivity {
     @BindView(R.id.imageView_WorkOrderDetails_Image)
     ImageView imageView;
 
+    @BindView(R.id.editText_WorkOrderDetails_Comments)
+    EditText comments;
+
     @BindView(R.id.button_WorkOrderDetails_Fix)
     Button fixButton;
 
@@ -63,7 +68,7 @@ public class WorkOrderDetails extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        toolbar=findViewById(R.id.workOrder_Details_Toolbar);
+        toolbar = findViewById(R.id.workOrder_Details_Toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back_arrow);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -72,19 +77,20 @@ public class WorkOrderDetails extends AppCompatActivity {
                 finish();
             }
         });
+        comments.requestFocus();
 
 
         //This will change the status bar color.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#303F9F"));
+            getWindow().setStatusBarColor(Color.parseColor("#006978"));
         }
 
-        String titleData=getIntent().getExtras().getString("titledata");
-        String descriptionData=getIntent().getExtras().getString("descriptiondata");
-        String priorityData=getIntent().getExtras().getString("prioritydata");
-        String assignedToData=getIntent().getExtras().getString("assignedToData");
+        String titleData = getIntent().getExtras().getString("titledata");
+        String descriptionData = getIntent().getExtras().getString("descriptiondata");
+        String priorityData = getIntent().getExtras().getString("prioritydata");
+        String assignedToData = getIntent().getExtras().getString("assignedToData");
 
-        id=getIntent().getExtras().getString("ID");
+        id = getIntent().getExtras().getString("ID");
 
         title.setText(titleData);
         description.setText(descriptionData);
@@ -92,33 +98,35 @@ public class WorkOrderDetails extends AppCompatActivity {
         assignedTo.setText(assignedToData);
         Glide.with(this.getApplicationContext()).load(getIntent().getExtras().getString("Imagedata")).into(imageView);
 
-        Log.d("checkid",""+id);
+        Log.d("checkid", "" + id);
 
 
     }
 
     @OnClick(R.id.button_WorkOrderDetails_Fix)
-    public void onClick(View view){
+    public void onClick(View view) {
 
-        AlertDialog.Builder builder= new AlertDialog.Builder(this);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Do you want to fix and close the complaint?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                databaseReference=FirebaseDatabase.getInstance().getReference().child("Create Complaint");
+                databaseReference = FirebaseDatabase.getInstance().getReference().child("Create Complaint");
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                            String compid=dataSnapshot1.getKey();
-                            Log.d("compid",""+compid);
-                            String idFromDatasnapshot = compid.substring(0,compid.indexOf("_"));
-                            Log.d("Xyz","ID's from Datasnapshot "+idFromDatasnapshot);
-                            Log.d("Abcd","Condition: "+idFromDatasnapshot.equals(id));
-                            if(idFromDatasnapshot.equals(id)){
+                            String compid = dataSnapshot1.getKey();
+                            Log.d("compid", "" + compid);
+                            String idFromDatasnapshot = compid.substring(0, compid.indexOf("_"));
+                            Log.d("Xyz", "ID's from Datasnapshot " + idFromDatasnapshot);
+                            Log.d("Abcd", "Condition: " + idFromDatasnapshot.equals(id));
+                            if (idFromDatasnapshot.equals(id)) {
 
+                                databaseReference.child(compid).child("comments").setValue(comments.getText().toString());
                                 databaseReference.child(compid).child("status").setValue("Completed");
 
                                 //Deletes the Work Order from the database

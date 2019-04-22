@@ -34,9 +34,13 @@
             android:id="@+id/textView_complaint_list_compTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:hint="Helloo"
-            android:textColor="#262626"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+
+            android:hint="Title"
+            android:textColor="#000"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/imageView_complaint_list_compImage" />
 
@@ -44,18 +48,24 @@
             android:id="@+id/textView_complaint_list_compDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:hint="Hello"
-            android:textColor="#000"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="8dp"
+            android:hint="Description"
+            android:textColor="#262626"
             app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compTitle" />
 
         <TextView
             android:id="@+id/textView_complaint_list_compPriority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:hint="Hello"
-            android:textColor="#000"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="8dp"
+            android:hint="Priority"
+            android:textColor="#262626"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compDescription"
             />
@@ -64,13 +74,15 @@
             android:id="@+id/textView_complaint_list_compStatusLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="8dp"
             android:hint="Status : "
             android:textColor="#F00"
             android:textColorHint="#F00"
-            android:paddingBottom="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compPriority"
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compCreator"
 
             />
 
@@ -78,13 +90,40 @@
             android:id="@+id/textView_complaint_list_compStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:hint="OPEN"
             android:textColor="#F00"
             android:textColorHint="#F00"
-            android:paddingBottom="16dp"
+            android:paddingBottom="8dp"
             app:layout_constraintStart_toEndOf="@id/textView_complaint_list_compStatusLabel"
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compCreator"
+            />
+
+        <TextView
+            android:id="@+id/textView_complaint_list_compCreatorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="8dp"
+            android:textColor="#262626"
+            android:text="Created by :"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compPriority" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HEllo this i semail"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textColor="#262626"
+            app:layout_constraintLeft_toRightOf="@id/textView_complaint_list_compCreatorLabel"
+            android:id="@+id/textView_complaint_list_compCreator"
             app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compPriority"
             />
 
@@ -93,15 +132,15 @@
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:text="ASSIGN"
             android:textColor="#00F"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/textView_complaint_list_compStatus"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compPriority"
+            app:layout_constraintTop_toBottomOf="@id/textView_complaint_list_compCreator"
             app:layout_constraintTop_toTopOf="@id/textView_complaint_list_compStatus" />
 
         <!--<TextView

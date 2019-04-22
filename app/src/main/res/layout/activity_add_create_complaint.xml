@@ -23,7 +23,7 @@
                 android:id="@+id/create_complaint_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorPrimaryDark"
                 app:title="@string/add_create_complaint"
                 app:titleTextColor="#FFF" />
 

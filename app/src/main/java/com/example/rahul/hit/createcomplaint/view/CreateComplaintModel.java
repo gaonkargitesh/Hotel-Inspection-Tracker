@@ -8,6 +8,7 @@ public class CreateComplaintModel {
     private String id;
     private String email;
     private String status;
+    private String creator;
 
     public CreateComplaintModel() {
 
@@ -45,13 +46,14 @@ public class CreateComplaintModel {
         this.imageUrl = imageUrl;
     }
 
-    CreateComplaintModel(String title, String description, String priority, String imageUrl, String id, String status) {
+    CreateComplaintModel(String title, String description, String priority, String imageUrl, String id, String status, String creator) {
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.imageUrl = imageUrl;
         this.id = id;
         this.status = status;
+        this.creator=creator;
     }
 
     public String getId() {
@@ -68,5 +70,13 @@ public class CreateComplaintModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

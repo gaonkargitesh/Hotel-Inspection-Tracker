@@ -18,9 +18,9 @@
             android:id="@+id/add_Technician_Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             app:title="@string/add_technician"
-            app:titleTextColor="#FFF">
+            app:titleTextColor="@color/White">
 
         </android.support.v7.widget.Toolbar>
     </LinearLayout>
@@ -114,7 +114,7 @@
         android:layout_marginRight="8dp"
         android:background="@drawable/rounded_button"
         android:text="ADD"
-        android:textColor="#FFF"
+        android:textColor="@color/White"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@id/textLayout_AddTechnicianPage_TechJobProfile"
         app:layout_constraintTop_toBottomOf="@id/textLayout_AddTechnicianPage_TechPasswrod" />

@@ -74,6 +74,7 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
         createComplaintViewHolder.description.setText(createComplaints.get(position).getDescription());
         createComplaintViewHolder.priority.setText(createComplaints.get(position).getPriority());
         createComplaintViewHolder.status.setText(createComplaints.get(position).getStatus());
+        createComplaintViewHolder.creator.setText(createComplaints.get(position).getCreator());
 
         if (userRoleAssign.equals("User")){
             createComplaintViewHolder.assigntechnician.setVisibility(View.GONE);
@@ -134,6 +135,9 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
         @BindView(R.id.textView_complaint_list_compStatus)
         TextView status;
 
+        @BindView(R.id.textView_complaint_list_compCreator)
+        TextView creator;
+
         @BindView(R.id.button_complaint_list_assignComplaint)
         Button assigntechnician;
 
@@ -153,6 +157,7 @@ public class CreateComplaintAdapter extends RecyclerView.Adapter<CreateComplaint
             this.complaint = itemView.findViewById(R.id.imageView_complaint_list_compImage);
             this.cardView = itemView.findViewById(R.id.createComplaint_CardView_Container);
             this.assigntechnician = itemView.findViewById(R.id.button_complaint_list_assignComplaint);
+            this.creator=itemView.findViewById(R.id.textView_complaint_list_compCreator);
         }
     }
 }

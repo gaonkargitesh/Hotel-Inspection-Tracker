@@ -8,6 +8,7 @@ public class WorkOrderModel {
     private String id;
     private String AssignedTo;
     private String status;
+    private String creator;
 
     public WorkOrderModel(){
 
@@ -45,7 +46,7 @@ public class WorkOrderModel {
         this.imageUrl = imageUrl;
     }
 
-    WorkOrderModel(String title, String description, String priority, String imageUrl, String id,String AssignedTo,String status){
+    WorkOrderModel(String title, String description, String priority, String imageUrl, String id,String AssignedTo,String status,String creator){
         this.title=title;
         this.description=description;
         this.priority=priority;
@@ -53,7 +54,7 @@ public class WorkOrderModel {
         this.id = id;
         this.AssignedTo=AssignedTo;
         this.status=status;
-
+        this.creator=creator;
     }
 
     public String getId() {
@@ -79,5 +80,13 @@ public class WorkOrderModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

@@ -40,7 +40,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
             title="Users";
         }
         if(position==1){
-            title="Technicain";
+            title="Technician";
         }
 
         return title;

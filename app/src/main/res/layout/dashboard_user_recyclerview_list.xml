@@ -21,6 +21,7 @@
         android:id="@+id/textView_userList_firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#262626"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:hint="Gitesh"
@@ -32,6 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Gaonkar"
+        android:textColor="#262626"
         app:layout_constraintLeft_toRightOf="@id/textView_userList_firstName"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,6 +46,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:hint="gitesh@gmail.com"
+        android:textColor="#262626"
         app:layout_constraintLeft_toRightOf="@id/imageView_userList_firstLetter"
         app:layout_constraintTop_toBottomOf="@id/textView_userList_firstName" />
 
@@ -54,6 +57,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:hint="101"
+        android:textColor="#262626"
         app:layout_constraintStart_toEndOf="@id/imageView_userList_firstLetter"
         app:layout_constraintTop_toBottomOf="@id/textView_userList_email" />
 

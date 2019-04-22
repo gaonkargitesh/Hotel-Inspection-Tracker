@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="2dp">
 
     <ImageView
         android:id="@+id/imageView_TechnicianList_FirstLetter"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:hint="gitesh"
+        android:textColor="#262626"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageView_TechnicianList_FirstLetter"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,6 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+        android:textColor="#262626"
         android:hint="gitesh@g.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageView_TechnicianList_FirstLetter"
@@ -43,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:hint="123456789"
+        android:textColor="#262626"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageView_TechnicianList_FirstLetter"
         app:layout_constraintTop_toBottomOf="@id/textView_TechnicianList_TechEmail" />
@@ -53,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:hint="Plumber"
+        android:textColor="#262626"
         android:paddingBottom="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageView_TechnicianList_FirstLetter"

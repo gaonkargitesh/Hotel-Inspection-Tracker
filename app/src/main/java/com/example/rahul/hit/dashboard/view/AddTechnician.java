@@ -90,7 +90,7 @@ public class AddTechnician extends AppCompatActivity {
 
         //This will change the status bar color.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#303F9F"));
+            getWindow().setStatusBarColor(Color.parseColor("#006978"));
         }
 
 

@@ -60,6 +60,7 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
         workOrderViewHolder.description.setText(workOrderList.get(position).getDescription());
         workOrderViewHolder.priority.setText(workOrderList.get(position).getPriority());
         workOrderViewHolder.AssignedTo.setText(workOrderList.get(position).getAssignedTo());
+        workOrderViewHolder.creator.setText(workOrderList.get(position).getCreator());
 
         if(workOrderList.get(position).getStatus().equals("In Progress")){
             workOrderViewHolder.status.setText(workOrderList.get(position).getStatus());
@@ -73,9 +74,9 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
             workOrderViewHolder.statusLabel.setHintTextColor(Color.parseColor("#19ff19"));
             workOrderViewHolder.status.setTextColor(Color.parseColor("#19ff19"));
 
-            workOrderViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#DCDCDC"));
+            workOrderViewHolder.cardView.setCardBackgroundColor(Color.parseColor("#eeeeee"));
             //workOrderViewHolder.complaint.setColorFilter(Color.LTGRAY);
-            workOrderViewHolder.complaint.setColorFilter(Color.parseColor("#DCDCDC"), PorterDuff.Mode.LIGHTEN);
+            workOrderViewHolder.complaint.setColorFilter(Color.parseColor("#757575"), PorterDuff.Mode.ADD);
             workOrderViewHolder.cardView.setClickable(false);
             workOrderViewHolder.cardView.setEnabled(false);
         }
@@ -156,6 +157,9 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
         @BindView(R.id.work_Order_CardView_Container)
         CardView cardView;
 
+        @BindView(R.id.textView_workOrder_list_workOrderCreator)
+        TextView creator;
+
         public WorkOrderViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -167,6 +171,7 @@ public class WorkOrderAdapter extends RecyclerView.Adapter<WorkOrderAdapter.Work
             this.cardView=itemView.findViewById(R.id.work_Order_CardView_Container);
             this.status=itemView.findViewById(R.id.textView_workOrder_list_workOrderStatus);
             this.statusLabel=itemView.findViewById(R.id.textView_workOrder_list_workOrderStatusLabel);
+            this.creator=itemView.findViewById(R.id.textView_workOrder_list_workOrderCreator);
         }
     }
 }

@@ -152,7 +152,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
             signupButton.setEnabled(true);
             signupButton.setClickable(true);
         }
-        else if ((firstNameEditText.getText() != null && lastNameEditText.getText() != null && emailEditText.getText() != null
+        else if (!(firstNameEditText.getText() != null && lastNameEditText.getText() != null && emailEditText.getText() != null
                 && roomNoEditText.getText() != null && passwordEditText.getText() != null && confirmPasswordEditText.getText() != null)) {
             signupButton.setVisibility(View.INVISIBLE);
             signupButton.setEnabled(false);

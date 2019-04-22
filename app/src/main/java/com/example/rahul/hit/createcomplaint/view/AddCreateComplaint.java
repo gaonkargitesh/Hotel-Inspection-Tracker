@@ -154,7 +154,7 @@ public class AddCreateComplaint extends BaseActivity {
         setSupportActionBar(toolbar);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#303F9F"));
+            getWindow().setStatusBarColor(Color.parseColor("#006978"));
         }
 
         toolbar.setNavigationIcon(R.drawable.back_arrow);
@@ -193,11 +193,19 @@ public class AddCreateComplaint extends BaseActivity {
 
     @OnClick(R.id.button_AddComplaint_Save)
     public void saveComplaint() {
+
+
+        final String email = "_" + baseActivityPreferenceHelper.getString("mail", "");
+
         final String Title = ComplaintTitle.getText().toString();
         final String Description = ComplaintDescription.getText().toString();
         final String imageURL = imageURLSaveComplaint;
         final String id = String.valueOf(System.currentTimeMillis());
         final String status = "Open";
+        final String creator=email.substring(1);
+
+        Log.d("creator",""+creator);
+
         Log.d(TAG, "" + imageURL);
         RadioButton SelectPriority = findViewById(radioGroup.getCheckedRadioButtonId());
         priority = SelectPriority.getText().toString();
@@ -258,7 +266,9 @@ public class AddCreateComplaint extends BaseActivity {
 
         SaveComplaint.setEnabled(ComplaintTitle.getText() != null && ComplaintDescription.getText() != null);
 
-        final String email = "_" + baseActivityPreferenceHelper.getString("mail", "");
+
+
+
         Log.d(TAG, "In add create complaint email value is " + email);
 
         ComplaintDatabase = mStorageDatabase.child("Create Complaint");
@@ -267,7 +277,7 @@ public class AddCreateComplaint extends BaseActivity {
         ComplaintDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final CreateComplaintModel createComplaintModel = new CreateComplaintModel(Title, Description, priority, imageURL, id, status);
+                final CreateComplaintModel createComplaintModel = new CreateComplaintModel(Title, Description, priority, imageURL, id, status,creator);
                 //mStorageDatabase.child("Create Complaint").child(""+count+email.substring(0,email.indexOf("@"))).setValue(createComplaintModel);
                 ComplaintDatabase.child(String.valueOf(id)
                         + email.substring(0, email.indexOf("@"))).setValue(createComplaintModel);

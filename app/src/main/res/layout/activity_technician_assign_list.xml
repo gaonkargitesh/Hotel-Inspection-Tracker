@@ -18,8 +18,7 @@
             android:id="@+id/assign_technician_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#586"
-            android:backgroundTint="#00F"
+            android:background="@color/colorPrimaryDark"
             app:title="Assign Technician"
             app:titleTextColor="#FFF" />
 

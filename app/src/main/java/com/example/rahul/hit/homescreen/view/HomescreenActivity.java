@@ -2,6 +2,7 @@ package com.example.rahul.hit.homescreen.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -89,7 +90,7 @@ public class HomescreenActivity extends BaseActivity {
         reference = FirebaseDatabase.getInstance().getReference();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#303F9F"));
+            getWindow().setStatusBarColor(Color.parseColor("#006978"));
         }
 
         colorGenerator=ColorGenerator.DEFAULT;
@@ -278,6 +279,7 @@ public class HomescreenActivity extends BaseActivity {
                 Log.d("Itemid", "ID:" + id);
                 if (id == R.id.item_workorder_navigation_drawer) {
                     setTitle("Work Order");
+
                     WorkorderFragment workorderFragment = new WorkorderFragment();
                     replaceFragment(workorderFragment);
 
